@@ -11,7 +11,7 @@ public class EventFactory {
 	private static EventFactory theInstance;
 	
 	/**
-	 * @return
+	 * @return instance of EventFactory
 	 */
 	public static synchronized EventFactory instance() {
 		if (theInstance == null) {
@@ -24,8 +24,14 @@ public class EventFactory {
 	}
 	
 	/**
-	 * @param eventDescription
-	 * @return
+	 * This method receives an event description which is passed to the facotry by 
+	 * another action/command taken in the game, ie. ItemSpecificCommand or some action
+	 * taken during trading/combat/dialog. Then it is parsed it into strings. These
+     * Strings are being stored in a simple array. Event input will start with a specific
+     * event identifier followed by (if needed) arugments delimited with simple spaces
+     * 
+	 * @param eventDescription string of eventDescription passed by initiating action
+	 * @return specific Event object as per the parsing
 	 */
 	public Event parseEvent(String eventDescription) {
 		return new UnknownEvent(eventDescription);
