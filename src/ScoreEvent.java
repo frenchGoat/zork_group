@@ -3,16 +3,18 @@
  */
 
 /**
- * @author Jacques
+ * @author Jacques Troussard
  *
  */
 public class ScoreEvent extends Event {
 
+	private int points;
+	
 	/**
-	 * 
+	 * @param points int - Amount of points to add/update player score with.
 	 */
-	public ScoreEvent() {
-		// TODO Auto-generated constructor stub
+	public ScoreEvent(int points) {
+		this.points = points;
 	}
 
 	/* (non-Javadoc)
