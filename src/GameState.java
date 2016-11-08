@@ -8,7 +8,8 @@ import java.io.PrintWriter;
 
 public class GameState {
 
-    public static class IllegalSaveFormatException extends Exception {
+    @SuppressWarnings("serial")
+	public static class IllegalSaveFormatException extends Exception {
         public IllegalSaveFormatException(String e) {
             super(e);
         }
@@ -26,6 +27,10 @@ public class GameState {
     private Dungeon dungeon;
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
+    private int playerHealth;
+    private int playerHunger;
+    private int playerBank;
+    private ArrayList<Exit> unlockedExits;
 
     static synchronized GameState instance() {
         if (theInstance == null) {
