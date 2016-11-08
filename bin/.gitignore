@@ -18,3 +18,7 @@
 /SaveCommand.class
 /TakeCommand.class
 /UnknownCommand.class
+/EventFactory.class
+/Event.class
+/TransformEvent.class
+/UnknownEvent.class
