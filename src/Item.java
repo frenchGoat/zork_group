@@ -6,8 +6,19 @@ public class Item {
     @SuppressWarnings("serial")
 	static class NoItemException extends Exception {}
 
+    /**
+     * Primary name of item, used in game as id, used in data structures as key.
+     */
     private String primaryName;
+    
+    /**
+     * Weight of item.
+     */
     private int weight;
+    
+    /**
+     * Hashtable used to store messages and events related to item.
+     */
     private Hashtable<String,String> messages;
 
 
@@ -39,6 +50,13 @@ public class Item {
         }
     }
 
+    /**
+     * Used by parser to confirm whether user command input of an item name is valid 
+     * for an existing Item object.
+     * 
+     * @param name non-primary name string
+     * @return boolean confirming whether non-primary name is a valid name for Item
+     */
     boolean goesBy(String name) {
         // could have other aliases
         return this.primaryName.equals(name);
@@ -50,6 +68,9 @@ public class Item {
         return messages.get(verb);
     }
 
+    /**
+     * Simply returns Item object primary name
+     */
     public String toString() {
         return primaryName;
     }
