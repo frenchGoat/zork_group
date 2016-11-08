@@ -5,6 +5,9 @@ import java.util.Arrays;
 public class CommandFactory {
 
     private static CommandFactory theInstance;
+    /**
+     * List of possible movement commands which the player may use.
+     */
     public static List<String> MOVEMENT_COMMANDS = 
         Arrays.asList("n","w","e","s","u","d" );
 
