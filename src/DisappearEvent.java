@@ -9,7 +9,7 @@
 public class DisappearEvent extends Event {
 	
 	/**
-	 * Primary name of target item Object. 
+	 * Primary name of target Item Object. 
 	 */
 
 	private String itemName;
