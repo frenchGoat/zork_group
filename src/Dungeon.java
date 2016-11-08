@@ -7,7 +7,8 @@ import java.io.PrintWriter;
 
 public class Dungeon {
 
-    public static class IllegalDungeonFormatException extends Exception {
+    @SuppressWarnings("serial")
+	public static class IllegalDungeonFormatException extends Exception {
         public IllegalDungeonFormatException(String e) {
             super(e);
         }
@@ -43,6 +44,9 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
+     * @param filename 
+     * @throws FileNotFoundException 
+     * @throws IllegalDungeonFormatException 
      */
     public Dungeon(String filename) throws FileNotFoundException, 
         IllegalDungeonFormatException {
@@ -53,8 +57,13 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it, including (possibly) the items in their original locations.
+     * @param filename 
+     * @param initState boolean - Represents the desire to reload the map or restore
+     * @throws FileNotFoundException 
+     * @throws IllegalDungeonFormatException 
      */
-    public Dungeon(String filename, boolean initState) 
+    @SuppressWarnings("resource")
+	public Dungeon(String filename, boolean initState) 
         throws FileNotFoundException, IllegalDungeonFormatException {
 
         init();
@@ -172,6 +181,9 @@ public class Dungeon {
      * Get the Item object whose primary name is passed. This has nothing to
      * do with where the Adventurer might be, or what's in his/her inventory,
      * etc.
+     * @param primaryItemName String - Used as key for items hashtable
+     * @return Item object from items hashtable
+     * @throws Item.NoItemException 
      */
     public Item getItem(String primaryItemName) throws Item.NoItemException {
         

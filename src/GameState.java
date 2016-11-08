@@ -43,7 +43,8 @@ public class GameState {
         inventory = new ArrayList<Item>();
     }
 
-    void restore(String filename) throws FileNotFoundException,
+    @SuppressWarnings("resource")
+	void restore(String filename) throws FileNotFoundException,
         IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
 
         Scanner s = new Scanner(new FileReader(filename));

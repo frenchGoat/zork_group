@@ -3,7 +3,8 @@ import java.util.Hashtable;
 
 public class Item {
 
-    static class NoItemException extends Exception {}
+    @SuppressWarnings("serial")
+	static class NoItemException extends Exception {}
 
     private String primaryName;
     private int weight;

@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Exit {
 
-    class NoExitException extends Exception {}
+    @SuppressWarnings("serial")
+	class NoExitException extends Exception {}
 
     private String dir;
     private Room src, dest;

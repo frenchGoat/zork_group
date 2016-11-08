@@ -11,7 +11,7 @@ public class DisappearEvent extends Event {
 	private String itemName;
 	
 	/**
-	 * @param itemName String = primary name of Item which is to be removed from game.
+	 * @param itemName String - primary name of Item which is to be removed from game.
 	 */
 	public DisappearEvent(String itemName) {
 		this.itemName = itemName;
