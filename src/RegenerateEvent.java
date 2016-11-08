@@ -12,16 +12,22 @@ public class RegenerateEvent extends Event {
 	int hungerBuff;
 	
 	/**
-	 * @param healthBuff int - Amount to add to players health status
-	 * @param hungerBuff int - Amount to add to players hunger status
+	 * This is a player status trigger. Event structure takes two parsed arguments from
+	 * Event Factory and assigns them to their respective instance variables.
+	 * 
+	 * @param healthBuff amount to add to players health status
+	 * @param hungerBuff amount to add to players hunger status
 	 */
 	public RegenerateEvent(int healthBuff, int hungerBuff) {
 		this.healthBuff = healthBuff;
 		this.hungerBuff = hungerBuff;
 	}
 
-	/* (non-Javadoc)
-	 * @see Event#trigger()
+	/**
+	 * When triggered will update the players health and hunger status in GameState and
+	 * return the appropriate messages to be printed to the console.
+	 * 
+	 * @return health and hunger updates
 	 */
 	@Override
 	String trigger() {
