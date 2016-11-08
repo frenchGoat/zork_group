@@ -26,3 +26,5 @@
 /DisappearEvent.class
 /WinEvent.class
 /DieEvent.class
+/WoundEvent.class
+/ScoreEvent.class
