@@ -18,6 +18,15 @@ public class CommandFactory {
     private CommandFactory() {
     }
 
+    /**
+     * This method receives the user command and attempts to parse it into strings. These
+     * Strings are being stored in a simple array. User input is assumed to come in two
+     * basic forms. 1) single character ex. 'q' 2) a multiple part command composed of 
+     * a verb key word and at least one noun.
+     * 
+     * @param command string of input received from player
+     * @return the specific command to execute
+     */
     public Command parse(String command) {
         String parts[] = command.split(" ");
         String verb = parts[0];
