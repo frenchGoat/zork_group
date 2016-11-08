@@ -24,14 +24,38 @@ public class GameState {
     static String INVENTORY_LEADER = "Inventory: ";
 
     private static GameState theInstance;
+    /**
+     * Current dungeon
+     */
     private Dungeon dungeon;
+    /**
+     * Current player inventory
+     */
     private ArrayList<Item> inventory;
+    /**
+     * Current location of player
+     */
     private Room adventurersCurrentRoom;
+    /**
+     * Current status of player health
+     */
     private int playerHealth;
+    /**
+     * Current status of player hunger
+     */
     private int playerHunger;
+    /**
+     * CUrrent amount in player bank
+     */
     private int playerBank;
+    /**
+     * Michelle: sorry didn't know how you wanted to do this so i'll leave it to you
+     */
     private ArrayList<Exit> unlockedExits;
 
+    /**
+     * @return current instance of GameState 
+     */
     static synchronized GameState instance() {
         if (theInstance == null) {
             theInstance = new GameState();
@@ -43,6 +67,14 @@ public class GameState {
         inventory = new ArrayList<Item>();
     }
 
+    /**
+     * Restores GameState with a sav file
+     * 
+     * @param filename .sav file name
+     * @throws FileNotFoundException
+     * @throws IllegalSaveFormatException
+     * @throws Dungeon.IllegalDungeonFormatException
+     */
     @SuppressWarnings("resource")
 	void restore(String filename) throws FileNotFoundException,
         IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
@@ -84,10 +116,20 @@ public class GameState {
         }
     }
 
+    /**
+     * Base function used recursively for storing the current GameState to a .sav file.
+     * @throws IOException
+     */
     void store() throws IOException {
         store(DEFAULT_SAVE_FILE);
     }
 
+    /**
+     * Store the current GameState to a .sav file.
+     * 
+     * @param saveName name of .sav file without extension
+     * @throws IOException
+     */
     void store(String saveName) throws IOException {
         String filename = saveName + SAVE_FILE_EXTENSION;
         PrintWriter w = new PrintWriter(new FileWriter(filename));
@@ -105,6 +147,12 @@ public class GameState {
         w.close();
     }
 
+    /**
+     * Helper method used during restore function to recreate base dungeon and setting
+     * players current position in the dungeon.
+     * 
+     * @param dungeon
+     */
     void initialize(Dungeon dungeon) {
         this.dungeon = dungeon;
         adventurersCurrentRoom = dungeon.getEntry();
@@ -118,14 +166,32 @@ public class GameState {
         return names;
     }
 
+    /**
+     * Updates player inventor with an item. Item object is added to player inventory 
+     * data structure.
+     * 
+     * @param item specific item to be added to inventory
+     */
     void addToInventory(Item item) /* throws TooHeavyException */ {
         inventory.add(item);
     }
 
+    /**
+     * Updates player inventor by removing an item. Item object is removed from player
+     * inventory data structure.
+     * 
+     * @param item specific item to be removed from inventory
+     */
     void removeFromInventory(Item item) {
         inventory.remove(item);
     }
 
+    /**
+     * Helper method used to access a specified item from either within player inventory
+     * or in current room.
+     * 
+     * @param name primary name of item Object
+     */
     Item getItemInVicinityNamed(String name) throws Item.NoItemException {
 
         // First, check inventory.
@@ -145,6 +211,13 @@ public class GameState {
         throw new Item.NoItemException();
     }
 
+    /**
+     * Helper method used to access items in player inventory.
+     * 
+     * @param name primary name of target Item object
+     * @return target Item object
+     * @throws Item.NoItemException
+     */
     Item getItemFromInventoryNamed(String name) throws Item.NoItemException {
 
         for (Item item : inventory) {
