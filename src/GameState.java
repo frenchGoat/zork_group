@@ -25,9 +25,6 @@ public class GameState {
 
     private static GameState theInstance;
     private Dungeon dungeon;
-    /**
-     * TESTESTESTESTETSETSTESTETSET
-     */
     private ArrayList<Item> inventory;
     private Room adventurersCurrentRoom;
     private int playerHealth;

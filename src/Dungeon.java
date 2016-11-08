@@ -26,11 +26,26 @@ public class Dungeon {
     // Variables relating to game state (.sav) storage.
     static String FILENAME_LEADER = "Dungeon file: ";
     static String ROOM_STATES_MARKER = "Room states:";
-
+    
+    // Variables relating to Dungeon.
+    /**
+     * Name used to identify loaded dungeon object.
+     */
     private String name;
+    /**
+     * Player spawn location
+     */
     private Room entry;
+    /**
+     * Data structure storing dungeon rooms
+     */
     private Hashtable<String,Room> rooms;
+    /**
+     * Data structure storing all possible items
+     */
     private Hashtable<String,Item> items;
+    
+    // Variables related to identifying files.
     private String filename;
 
     Dungeon(String name, Room entry) {
@@ -44,7 +59,8 @@ public class Dungeon {
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
-     * @param filename 
+     * 
+     * @param filename full bork file name including extension
      * @throws FileNotFoundException 
      * @throws IllegalDungeonFormatException 
      */
@@ -56,9 +72,10 @@ public class Dungeon {
 
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
-     * based on it, including (possibly) the items in their original locations.
-     * @param filename 
-     * @param initState boolean - Represents the desire to reload the map or restore
+     * based on it, including (possibly) the items/NPCs in their original locations.
+     * 
+     * @param filename filename full bork file name including extension
+     * @param initState represents the desire to reload the map or restore
      * @throws FileNotFoundException 
      * @throws IllegalDungeonFormatException 
      */
@@ -126,7 +143,7 @@ public class Dungeon {
         s.close();
     }
     
-    // Common object initialization tasks, regardless of which constructor
+    // common object initialization tasks, regardless of which constructor
     // is used.
     private void init() {
         rooms = new Hashtable<String,Room>();
@@ -166,13 +183,40 @@ public class Dungeon {
             roomName = s.nextLine();
         }
     }
-
+    
+    /**
+     * 
+     * @return spawn room for dungeon
+     */
     public Room getEntry() { return entry; }
+    /**
+     * 
+     * @return id name for dungeon
+     */
     public String getName() { return name; }
+    /**
+     * 
+     * @return full dungeon file name with extension
+     */
     public String getFilename() { return filename; }
+    /**
+     * 
+     * @param room room object to be added to the rooms hashtable, keyed by room name
+     */
     public void add(Room room) { rooms.put(room.getTitle(),room); }
+    /**
+     * 
+     * @param item item object to be added to the items hashtable, keyed by primary name
+     */
     public void add(Item item) { items.put(item.getPrimaryName(),item); }
-
+    
+    /**
+     * Get the Room object whose name is passed. This has nothing to do with
+     * where the Adventurer might be.
+     * 
+     * @param roomTitle room name
+     * @return room object from rooms hashtable keyed by room name
+     */
     public Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
     }
