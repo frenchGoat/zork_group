@@ -2,10 +2,13 @@ class ItemSpecificCommand extends Command {
 
     private String verb;
     private String noun;
-    
-    // comment test
                         
 
+    /**
+     * Command structure takes in parsed user input and  
+     * @param verb
+     * @param noun
+     */
     ItemSpecificCommand(String verb, String noun) {
         this.verb = verb;
         this.noun = noun;
