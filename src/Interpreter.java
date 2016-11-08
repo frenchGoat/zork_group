@@ -54,6 +54,12 @@ public class Interpreter {
         }
     }
 
+    /**
+     * Helper method used to read user input in main program
+     * 
+     * @param commandLine input from user
+     * @return next line awating user input
+     */
     private static String promptUser(Scanner commandLine) {
 
         System.out.print("> ");
