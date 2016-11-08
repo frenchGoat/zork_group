@@ -45,6 +45,11 @@ public class Dungeon {
      */
     private Hashtable<String,Item> items;
     
+    /**
+     * Data structure storing all possible NPCs
+     */
+    private Hashtable<String,NPC> npcs;
+    
     // Variables related to identifying files.
     private String filename;
 
