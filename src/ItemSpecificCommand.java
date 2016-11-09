@@ -1,3 +1,9 @@
+
+
+/**
+ * @author Jacques Troussard
+ *
+ */
 class ItemSpecificCommand extends Command {
 
     private String verb;

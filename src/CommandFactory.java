@@ -2,6 +2,10 @@
 import java.util.List;
 import java.util.Arrays;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class CommandFactory {
 
     private static CommandFactory theInstance;

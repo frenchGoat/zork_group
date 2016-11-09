@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.Hashtable;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class Item {
 
     @SuppressWarnings("serial")
