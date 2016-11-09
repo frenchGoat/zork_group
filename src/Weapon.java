@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import Dungeon.IllegalDungeonFormatException;
-
 /**
  * 
  */
@@ -18,7 +16,8 @@ public class Weapon extends Item {
 	 * @throws NoItemException
 	 * @throws Dungeon.IllegalDungeonFormatException
 	 */
-	public Weapon(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException {
+	public Weapon(Scanner s) throws NoItemException,
+			Dungeon.IllegalDungeonFormatException {
 		super(s);
 		// TODO Auto-generated constructor stub
 	}
