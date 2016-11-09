@@ -9,8 +9,8 @@ public class Room {
 	class NoRoomException extends Exception {}
 
     /**
-     * Header String for item contents when writing/reading from a file.
-     */
+    * Header String for item contents when writing/reading from a file.
+    */
     static String CONTENTS_STARTER = "Contents: ";
     /**
      * Header String for NPC present in room when writing/reading from a file.
