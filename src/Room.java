@@ -5,7 +5,8 @@ import java.io.PrintWriter;
 
 public class Room {
 
-    class NoRoomException extends Exception {}
+    @SuppressWarnings("serial")
+	class NoRoomException extends Exception {}
 
     /**
      * Header String for item contents when writing/reading from a file.
@@ -283,21 +284,21 @@ public class Room {
     }
     
     /**
-     * Takes in a String as a search parameter, representing the primary name of an Item.
-     * Checks the room's contents array list for a match. If match is made returns an 
-     * Item, otherwise throws exception.
+     * Takes in a String as a search parameter, representing the name of a NPC object.
+     * Checks the room's npcs array list for a match. If match is made returns an 
+     * NPC object, otherwise throws exception.
      * 
-     * @param name search parameter, as name of item
-     * @return item object
-     * @throws Item.NoItemException
+     * @param name search parameter, as name of npc
+     * @return target npc object
+     * @throws NPC.NoNPCException 
      */
-    Item getNpcNamed(String name) {
+    NPC getNpcNamed(String name) throws NPC.NoNPCException {
         for (NPC npc : npcs) {
-            if (npc.goesBy(name)) {
+            if (npc.getName().equals(name)) {
                 return npc;
             }
         }
-        throw new Item.NoItemException();
+        throw new NPC.NoNPCException();
     }
 
     ArrayList<Item> getContents() {
