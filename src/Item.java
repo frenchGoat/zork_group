@@ -24,6 +24,15 @@ public class Item {
      * Hashtable used to store messages and events related to item.
      */
     private Hashtable<String,String> messages;
+    
+    /**
+     * Takes w as a int parameter and assigns it to the instance variable, weight.
+     * 
+     * @param w amount of space modified when taken into inverntory.
+     */
+    Item(int w) {
+    	this.weight = w;
+    }
 
 
     Item(Scanner s) throws NoItemException,
