@@ -14,7 +14,8 @@ public class Mob extends NPC {
     *
     * @param attack A int value of damage it can deal.
     */
-    Mob(int attack) {
+    Mob(String name, int attack) {
+        super(name);
         this.attack = attack;
     }
     
