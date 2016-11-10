@@ -6,6 +6,7 @@
 
 /**
  * @author Michelle Booth
+ * @author Jacques Troussard
  */
 public class ScoreCommand extends Command {
    /**
@@ -13,7 +14,8 @@ public class ScoreCommand extends Command {
    */
    private int score;
     /**
-    * Gives the ScoreCommand an int score
+     * Gives the ScoreCommand an int score
+     * 
 	 * @param score int
 	 */
    ScoreCommand(int score){
@@ -22,7 +24,8 @@ public class ScoreCommand extends Command {
    }
    /*
    * Gets the score and returns the rank
-   * @return String The rank that corrosponds to the score
+   * 
+   * @return String The rank that corresponds to the score
    */
    String execute(){
       return "score message";
