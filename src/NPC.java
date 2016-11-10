@@ -1,5 +1,8 @@
 import java.util.Scanner;
 /**
+ * Every NPC tyoe will extend this class that gives each NPC a name, health, 
+ * conversation hashtable, and a current room that is read in from a file. Along with getters for each field.
+ *
  * @author Kaylee Payne
  * @author Jacques Troussard
  *
@@ -11,13 +14,19 @@ public class NPC {
     
     /**
      * Name of NPC
-     * Health of NPC
-     * Hashtable of NPC conversations
-     * Current Room of NPC
      */
     private String name;
+    /**	
+     * Health of NPC
+     */
     private int health;
+    /**
+     * Hashtable of NPC conversations
+     */
     private Hashtable<String,String> conversation;
+    /**
+     * Current Room of NPC
+     */
     private Room currentRoom;
     
     /**
