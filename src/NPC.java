@@ -80,7 +80,7 @@ public class NPC {
     * @param prompt The user's conversation prompt that will be a key for a response in conversation.
     * @return converse The string response with the key of prompt.
     */
-    public String getConversation(String prompt) {
+    public String interact(String prompt) {
 	    
     }  
     
