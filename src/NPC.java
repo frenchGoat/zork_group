@@ -1,3 +1,4 @@
+import java.util.Hashtable;
 import java.util.Scanner;
 /**
  * Every NPC type will extend this class that gives each NPC a name, health, 
@@ -81,7 +82,7 @@ public class NPC {
     * @return converse The string response with the key of prompt.
     */
     public String interact(String prompt) {
-	    
+	    return String
     }  
     
 
