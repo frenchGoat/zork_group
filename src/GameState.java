@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class GameState {
 
     @SuppressWarnings("serial")
@@ -15,15 +19,58 @@ public class GameState {
         }
     }
 
+    /**
+     * Header String for default file name when writing to a .sav file.
+     */
     static String DEFAULT_SAVE_FILE = "bork_save";
+
+    /**
+     * Header String for default save file extension when writing to a .sav file.
+     */
     static String SAVE_FILE_EXTENSION = ".sav";
+    /**
+     * Header String for default file version when reading/writing from/to a 
+     * .bork/.sav file.
+     */
     static String SAVE_FILE_VERSION = "Bork v3.0 save data";
-
+    /**
+     * Header String for player status section when writing to a .sav file.
+     */
     static String ADVENTURER_MARKER = "Adventurer:";
+    /**
+     * Header String for player position status when writing to a .sav file.
+     */
     static String CURRENT_ROOM_LEADER = "Current room: ";
+    /**
+     * Header String for player inventory status when writing to a .sav file.
+     */
     static String INVENTORY_LEADER = "Inventory: ";
-
+    /**
+     * Header String for player health status when writing to a .sav file.
+     */
+    static String HEALTH_LEADER = "Health: ";
+    /**
+     * Header String for player hunger status when writing to a .sav file.
+     */
+    static String HUNGER_LEADER = "Hunger: ";
+    /**
+     * Header String for player companion status when writing to a .sav file.
+     */
+    static String COMPANION_LEADER = "Companion: ";
+    /**
+     * Header String for player bank status when writing to a .sav file.
+     */
+    static String BANK_LEADER = "Bank: ";
+    /**
+     * Header String for player score status when writing to a .sav file.
+     */
+    static String SCORE_LEADER = "Score: ";
+    
+    /**
+     * Instance variable for GameState
+     */
     private static GameState theInstance;
+    
     /**
      * Current dungeon
      */
