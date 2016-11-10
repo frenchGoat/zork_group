@@ -26,7 +26,7 @@ public class Companion extends NPC {
     * @param scanner The scanner of the dungeon file.
     */
     Companion(Scanner scanner) {
-        
+        super(scanner);
     }
     
     /**
