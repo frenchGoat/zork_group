@@ -15,7 +15,8 @@ public class Companion extends NPC {
     *
     * @param name A string name for the NPC.
     */
-    Companion(Item gift) {
+    Companion(Item gift, String name) {
+    	super(name);
         this.gift = gift;
     }
     

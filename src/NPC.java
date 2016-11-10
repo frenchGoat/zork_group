@@ -82,7 +82,7 @@ public class NPC {
     * @return converse The string response with the key of prompt.
     */
     public String interact(String prompt) {
-	    return String
+	    return null;
     }  
     
 
