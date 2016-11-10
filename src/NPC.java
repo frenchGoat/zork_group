@@ -77,6 +77,20 @@ public class NPC {
     }
 	
     /**
+    * Sets the health of the NPC.
+    */
+    public viod setHealth() {
+	this.health = health;
+    }
+	
+    /**
+    * Sets the current room of the NPC.
+    */
+    public void setCurrentRoom() {
+	this.currentRoom = currentRoom;
+    }
+	
+    /**
     * Returns the correct responce from the NPC's conversation Hashtable based off of a String prompt.
     * 
     * @param prompt The user's conversation prompt that will be a key for a response in conversation.
