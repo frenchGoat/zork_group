@@ -4,21 +4,26 @@
 
 /**
  * @author Jacques Troussard
+ * @author Michelle Booth
  *
  */
 public class WinEvent extends Event {
+	/**
+	 * This is an end game trigger, in which the player has won.
+    * WinEvent will be caused when the player reaches a certian score 
+	 */
 	
 	public WinEvent() {
-		// TODO Auto-generated constructor stub
+   
 	}
 
-	/* (non-Javadoc)
-	 * @see Event#trigger()
+    /**
+	 * Activates the WinEvent.
+	 * 
+	 * @return message The won game message
 	 */
 	@Override
 	String trigger() {
-		// TODO Auto-generated method stub
-		return null;
+		return winMessage;
 	}
-
 }
