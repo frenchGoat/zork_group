@@ -15,7 +15,8 @@ public class Vendor extends NPC {
     *
     * @param money A int value of money owned.
     */
-    Vendor(int money) {
+    Vendor(String name, int money) {
+        super(name);
         this.money = money;
     }
     
@@ -25,7 +26,7 @@ public class Vendor extends NPC {
     * @param scanner The scanner of the dungeon file.
     */
     Vendor(Scanner scanner) {
-        
+        super(scanner);
     }
     
     /**
