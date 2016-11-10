@@ -1,7 +1,4 @@
-/**
- * 
- */
-
+import java.util.Scanner;
 /**
  * @author Kaylee Payne
  * @author Jacques Troussard
@@ -20,7 +17,7 @@ public class NPC {
      */
     private String name;
     private int health;
-    private Hashtable conversation;
+    private Hashtable<String,String> conversation;
     private Room currentRoom;
     
     /**
