@@ -9,6 +9,9 @@
  */
 public class TeleportEvent extends Event {
 
+	/**
+	 * Destination Room object
+	 */
 	private Room destinationRoom;
 	
 	/**
