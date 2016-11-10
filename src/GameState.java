@@ -101,7 +101,9 @@ public class GameState {
     private ArrayList<Exit> unlockedExits;
 
     /**
-     * @return current instance of GameState 
+     * Returns the only instance of GameState
+     *
+     * @return theInstance current instance of GameState 
      */
     static synchronized GameState instance() {
         if (theInstance == null) {
@@ -115,7 +117,7 @@ public class GameState {
     }
 
     /**
-     * Restores GameState with a sav file
+     * Restores GameState with a .sav file
      * 
      * @param filename .sav file name
      * @throws FileNotFoundException
@@ -165,6 +167,7 @@ public class GameState {
 
     /**
      * Base function used recursively for storing the current GameState to a .sav file.
+     *
      * @throws IOException
      */
     void store() throws IOException {
@@ -198,7 +201,7 @@ public class GameState {
      * Helper method used during restore function to recreate base dungeon and setting
      * players current position in the dungeon.
      * 
-     * @param dungeon
+     * @param dungeon The dungeon to be initialized.
      */
     void initialize(Dungeon dungeon) {
         this.dungeon = dungeon;
@@ -217,14 +220,14 @@ public class GameState {
      * Updates player inventor with an item. Item object is added to player inventory 
      * data structure.
      * 
-     * @param item specific item to be added to inventory
+     * @param item Specific item to be added to inventory
      */
     void addToInventory(Item item) /* throws TooHeavyException */ {
         inventory.add(item);
     }
 
     /**
-     * Updates player inventor by removing an item. Item object is removed from player
+     * Updates player inventory by removing an item. Item object is removed from player
      * inventory data structure.
      * 
      * @param item specific item to be removed from inventory
@@ -237,7 +240,7 @@ public class GameState {
      * Helper method used to access a specified item from either within player inventory
      * or in current room.
      * 
-     * @param name primary name of item Object
+     * @param name Primary name of item Object
      */
     Item getItemInVicinityNamed(String name) throws Item.NoItemException {
 
