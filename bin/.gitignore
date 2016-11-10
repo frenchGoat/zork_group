@@ -2,3 +2,8 @@
 /Keys.class
 /Food.class
 /Weapon.class
+/NPC$NoNPCException.class
+/Companion.class
+/Mob.class
+/TeleportEvent.class
+/Vendor.class

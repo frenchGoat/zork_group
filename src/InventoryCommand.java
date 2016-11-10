@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 class InventoryCommand extends Command {
 
 	/**

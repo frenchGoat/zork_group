@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class Interpreter {
 
     private static GameState state; // not strictly necessary; GameState is 

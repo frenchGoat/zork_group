@@ -5,15 +5,45 @@ import java.io.PrintWriter;
 
 public class Room {
 
-    class NoRoomException extends Exception {}
+    @SuppressWarnings("serial")
+	class NoRoomException extends Exception {}
 
+    /**
+    * Header String for item contents when writing/reading from a file.
+    */
     static String CONTENTS_STARTER = "Contents: ";
+    /**
+     * Header String for NPC present in room when writing/reading from a file.
+     */
+    static String NPC_PRESENCE = "NPC Present: ";
 
+    /**
+     * Name/ID for Room object
+     */
     private String title;
+    /**
+     * Full description of Room. Used to print to console for player.
+     */
     private String desc;
+    /**
+     * Boolean for whether GameState's adventurerCurrentRoom variable has ever been 
+     * assigned as this Room object.
+     */
     private boolean beenHere;
+    /**
+     * Data structure used to store Item objects which in game are present in the Room.
+     */
     private ArrayList<Item> contents;
+    /**
+     * Data structure used to store Exit objects which in game are available for the
+     * player to access, regardless of their isLocked variable.
+     */
     private ArrayList<Exit> exits;
+    /**
+     * Data structure used to store NPC objects which in game are present in the Room.
+     */
+    private ArrayList<NPC> npcs;
+    
 
     Room(String title) {
         init();
@@ -77,7 +107,9 @@ public class Room {
         }
     }
 
-    // Common object initialization tasks.
+    /**
+     * Common object initialization tasks.
+     */
     private void init() {
         contents = new ArrayList<Item>();
         exits = new ArrayList<Exit>();
@@ -105,6 +137,14 @@ public class Room {
         w.println(Dungeon.SECOND_LEVEL_DELIM);
     }
 
+    /**
+     * Given a Scanner object positioned at the beginning of a "Room" file entry from a 
+     * .sav file, read and return a Room object representing it. 
+     * 
+     * @param s scanner object passed by the previous calling (GameState)
+     * @param d current dungeon object created by the restore call in GameState
+     * @throws GameState.IllegalSaveFormatException
+     */
     void restoreState(Scanner s, Dungeon d) throws 
         GameState.IllegalSaveFormatException {
 
@@ -130,6 +170,16 @@ public class Room {
         }
     }
 
+    /**
+     * This method prints the details of the room on the console for the player, taking 
+     * into consideration its contents, exits and the status of the Rooms boolean hasBeen 
+     * variable. If it is false the Room title and description variables are formated and 
+     * printed to the console. If is is true then only the title is printed to the 
+     * console. For both conditions the Item and NPC object names are formated and
+     * printed to the console.
+     * 
+     * @return message string to be printed to the console
+     */
     public String describe() {
         String description;
         if (beenHere) {
@@ -150,6 +200,15 @@ public class Room {
         return description;
     }
     
+    /**
+     * Takes a single character, representing a direction which to exit a Room object,
+     * and confirms that and exit with the matching direction exists. If the exit 
+     * direction is present the exit's destination Room object is return, otherwise the
+     * return value is set to null.
+     * 
+     * @param dir single character representing the potential direction an exit
+     * @return the destination room object
+     */
     public Room leaveBy(String dir) {
         for (Exit exit : exits) {
             if (exit.getDir().equals(dir)) {
@@ -159,18 +218,62 @@ public class Room {
         return null;
     }
 
+    /**
+     * Takes an Exit object and adds it to the Room's exits array list.
+     * 
+     * @param exit exit object representing a viable movement direction for the player
+     */
     void addExit(Exit exit) {
         exits.add(exit);
     }
 
+    /**
+     * Takes in an Item object and adds it to the Room's contents array list.
+     * 
+     * @param item
+     */
     void add(Item item) {
         contents.add(item);
     }
+    
+    /**
+     * Takes in an NPC object and adds it to the Room's npcs array list.
+     * 
+     * @param npc
+     */
+    void add(NPC npc) {
+    	npcs.add(npc);
+    }
 
+    /**
+     * Takes in an Item object and removes it from the Room's contents array list.
+     * 
+     * @param item the target item object to be removed from the room's contents array
+     *  list
+     */
     void remove(Item item) {
         contents.remove(item);
     }
+    
+    /**
+     * Takes in an NPC object and removes it from the Room's npcs array list.
+     * 
+     * @param npc the target npc object to be removed from the room's npcs array
+     *  list
+     */
+    void remove(NPC npc) {
+        npcs.remove(npc);
+    }
 
+    /**
+     * Takes in a String as a search parameter, representing the primary name of an Item.
+     * Checks the room's contents array list for a match. If match is made returns an 
+     * Item, otherwise throws exception.
+     * 
+     * @param name search parameter, as name of item
+     * @return item object
+     * @throws Item.NoItemException
+     */
     Item getItemNamed(String name) throws Item.NoItemException {
         for (Item item : contents) {
             if (item.goesBy(name)) {
@@ -178,6 +281,24 @@ public class Room {
             }
         }
         throw new Item.NoItemException();
+    }
+    
+    /**
+     * Takes in a String as a search parameter, representing the name of a NPC object.
+     * Checks the room's npcs array list for a match. If match is made returns an 
+     * NPC object, otherwise throws exception.
+     * 
+     * @param name search parameter, as name of npc
+     * @return target npc object
+     * @throws NPC.NoNPCException 
+     */
+    NPC getNpcNamed(String name) throws NPC.NoNPCException {
+        for (NPC npc : npcs) {
+            if (npc.getName().equals(name)) {
+                return npc;
+            }
+        }
+        throw new NPC.NoNPCException();
     }
 
     ArrayList<Item> getContents() {

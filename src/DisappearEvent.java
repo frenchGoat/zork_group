@@ -18,7 +18,7 @@ public class DisappearEvent extends Event {
 	
 	/**
 	 * This is an item manipulation trigger, in which the target item is removed from the
-	 * game completely. This is used in conjuction with transform events as well when
+	 * game completely. This is used in conjunction with transform events as well when
 	 * finite items are depleted or broken.
 	 * 
 	 * @param itemName primary name of Item which is to be removed from game
@@ -37,7 +37,7 @@ public class DisappearEvent extends Event {
 	 */
 	@Override
 	String trigger() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub.
 		return null;
 	}
 

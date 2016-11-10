@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class Dungeon {
 
     @SuppressWarnings("serial")

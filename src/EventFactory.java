@@ -24,7 +24,7 @@ public class EventFactory {
 	}
 	
 	/**
-	 * This method receives an event description which is passed to the facotry by 
+	 * This method receives an event description which is passed to the factory by 
 	 * another action/command taken in the game, ie. ItemSpecificCommand or some action
 	 * taken during trading/combat/dialog. Then it is parsed it into strings. These
      * Strings are being stored in a simple array. Event input will start with a specific
