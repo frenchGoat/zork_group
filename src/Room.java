@@ -116,8 +116,18 @@ public class Room {
         beenHere = false;
     }
 
+    /**
+     * Returns Room object title name.
+     * 
+     * @return String title name
+     */
     String getTitle() { return title; }
 
+    /**
+     * Sets the Room objects desc variable
+     * 
+     * @param desc full description of the room
+     */
     void setDesc(String desc) { this.desc = desc; }
 
     /*
@@ -301,6 +311,11 @@ public class Room {
         throw new NPC.NoNPCException();
     }
 
+    /**
+     * Returns the Item objects within the contents db
+     * 
+     * @return list of Items present in the Room
+     */
     ArrayList<Item> getContents() {
         return contents;
     }
