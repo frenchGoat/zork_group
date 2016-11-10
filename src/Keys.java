@@ -7,14 +7,31 @@ import java.util.Scanner;
  */
 
 /**
- * @author 
+ * @author Michelle Booth
  */
 public class Keys extends Item {
-
-	Keys(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException,
-			Item.NoItemException {
-		super(s);
-		// TODO Auto-generated constructor stub
-	}
+   /**
+   * The exit that needs to be unlocked
+   */
+   private Exit unlock;
+    /**
+	 * @param s
+	 * @throws NoItemException
+	 * @throws Dungeon.IllegalDungeonFormatException
+	 */
+   Keys(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException,
+   		Item.NoItemException {
+      super(s);
+   
+   }
+   /*
+   * Changes the locked status of the exit and returns a message
+   * indicating that
+   * @param unlock Exit the exit that needs to be unlocked
+   * @return String unlocked
+   */
+   String unlockedExit(Exit unlock){
+   return "unlocked";
+   } 
 
 }
