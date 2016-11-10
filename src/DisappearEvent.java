@@ -28,12 +28,10 @@ public class DisappearEvent extends Event {
 	}
 
 	/**
-	 * Activates the DisappearEvent. 
-	 * +Return statement should be tailored to the situation?
-	 * ++Tiggering via usage or breaking will alert the user?
-	 * ++Transformation triggers remain silent?
+	 * Activates the DisappearEvent that returns a set message for breaking items 
+	 * or a set message for consuming items.
 	 * 
-	 * @return +should this be canned or have multiple results?
+	 * @return message Will either tell if the item is broken or if it has been consumed.
 	 */
 	@Override
 	String trigger() {
