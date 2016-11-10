@@ -40,6 +40,15 @@ public class Vendor extends NPC {
     }
     
     /**
+    * Updates the vendor's money
+    *
+    * @param amount The amount money will change.
+    */
+    public void setMoney(int amount) {
+        
+    }
+    
+    /**
      * Will return the Item purchesed whent he correct amount of money is given.
      * 
      * @param price The value of the Item the player is buying.
