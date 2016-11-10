@@ -5,3 +5,5 @@
 /NPC$NoNPCException.class
 /Companion.class
 /Mob.class
+/TeleportEvent.class
+/Vendor.class
