@@ -1,6 +1,6 @@
 import java.util.Scanner;
 /**
- * Every NPC tyoe will extend this class that gives each NPC a name, health, 
+ * Every NPC type will extend this class that gives each NPC a name, health, 
  * conversation hashtable, and a current room that is read in from a file. Along with getters for each field.
  *
  * @author Kaylee Payne
