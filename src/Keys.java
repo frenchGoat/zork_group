@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * @author Michelle Booth
+ * @author Jacques Troussard
  */
 public class Keys extends Item {
    /**
@@ -15,16 +16,16 @@ public class Keys extends Item {
    */
    private Exit unlock;
     /**
-	 * @param s
-	 * @throws NoItemException
-	 * @throws Dungeon.IllegalDungeonFormatException
-	 */
+    * @param s
+    * @throws NoItemException
+    * @throws Dungeon.IllegalDungeonFormatException
+    */
    Keys(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException,
    		Item.NoItemException {
       super(s);
    
    }
-   /*
+   /**
    * Changes the locked status of the exit and returns a message
    * indicating that
    * @param unlock Exit the exit that needs to be unlocked
