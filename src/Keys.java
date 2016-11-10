@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Keys extends Item {
    /**
-   * The exit that needs to be unlocked
+   * The exit that needs to be unlocked.
    */
    private Exit unlock;
     /**
