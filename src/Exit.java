@@ -1,13 +1,36 @@
 import java.util.Scanner;
 
+/**
+ * @author Jacques Troussard
+ *
+ */
 public class Exit {
 
     @SuppressWarnings("serial")
 	class NoExitException extends Exception {}
 
+    /**
+     * Location of exit with respect to its source Room object.
+     */
     private String dir;
-    private Room src, dest;
+    /**
+     * Room object identifying the source location of the Exit object.
+     */
+    private Room src;
+    /**
+     * Room object identifying the linked Room object from the source Room. 
+     */
+    private Room dest;
 
+    /**
+     * Takes a String, and two Room objects to construct an Exit object. After 
+     * initialization and assignments, the source Room object's addExit method is called
+     * to add the exit into the Room's exit data structure.
+     * 
+     * @param dir direction of the exit with respect to the source room
+     * @param src room object containing the exit
+     * @param dest destination room object
+     */
     Exit(String dir, Room src, Room dest) {
         init();
         this.dir = dir;
@@ -53,11 +76,32 @@ public class Exit {
     private void init() {
     }
 
+    /**
+     * Method used to return a message describing the exit object's dir variable plus the 
+     * name variable of the destination Room object.
+     * 
+     * @return message describing the exits direction and destination
+     */
     String describe() {
         return "You can go " + dir + " to " + dest.getTitle() + ".";
     }
 
+    /**
+     * Returns the direction variable.
+     * 
+     * @return exit direction
+     */
     String getDir() { return dir; }
+    /**
+     * Returns the Room which the exit is contained in.
+     * 
+     * @return exit source room
+     */
     Room getSrc() { return src; }
+    /**
+     * Returns the destination Room of the exit.
+     * 
+     * @return destination of exit
+     */
     Room getDest() { return dest; }
 }
