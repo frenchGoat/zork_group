@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 /**
  * The Mob extends NPC and has an additional field that is the int cmount of attack.

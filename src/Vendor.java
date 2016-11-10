@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 /**
  * The Vendor extends NPC and has an additional field for the currency it carries.
