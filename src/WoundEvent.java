@@ -1,5 +1,6 @@
 /**
- * 
+ * University of Mary Washington
+ * CPSC 240 Section 2 
  */
 
 /**
@@ -8,17 +9,25 @@
  */
 public class WoundEvent extends Event {
 	
+	/**
+	 * Amount of damage received.
+	 */
 	private int damage;
 	
 	/**
-	 * @param damage int - Amount of damage to remove from target's health stat
+	 * Takes int parameter and assigns it to the instance variable, damage.
+	 * 
+	 * @param damage amount of damage to remove from target's health status
 	 */
 	public WoundEvent(int damage) {
 		this.damage = damage;
 	}
 
-	/* (non-Javadoc)
-	 * @see Event#trigger()
+	/**
+	 * This is a player status modifier. Updates the playerHealth variable (GameState)
+	 * by subtracting the damage variable from it.
+	 * 
+	 * @return message alerting player how much damage was taken
 	 */
 	@Override
 	String trigger() {
