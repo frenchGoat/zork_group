@@ -37,20 +37,20 @@ public class Dungeon {
      */
     private String name;
     /**
-     * Player spawn location
+     * Player spawn location.
      */
     private Room entry;
     /**
-     * Data structure storing dungeon rooms
+     * Data structure storing dungeon rooms.
      */
     private Hashtable<String,Room> rooms;
     /**
-     * Data structure storing all possible items
+     * Data structure storing all possible dungeon items.
      */
     private Hashtable<String,Item> items;
     
     /**
-     * Data structure storing all possible NPCs
+     * Data structure storing all possible NPCs.
      */
     private Hashtable<String,NPC> npcs;
     
@@ -69,7 +69,7 @@ public class Dungeon {
      * Read from the .bork filename passed, and instantiate a Dungeon object
      * based on it.
      * 
-     * @param filename full bork file name including extension
+     * @param filename Full bork file name including extension.
      * @throws FileNotFoundException 
      * @throws IllegalDungeonFormatException 
      */
@@ -81,10 +81,10 @@ public class Dungeon {
 
     /**
      * Read from the .bork filename passed, and instantiate a Dungeon object
-     * based on it, including (possibly) the items/NPCs in their original locations.
+     * based on it, including the items/NPCs in their original locations.
      * 
-     * @param filename filename full bork file name including extension
-     * @param initState represents the desire to reload the map or restore
+     * @param filename Full bork file name including extension
+     * @param initState Represents the desire to reload the map or restore
      * @throws FileNotFoundException 
      * @throws IllegalDungeonFormatException 
      */
@@ -194,28 +194,32 @@ public class Dungeon {
     }
     
     /**
+     * Returns the spawn room of the dungeon.
      * 
      * @return spawn room for dungeon
      */
     public Room getEntry() { return entry; }
     /**
-     * 
-     * @return id name for dungeon
+     * Returns the dungeon name.
+     *
+     * @return name The name of the dungeon.
      */
     public String getName() { return name; }
     /**
-     * 
-     * @return full dungeon file name with extension
+     * Returns the filename with the extension.
+     *
+     * @return filename Full dungeon file name with extension.
      */
     public String getFilename() { return filename; }
     /**
-     * 
-     * @param room room object to be added to the rooms hashtable, keyed by room name
+     * Adds a room to the dungeons rooms list.
+     * @param room Room object to be added to the rooms hashtable, keyed by room name.
      */
     public void add(Room room) { rooms.put(room.getTitle(),room); }
     /**
-     * 
-     * @param item item object to be added to the items hashtable, keyed by primary name
+     * Adds an item to the dungeon items list.
+     *
+     * @param item Item object to be added to the items hashtable, keyed by primary name.
      */
     public void add(Item item) { items.put(item.getPrimaryName(),item); }
     
@@ -223,8 +227,8 @@ public class Dungeon {
      * Get the Room object whose name is passed. This has nothing to do with
      * where the Adventurer might be.
      * 
-     * @param roomTitle room name
-     * @return room object from rooms hashtable keyed by room name
+     * @param roomTitle Room name
+     * @return room Room object from rooms hashtable keyed by room name
      */
     public Room getRoom(String roomTitle) {
         return rooms.get(roomTitle);
@@ -234,6 +238,7 @@ public class Dungeon {
      * Get the Item object whose primary name is passed. This has nothing to
      * do with where the Adventurer might be, or what's in his/her inventory,
      * etc.
+     *
      * @param primaryItemName String - Used as key for items hashtable
      * @return Item object from items hashtable
      * @throws Item.NoItemException 
