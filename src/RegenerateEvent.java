@@ -27,12 +27,12 @@ public class RegenerateEvent extends Event {
 	 * When triggered will update the players health and hunger status in GameState and
 	 * return the appropriate messages to be printed to the console.
 	 * 
-	 * @return health and hunger updates
+	 * @return message Health and/or hunger update message.
 	 */
 	@Override
 	String trigger() {
 		// TODO Auto-generated method stub
-		return null;
+		return message;
 	}
 
 }
