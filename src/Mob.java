@@ -23,7 +23,7 @@ public class Mob extends NPC {
     *
     * @param scanner The scanner of the dungeon file.
     */
-    Companion(Scanner scanner) {
+    Mob(Scanner scanner) {
         
     }
     
