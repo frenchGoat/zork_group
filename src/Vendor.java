@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 /**
  * The Vendor extends NPC and has an additional field for the currency it carries.
@@ -35,6 +36,15 @@ public class Vendor extends NPC {
      * @return money The int value of money this Vendor has.
      */
     public int getMoney() {
+        
+    }
+    
+    /**
+    * Updates the vendor's money
+    *
+    * @param amount The amount money will change.
+    */
+    public void setMoney(int amount) {
         
     }
     

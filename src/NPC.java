@@ -1,3 +1,4 @@
+
 import java.util.Hashtable;
 import java.util.Scanner;
 /**
@@ -73,6 +74,24 @@ public class NPC {
     */
     public Room getCurrentRoom() {
 	return currentRoom;
+    }
+	
+    /**
+    * Sets the health of the NPC.
+    *
+    * @param health The new health of the NPC
+    */
+    public viod setHealth(int health) {
+	this.health = health;
+    }
+	
+    /**
+    * Sets the current room of the NPC.
+    *
+    * @param currentRoom The new currentRoom of the NPC
+    */
+    public void setCurrentRoom(Room currentRoom) {
+	this.currentRoom = currentRoom;
     }
 	
     /**

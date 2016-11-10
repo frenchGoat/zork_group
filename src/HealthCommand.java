@@ -23,6 +23,13 @@ public class HealthCommand extends Command {
    
    }
    /*
+   * Gets and returns the health
+   * @return int Returns health
+   */
+   public int getHealth(){
+   return health;
+   }
+   /*
    * Gets the health and returns the health message
    * @return String The message that corrosponds to the health
    */
