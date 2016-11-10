@@ -33,6 +33,5 @@ public class Keys extends Item {
    */
    String unlockedExit(Exit unlock){
    return "unlocked";
-   } 
-
+   }
 }
