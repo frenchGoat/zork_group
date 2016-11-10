@@ -16,7 +16,7 @@ public class Keys extends Item {
    */
    private Exit unlock;
     /**
-    * @param s
+    * @param s The scanner of the dungeon file.
     * @throws NoItemException
     * @throws Dungeon.IllegalDungeonFormatException
     */
@@ -26,10 +26,10 @@ public class Keys extends Item {
    
    }
    /**
-   * Changes the locked status of the exit and returns a message
-   * indicating that
-   * @param unlock Exit the exit that needs to be unlocked
-   * @return String unlocked
+   * Changes the locked status of the exit and returns a message.
+   *
+   * @param unlock The exit that needs to be unlocked
+   * @return unlocked The string "unlocked" indicated the exit is open.
    */
    String unlockedExit(Exit unlock){
    return "unlocked";
