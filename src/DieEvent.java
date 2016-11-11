@@ -1,8 +1,13 @@
 /**
+ * University of Mary Washington
+ * CPSC 240 Section 2
  * 
  */
 
 /**
+ * A global event which ends the game if the players health or hunger status reach
+ * zero.
+ * 
  * @author Jacques Troussard
  *
  */
@@ -14,9 +19,7 @@ public class DieEvent extends Event {
 	 * will reload the game from last restore point.
 	 * 
 	 */
-	public DieEvent() {
-		// TODO Auto-generated constructor stub
-	}
+	public DieEvent() {}
 
 	/**
 	 * Activates the DieEvent.
@@ -26,7 +29,7 @@ public class DieEvent extends Event {
 	@Override
 	String trigger() {
 		// TODO Auto-generated method stub
-		return message;
+		return null;
 	}
 
 }
