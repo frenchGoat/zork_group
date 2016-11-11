@@ -319,4 +319,24 @@ public class Room {
     ArrayList<Item> getContents() {
         return contents;
     }
+    
+    /**
+	 * Development test method used to check room contents by printing a list
+	 * to the console.
+	 */
+    public void devPrintRoomContents() {
+    	int num = 0;
+		if (!contents.isEmpty()) {
+			System.out.println("Room Contains:");
+			for (Item i : contents) {
+				System.out.println(num + ": " + i.getPrimaryName());
+				num++;
+			}
+			System.out.println();
+		} else {
+			System.out.println("Room is empty");
+			System.out.println();
+		}
+	}
 }
+
