@@ -36,6 +36,6 @@ public class Companion extends NPC {
      * @return gift The gift Item of this Companion.
      */
     public Item getGift() {
-        
+        return null;
     }
 }
