@@ -3,6 +3,13 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
+ * The CommandFactory Class will take in user commands as strings, parse them and
+ * try to determine what the player is trying to accomplish. If parsed commands
+ * can be matched to valid sub-command classes, they will be created and executed,
+ * possibly causing sub-event classes to be created, but always will return a string
+ * to be printed on the console to alert the player as to the results of their 
+ * input/actions.
+ * 
  * @author Jacques Troussard
  *
  */
@@ -49,6 +56,9 @@ public class CommandFactory {
         }
         if (verb.equals("i") || verb.equals("inventory")) {
             return new InventoryCommand();
+        }
+        if (verb.equals("h") || verb.equals("health")) { 
+        	return new HealthCommand();
         }
         if (MOVEMENT_COMMANDS.contains(verb)) {
             return new MovementCommand(verb);

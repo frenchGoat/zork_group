@@ -290,4 +290,9 @@ public class GameState {
         return dungeon;
     }
 
+	public static int getPlayerHealth() {
+		// access then return player health
+		return 0;
+	}
+
 }
