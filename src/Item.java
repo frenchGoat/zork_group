@@ -33,6 +33,10 @@ public class Item {
     Item(int w) {
     	this.weight = w;
     }
+    
+    Item(String n) {
+    	this.primaryName = n;
+    }
 
 
     Item(Scanner s) throws NoItemException,
