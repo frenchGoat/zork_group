@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+/**
+ * University of Mary Washington 
+ * CPSC 240 Section 2
+ * 
+ */
 
 /**
  * @author Jacques Troussard
