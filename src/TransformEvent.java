@@ -5,6 +5,7 @@
  */
 
 /**
+ * This Event sub class transforms one object to another.
  * @author Jacques Troussard
  *
  */
