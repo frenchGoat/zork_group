@@ -233,11 +233,12 @@ public class Dungeon {
 	 * Adds a room to the dungeons rooms list.
 	 * 
 	 * @param room
-	 *            Room object to be added to the rooms hashtable, keyed by room
-	 *            name.
+	 *            Room object to be added to the rooms and teleDests
+	 *            hashtable, keyed by room title(name).
 	 */
 	public void add(Room room) {
 		rooms.put(room.getTitle(), room);
+		teleDests.put(room.getTitle(), room);
 	}
 	
 	/**
@@ -318,6 +319,10 @@ public class Dungeon {
 		}
 
 	}
+	
+	public Hashtable<String, Room> getTeleTable() {
+		return teleDests;
+	}
 
 	/**
 	 * Development test method used to check game item master list by printing a
@@ -352,4 +357,6 @@ public class Dungeon {
 			System.out.println("There are no items at all");
 		}
 	}
+	
+	
 }
