@@ -16,8 +16,10 @@ public class DisappearEvent extends Event {
 	/**
 	 * Primary name of target Item Object. 
 	 */
-
 	private String itemName;
+	/**
+	 * Not used for play. Logs actions taken by user.
+	 */
 	private String logEntry;
 	
 	/**
