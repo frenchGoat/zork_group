@@ -45,6 +45,10 @@ public class Dungeon {
 	 */
 	private Hashtable<String, Room> rooms;
 	/**
+	 * Data structure storing teleport destination room options.
+	 */
+	private Hashtable<String, Room> teleDests;
+	/**
 	 * Data structure storing all possible dungeon items.
 	 */
 	private Hashtable<String, Item> items;
@@ -66,6 +70,7 @@ public class Dungeon {
 		this.name = name;
 		this.entry = entry;
 		rooms = new Hashtable<String, Room>();
+		teleDests = new Hashtable<String, Room>();
 	}
 
 	/**
@@ -159,6 +164,7 @@ public class Dungeon {
 	// is used.
 	private void init() {
 		rooms = new Hashtable<String, Room>();
+		teleDests = new Hashtable<String, Room>();
 		items = new Hashtable<String, Item>();
 		itemsOutOfPlay = new Hashtable<String, Item>();
 	}
@@ -232,6 +238,19 @@ public class Dungeon {
 	 */
 	public void add(Room room) {
 		rooms.put(room.getTitle(), room);
+	}
+	
+	/**
+	 * Adds a room to the designated data structure.
+	 * 
+	 * @param dest
+	 *            Destination data structure for room storage.
+	 * @param room
+	 *            Room object to be added to the designated hashtable, keyed 
+	 *            by room title(name).
+	 */
+	public void add(Hashtable<String, Room> dest, Room room) {
+		dest.put(room.getTitle(), room);
 	}
 
 	/**
