@@ -27,9 +27,8 @@ public class DieEvent extends Event {
 	 * @return message The end of game message
 	 */
 	@Override
-	String trigger() {
+	void trigger() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
