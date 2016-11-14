@@ -23,7 +23,17 @@ public class Item {
     /**
      * Hashtable used to store messages and events related to item.
      */
-    private Hashtable<String,String> messages;
+    private Hashtable<String, String> messages;
+    /**
+     * ArrayList used to store events related to item specific commands. Events
+     * are keyed by their corresponding verb (itemSpecific command). example:
+     * file read in -> drink[Transform(emptyCan), Wound(-1)]:'Generic Message'
+     * would store the Event Transform(emptyCan) keyed to 'drink', and the Event
+     * Wound(-1) keyed to 'drink'. The event factory will be passed this db and
+     * all necessary events keyed to action verb the command factory parsed will
+     * be invoked.
+     */
+    private Hashtable<String, String> triggers;
     
     /**
      * Takes w as a int parameter and assigns it to the instance variable, weight.
@@ -43,6 +53,7 @@ public class Item {
         Dungeon.IllegalDungeonFormatException {
 
         messages = new Hashtable<String,String>();
+        triggers = new Hashtable<String,String>();
 
         // Read item name.
         primaryName = s.nextLine();
@@ -62,6 +73,26 @@ public class Item {
             }
             String[] verbParts = verbLine.split(":");
             messages.put(verbParts[0],verbParts[1]);
+            /*
+             *  Check to see if the item specific verb has any events
+             *  which need to be triggered when acted upon. The '.bork'
+             *  file pattern identifies events by surrounding them with
+             *  brackets after the verb. 
+             *  
+             *  ie. verb[Event(param),Event(param)]:Message to display
+             *  
+             *  For triggers hashtable will store this information keyed
+             *  by the verb, the value being the event(s). If there are 
+             *  more than one events associated with a verb action, the
+             *  EventFactory will detect this and separate the events 
+             *  Accordingly.
+             */
+            for (String key : messages.keySet()) {
+            	if (key.contains("[")) {
+            		String[] eventParts = key.split("[");
+            		triggers.put(eventParts[0], eventParts[1].substring(0, -1));
+            	}
+            }
             
             verbLine = s.nextLine();
         }
