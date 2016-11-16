@@ -41,6 +41,8 @@ class ItemSpecificCommand extends Command {
 		// Check for event triggers
 		if (itemReferredTo.hasEvents()) {
 			try {
+				EventCounter ec = new EventCounter(itemReferredTo.getEventDetailsForVerb(verb));
+				//for (int i = ec.countEvents(); i>0; i--) {
 				EventFactory.instance().parse(itemReferredTo.getEventDetailsForVerb(verb)).trigger();
 			} catch (Item.NoItemException e) {
 				e.printStackTrace();

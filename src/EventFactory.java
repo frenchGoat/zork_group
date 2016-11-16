@@ -34,6 +34,31 @@ public class EventFactory {
 	 * @return specific Event object as per the parsing
 	 */
 	public Event parse(String eventDescription) {
+		String parts[] = command.split(" ");
+        String verb = parts[0];
+        String noun = parts.length >= 2 ? parts[1] : "";
+        if (verb.equals("save")) {
+            return new SaveCommand(noun);
+        }
+        if (verb.equals("take")) {
+            return new TakeCommand(noun);
+        }
+        if (verb.equals("drop")) {
+            return new DropCommand(noun);
+        }
+        if (verb.equals("i") || verb.equals("inventory")) {
+            return new InventoryCommand();
+        }
+        if (verb.equals("h") || verb.equals("health")) { 
+        	return new HealthCommand();
+        }
+        if (MOVEMENT_COMMANDS.contains(verb)) {
+            return new MovementCommand(verb);
+        }
+        if (parts.length == 2) {
+            return new ItemSpecificCommand(verb, noun);
+        }
+        return new UnknownCommand(command);
 		return new UnknownEvent(eventDescription);
 	}
 
