@@ -1,4 +1,4 @@
-
+import java.util.regex.Pattern;
 
 /**
  * @author Jacques Troussard
@@ -18,7 +18,7 @@ class ItemSpecificCommand extends Command {
      * @param noun
      */
     ItemSpecificCommand(String verb, String noun) {
-        this.verb = verb;
+    	this.verb = verb;
         this.noun = noun;
     }
 
