@@ -70,31 +70,20 @@ public class Item {
 				throw new Dungeon.IllegalDungeonFormatException("No '" + Dungeon.SECOND_LEVEL_DELIM + "' after item.");
 			}
 			String[] verbParts = verbLine.split(":");
-			messages.put(verbParts[0], verbParts[1]);
-			/*
-			 * Check to see if the item specific verb has any events which need
-			 * to be triggered when acted upon. The '.bork' file pattern
-			 * identifies events by surrounding them with brackets after the
-			 * verb.
-			 * 
-			 * ie. verb[Event(param),Event(param)]:Message to display
-			 * 
-			 * For triggers hashtable will store this information keyed by the
-			 * verb, the value being the event(s). If there are more than one
-			 * events associated with a verb action, the EventFactory will
-			 * detect this and separate the events Accordingly.
-			 */
-
-			for (String key : messages.keySet()) {
-				if (key.contains("[")) {
-					String[] eventParts = key.split(Pattern.quote("["));
-					triggers.put(eventParts[0], eventParts[1].substring(0, eventParts[1].length() - 1));
-				}
+			// Does verb have events connected to it?
+			if (verbParts[0].contains("[")) {
+				String eventLine = verbParts[0]; // verb with event details attached
+				String[] eventParts = eventLine.split(Pattern.quote("[")); // separate verb from event details
+				// load data structures -  event details are not parsed yet -> specific event or eventFactory's job
+				triggers.put(eventParts[0], eventParts[1].substring(0, eventParts[1].length() - 1)); 
+				messages.put(eventParts[0], verbParts[1]);
+			// Verb without event parts can be added to messages hashtable without edits.
+			} else {
+				messages.put(verbParts[0], verbParts[1]);
 			}
 			verbLine = s.nextLine();
 		}
 	}
-
 	/**
 	 * Used by parser to confirm whether user command input of an item name is
 	 * valid for an existing Item object.
