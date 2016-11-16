@@ -89,8 +89,8 @@ public class Item {
              */
             for (String key : messages.keySet()) {
             	if (key.contains("[")) {
-            		String[] eventParts = key.split("[");
-            		triggers.put(eventParts[0], eventParts[1].substring(0, -1));
+            		String[] eventParts = key.split("\\[");
+            		triggers.put(eventParts[0], eventParts[1].substring(0, eventParts[1].length()-1));
             	}
             }
             
