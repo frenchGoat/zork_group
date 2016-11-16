@@ -33,7 +33,7 @@ public class EventFactory {
 	 * @param eventDescription string of eventDescription passed by initiating action
 	 * @return specific Event object as per the parsing
 	 */
-	public Event parseEvent(String eventDescription) {
+	public Event parse(String eventDescription) {
 		return new UnknownEvent(eventDescription);
 	}
 
