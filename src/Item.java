@@ -38,7 +38,7 @@ public class Item {
     /**
      * Takes w as a int parameter and assigns it to the instance variable, weight.
      * 
-     * @param w amount of space modified when taken into inverntory.
+     * @param w amount of space modified when taken into inventory.
      */
     Item(int w) {
     	this.weight = w;
