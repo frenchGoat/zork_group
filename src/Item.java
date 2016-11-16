@@ -48,6 +48,12 @@ public class Item {
 	Item(String n) {
 		this.primaryName = n;
 	}
+	/**
+	 * For testing purposes only!
+	 */
+	Item() {
+		init();
+	}
 
 	Item(Scanner s) throws NoItemException, Dungeon.IllegalDungeonFormatException {
 
@@ -111,5 +117,31 @@ public class Item {
 	 */
 	public String toString() {
 		return primaryName;
+	}
+	
+	public boolean hasEvents() {
+		return !triggers.isEmpty();
+	}
+	
+	/**
+	 * For testing purposes only!
+	 */
+	public void init() {
+		messages = new Hashtable<String, String>();
+		triggers = new Hashtable<String, String>();
+	}
+	
+	
+	
+	
+	
+	//Item Methods Test
+	
+	public static void main (String args[]) {
+		Item i = new Item();
+		i.triggers.put("someVerb","triggerDetails");
+		System.out.println(i.hasEvents());
+		Item j = new Item();
+		System.out.println(j.hasEvents());
 	}
 }
