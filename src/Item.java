@@ -111,6 +111,18 @@ public class Item {
 	public String getMessageForVerb(String verb) {
 		return messages.get(verb);
 	}
+	
+	/**
+	 * Returns the event detail string related the keyed verb. Can be more than
+	 * one event in a single line.
+	 * 
+	 * @param verb key for hashtable, triggers.
+	 * @return the event details string which can contain details for more than one
+	 * event
+	 */
+	public String getEventDetailsForVerb(String verb) {
+		return triggers.get(verb);
+	}
 
 	/**
 	 * Simply returns Item object primary name
