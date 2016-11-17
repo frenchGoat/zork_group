@@ -31,8 +31,9 @@ public class UnknownEvent extends Event {
 	 * @return unknown event message
 	 */
 	@Override
-	String trigger() {
-		return null;
+	void trigger() {
+		GameState.logEntry = "Unsuccessful Event trigger: " + this.unknownEventDesc;
+		GameState.instance().logAction(GameState.logEntry);
 	}
 
 }
