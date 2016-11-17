@@ -46,6 +46,7 @@ public class Item {
 	}
 
 	Item(String n) {
+		init();
 		this.primaryName = n;
 	}
 	/**
@@ -131,8 +132,8 @@ public class Item {
 		return primaryName;
 	}
 	
-	public boolean hasEvents() {
-		return !triggers.isEmpty();
+	public boolean hasEvents(String verb) {
+		return triggers.containsKey(verb);
 	}
 	
 	/**
@@ -150,10 +151,11 @@ public class Item {
 	//Item Methods Test
 	
 	public static void main (String args[]) {
-		Item i = new Item();
+		Item i = new Item("i");
 		i.triggers.put("someVerb","triggerDetails");
-		System.out.println(i.hasEvents());
-		Item j = new Item();
-		System.out.println(j.hasEvents());
+		System.out.println(i.hasEvents("someVerb"));
+		Item j = new Item("j");
+		j.triggers.put("anotherVerb", "triggerDetails");
+		System.out.println(j.hasEvents("someVerb"));
 	}
 }
