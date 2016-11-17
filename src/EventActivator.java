@@ -56,6 +56,22 @@ public class EventActivator {
 		ac.setEventDetails(multiEvent1);
 		ac.activate();
 		
+		String die = "Die";
+		String trs = "Transform(\"squishedCan\")";
+		
+		String[] split;
+		
+		split = die.split(Pattern.quote("("));
+		for (int i = split.length; i>0; i--) {
+			System.out.println(split[i-1]);
+		}
+		System.out.println(split[1]);
+		split = trs.split(Pattern.quote("("));
+		for (int i = split.length; i>0; i--) {
+			System.out.println(split[i-1]);
+		}
+		
+		
 		
 
 		
