@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 /**
  * 
  */
@@ -34,11 +36,16 @@ public class EventFactory {
 	 * @return specific Event object as per the parsing
 	 */
 	public Event parse(String eventDescription) {
-		String parts[] = command.split(" ");
-        String verb = parts[0];
-        String noun = parts.length >= 2 ? parts[1] : "";
-        if (verb.equals("save")) {
-            return new SaveCommand(noun);
+		String eventBuffer[] = eventDescription.split(Pattern.quote(","));
+		int numOfEvents = eventBuffer.length;
+		
+		if (eventBuffer.length == 1) {
+			
+		}
+        String event = parts[0];
+        String param = parts.length >= 2 ? parts[1] : "";
+        if (verb.equalsIgnoreCase("die")) {
+            return new DieEvent(param);
         }
         if (verb.equals("take")) {
             return new TakeCommand(noun);
