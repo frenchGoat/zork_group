@@ -54,6 +54,9 @@ public class CommandFactory {
         if (verb.equals("drop")) {
             return new DropCommand(noun);
         }
+        if (verb.equals("look")) {
+        	return new LookCommand();
+        }
         if (verb.equals("i") || verb.equals("inventory")) {
             return new InventoryCommand();
         }
