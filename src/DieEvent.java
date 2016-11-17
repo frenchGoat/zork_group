@@ -22,7 +22,11 @@ public class DieEvent extends Event {
 	 * 
 	 * @param param ignore this param - never used
 	 */
-	public DieEvent(String param) {}
+	public DieEvent(String param) {
+		this.param = null;
+	}
+	
+	public DieEvent() {}
 
 	/**
 	 * Activates the DieEvent.
