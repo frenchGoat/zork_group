@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+
 /**
  * University of Mary Washington 
  * CPSC 240 Section 2
@@ -71,7 +72,6 @@ public class GameState {
 	 * Header String for player score status when writing to a .sav file.
 	 */
 	static String SCORE_LEADER = "Score: ";
-
 	/**
 	 * Instance variable for GameState
 	 */
@@ -106,14 +106,27 @@ public class GameState {
 	 * you
 	 */
 	private ArrayList<Exit> unlockedExits;
+
+	// Variables related to game logging
 	/**
-	 * Logger db
+	 * Database structure for the game log. Player commands, events triggered
+	 * and results will be stored here.
 	 */
 	private ArrayList<String> log;
 
-	
 	/**
-	 * Returns the only instance of GameState
+	 * Actual log entry to be put into log database.
+	 */
+	private static String logEntry;
+	/**
+	 * Current GameState turn (counter variable).
+	 */
+	private int curTurn;
+
+	/**
+	 * 
+	 * 
+	 * /** Returns the only instance of GameState
 	 *
 	 * @return theInstance current instance of GameState
 	 */
@@ -127,6 +140,7 @@ public class GameState {
 	private GameState() {
 		inventory = new ArrayList<Item>();
 		log = new ArrayList<String>();
+		curTurn = 0;
 	}
 
 	/**
@@ -186,7 +200,7 @@ public class GameState {
 	void initialize(Dungeon dungeon) {
 		this.dungeon = dungeon;
 		adventurersCurrentRoom = dungeon.getEntry();
-		
+
 	}
 
 	ArrayList<String> getInventoryNames() {
@@ -296,6 +310,26 @@ public class GameState {
 		return false;
 	}
 
+	// ++++++++++++++GAME LOGGER METHODS+++++++++++++++++
+	// Possibly move this to its own class
+
+	/**
+	 * Adds and entry to the log data structure
+	 * 
+	 * @param logString
+	 *            description of action/result taken in game.
+	 */
+	public void logAction(String logString) {
+		log.add(logString);
+	}
+
+	public void clickTurn() {
+		curTurn ++;
+
+	}
+
+	// ++++++++++++++DEVELOPMENT & TEST METHODS+++++++++++++++++
+
 	/**
 	 * Development test method used to check player inventory by printing a list
 	 * to the console.
@@ -314,21 +348,12 @@ public class GameState {
 			System.out.println();
 		}
 	}
-	
-	/**
-	 * Adds and entry to the log data structure
-	 * 
-	 * @param logString description of action/result taken in game.
-	 */
-	public void logAction(String logString) {
-		log.add(logString);
-	}
-	
+
 	public void devPrintGameLog() {
 		int num = 0;
 		for (String x : log) {
 			System.out.print("Turn " + num + "\n" + x);
-			
+
 		}
 	}
 
