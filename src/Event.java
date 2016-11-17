@@ -14,6 +14,17 @@ abstract class Event {
 	 * @return message A string message corresponding to the specific event.
 	 * @throws Item.NoItemException 
 	 */
+	
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	abstract void trigger() throws Item.NoItemException;
 	
 }
