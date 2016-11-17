@@ -20,7 +20,6 @@ public class ScoreCommand extends Command {
 	 */
    ScoreCommand(int score){
       this.score = score;
-   
    }
    /*
    * Gets the score and returns the rank
