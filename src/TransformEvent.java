@@ -12,6 +12,10 @@
 public class TransformEvent extends Event {
 
 	/**
+	 * Event parameter details
+	 */
+	private String paramDetails;
+	/**
 	 * Primary name of target Item object
 	 */
 	private String targetItem;
@@ -32,6 +36,7 @@ public class TransformEvent extends Event {
 	 * @param targetItem primary name of Item object which is removed from room/inventory
 	 * @param newItem primary name of the Item object which will be added to room/inventory
 	 */
+	
 	public TransformEvent(String targetItem, String newItem) {
 		this.targetItem = targetItem;
 		this.newItem = newItem;
