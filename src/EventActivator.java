@@ -1,11 +1,12 @@
 import java.util.regex.Pattern;
 
 /**
- * 
+ * University of Mary Washington
+ * CPSC 240 Section 2
  */
 
 /**
- * @author user
+ * @author Jacques Troussard
  *
  */
 public class EventActivator {
@@ -34,6 +35,8 @@ public class EventActivator {
 	
 
 	/**
+	 * For testing purposes only. 
+	 * 
 	 * @param args
 	 * @throws Item.NoItemException 
 	 */
@@ -54,8 +57,8 @@ public class EventActivator {
 		ac.activate();
 		
 		
-		
 
+		
 	}
 
 	/**
