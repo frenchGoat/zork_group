@@ -39,11 +39,14 @@ class ItemSpecificCommand extends Command {
 
 		String msg = itemReferredTo.getMessageForVerb(verb);
 		// Check for event triggers
-		if (itemReferredTo.hasEvents()) {
+		if (itemReferredTo.hasEvents(verb)) {
 			try {
-				EventCounter ec = new EventCounter(itemReferredTo.getEventDetailsForVerb(verb));
-				//for (int i = ec.countEvents(); i>0; i--) {
-				EventFactory.instance().parse(itemReferredTo.getEventDetailsForVerb(verb)).trigger();
+				EventActivator ea = new EventActivator(itemReferredTo.getEventDetailsForVerb(verb));
+				/*
+				 *  Triggering of events is now done from within the EventActivator to facilitate 
+				 *  triggering multiple events in one turn.
+				 */
+				ea.activate();
 			} catch (Item.NoItemException e) {
 				e.printStackTrace();
 			}
