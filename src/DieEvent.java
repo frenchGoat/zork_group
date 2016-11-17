@@ -12,14 +12,17 @@
  *
  */
 public class DieEvent extends Event {
+	
+	String param = null;
 
 	/**
 	 * This is an end game trigger, in which the player has lost. Die events can be
 	 * caused by reaching 0 in either player health or hunger status. This trigger 
 	 * will reload the game from last restore point.
 	 * 
+	 * @param param ignore this param - never used
 	 */
-	public DieEvent() {}
+	public DieEvent(String param) {}
 
 	/**
 	 * Activates the DieEvent.
