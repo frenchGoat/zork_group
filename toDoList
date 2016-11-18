@@ -1,0 +1,10 @@
+Sat Nov 12
+-CHECK DUNGEON ADD ROOM METHOD: made changes to add() method in dungeon class (add room) in which the method not only adds
+ a room to the rooms hashtable but also to the teleDests hashtable - this was done to facilitate testing of the TeleportEvent 
+ class. its effects during hydration/restore and game play will need to be observed and possibly modified.
+ 
+Wed Nov 16
+-[DONE]TIGGERS: Find a way act on multiple triggers
+
+Thr Nov 17
+-LOGGER DESIGN: Ask Prof about how to handle logger (log within gamestate or create new class)

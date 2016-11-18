@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author Jacques Troussard
+ *
+ */
 class SaveCommand extends Command {
 
 	/**

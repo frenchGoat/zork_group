@@ -2,6 +2,7 @@
  * When executed it will initiate interaction with NPC's.
  * 
  * @author Kaylee payne
+ * @author Jacques Troussard
  */
 public class TalkCommand extends Command {
     /**
@@ -24,6 +25,6 @@ public class TalkCommand extends Command {
      * @return answer The response taken from the target NPC conversation list in interact().
      */
     public String execute() {
-        
+        return null;
     }
 }

@@ -78,15 +78,19 @@ public class NPC {
 	
     /**
     * Sets the health of the NPC.
+    *
+    * @param health The new health of the NPC
     */
-    public viod setHealth() {
+    public viod setHealth(int health) {
 	this.health = health;
     }
 	
     /**
     * Sets the current room of the NPC.
+    *
+    * @param currentRoom The new currentRoom of the NPC
     */
-    public void setCurrentRoom() {
+    public void setCurrentRoom(Room currentRoom) {
 	this.currentRoom = currentRoom;
     }
 	

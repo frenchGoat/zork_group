@@ -49,6 +49,7 @@ public class Interpreter {
                     CommandFactory.instance().parse(command).execute());
 
                 command = promptUser(commandLine);
+                GameState.instance().clickTurn();
             }
 
             System.out.println("Bye!");

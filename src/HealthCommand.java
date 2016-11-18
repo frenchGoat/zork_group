@@ -7,43 +7,45 @@ import java.util.Scanner;
  */
 
 /**
+ * A simple single character command, when invoke will check the players 
+ * numerical health status and match it to a corresponding 'fuzzy' message
+ * indicating the health condition of the player.
+ * 
  * @author Michelle Booth
+ * @author Jacques Troussard
  */
 public class HealthCommand extends Command {
-   /**
-   * Health of user
-   */
-   private int health;
     /**
-    * Gives the HealthCommand an int health
-	 * @param health int
-	 */
-   HealthCommand(int health){
-      this.health = health;
+    * Single character command which when executed alerts the player of their 
+    * current health status.
+	* 
+	*/
+   HealthCommand(){}
    
-   }
-   /*
-   * Gets and returns the health
-   * @return int Returns health
-   */
-   public int getHealth(){
-   return health;
-   }
-   /*
-   * Gets the health and returns the health message
-   * @return String The message that corrosponds to the health
-   */
+   /**
+    * Gets the health status (GameState) and returns the health message
+    * @return health status message
+    */
    String execute(){
-   String healthMessage = null;
-   if(health == 100){
-      healthMessage = "Healthy";
+   
+      int currentHealth = GameState.getPlayerHealth();
+      String healthMessage = null;
+      if(currentHealth == 100){
+         healthMessage = "Healthy";
       }
-   else if(health <= 50){
-      healthMessage = "Not doing so great";
+      else if(currentHealth <= 50){
+         healthMessage = "Not doing so great";
       }
-    else if(health <= 25){
-      healthMessage = "Warning: Critial conditions!";
+      else if(currentHealth <= 25){
+         healthMessage = "Warning: Critial conditions!";
       }
+   
+      /*
+       * From the GameState, access the array of health messages and use an
+       * if/else or switch mechanism to match the health int value with the
+       * corresponding health message. return the appropriate health message.
+       */
+   
       return healthMessage;
    } 
 

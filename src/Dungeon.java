@@ -11,243 +11,352 @@ import java.io.PrintWriter;
  */
 public class Dungeon {
 
-    @SuppressWarnings("serial")
+	@SuppressWarnings("serial")
 	public static class IllegalDungeonFormatException extends Exception {
-        public IllegalDungeonFormatException(String e) {
-            super(e);
-        }
-    }
+		public IllegalDungeonFormatException(String e) {
+			super(e);
+		}
+	}
 
-    // Variables relating to both dungeon file and game state storage.
-    public static String TOP_LEVEL_DELIM = "===";
-    public static String SECOND_LEVEL_DELIM = "---";
+	// Variables relating to both dungeon file and game state storage.
+	public static String TOP_LEVEL_DELIM = "===";
+	public static String SECOND_LEVEL_DELIM = "---";
 
-    // Variables relating to dungeon file (.bork) storage.
-    public static String ROOMS_MARKER = "Rooms:";
-    public static String EXITS_MARKER = "Exits:";
-    public static String ITEMS_MARKER = "Items:";
-    
-    // Variables relating to game state (.sav) storage.
-    static String FILENAME_LEADER = "Dungeon file: ";
-    static String ROOM_STATES_MARKER = "Room states:";
-    
-    // Variables relating to Dungeon.
-    /**
-     * Name used to identify loaded dungeon object.
-     */
-    private String name;
-    /**
-     * Player spawn location.
-     */
-    private Room entry;
-    /**
-     * Data structure storing dungeon rooms.
-     */
-    private Hashtable<String,Room> rooms;
-    /**
-     * Data structure storing all possible dungeon items.
-     */
-    private Hashtable<String,Item> items;
-    
-    /**
-     * Data structure storing all possible NPCs.
-     */
-    private Hashtable<String,NPC> npcs;
-    
-    // Variables related to identifying files.
-    private String filename;
+	// Variables relating to dungeon file (.bork) storage.
+	public static String ROOMS_MARKER = "Rooms:";
+	public static String EXITS_MARKER = "Exits:";
+	public static String ITEMS_MARKER = "Items:";
 
-    Dungeon(String name, Room entry) {
-        init();
-        this.filename = null;    // null indicates not hydrated from file.
-        this.name = name;
-        this.entry = entry;
-        rooms = new Hashtable<String,Room>();
-    }
+	// Variables relating to game state (.sav) storage.
+	static String FILENAME_LEADER = "Dungeon file: ";
+	static String ROOM_STATES_MARKER = "Room states:";
 
-    /**
-     * Read from the .bork filename passed, and instantiate a Dungeon object
-     * based on it.
-     * 
-     * @param filename Full bork file name including extension.
-     * @throws FileNotFoundException 
-     * @throws IllegalDungeonFormatException 
-     */
-    public Dungeon(String filename) throws FileNotFoundException, 
-        IllegalDungeonFormatException {
+	// Variables relating to Dungeon.
+	/**
+	 * Name used to identify loaded dungeon object.
+	 */
+	private String name;
+	/**
+	 * Player spawn location.
+	 */
+	private Room entry;
+	/**
+	 * Data structure storing dungeon rooms.
+	 */
+	private Hashtable<String, Room> rooms;
+	/**
+	 * Data structure storing teleport destination room options.
+	 */
+	private Hashtable<String, Room> teleDests;
+	/**
+	 * Data structure storing all possible dungeon items.
+	 */
+	private Hashtable<String, Item> items;
+	/**
+	 * Data structure for storing items taken out of play
+	 */
+	private Hashtable<String, Item> itemsOutOfPlay;
+	/**
+	 * Data structure storing all possible NPCs.
+	 */
+	private Hashtable<String, NPC> npcs;
 
-        this(filename, true);
-    }
+	// Variables related to identifying files.
+	private String filename;
 
-    /**
-     * Read from the .bork filename passed, and instantiate a Dungeon object
-     * based on it, including the items/NPCs in their original locations.
-     * 
-     * @param filename Full bork file name including extension
-     * @param initState Represents the desire to reload the map or restore
-     * @throws FileNotFoundException 
-     * @throws IllegalDungeonFormatException 
-     */
-    @SuppressWarnings("resource")
-	public Dungeon(String filename, boolean initState) 
-        throws FileNotFoundException, IllegalDungeonFormatException {
+	Dungeon(String name, Room entry) {
+		init();
+		this.filename = null; // null indicates not hydrated from file.
+		this.name = name;
+		this.entry = entry;
+		rooms = new Hashtable<String, Room>();
+		teleDests = new Hashtable<String, Room>();
+	}
 
-        init();
-        this.filename = filename;
+	/**
+	 * Read from the .bork filename passed, and instantiate a Dungeon object
+	 * based on it.
+	 * 
+	 * @param filename
+	 *            Full bork file name including extension.
+	 * @throws FileNotFoundException
+	 * @throws IllegalDungeonFormatException
+	 */
+	public Dungeon(String filename) throws FileNotFoundException, IllegalDungeonFormatException {
 
-        Scanner s = new Scanner(new FileReader(filename));
-        name = s.nextLine();
+		this(filename, true);
+	}
 
-        s.nextLine();   // Throw away version indicator.
+	/**
+	 * Read from the .bork filename passed, and instantiate a Dungeon object
+	 * based on it, including the items/NPCs in their original locations.
+	 * 
+	 * @param filename
+	 *            Full bork file name including extension
+	 * @param initState
+	 *            Represents the desire to reload the map or restore
+	 * @throws FileNotFoundException
+	 * @throws IllegalDungeonFormatException
+	 */
+	@SuppressWarnings("resource")
+	public Dungeon(String filename, boolean initState) throws FileNotFoundException, IllegalDungeonFormatException {
 
-        // Throw away delimiter.
-        if (!s.nextLine().equals(TOP_LEVEL_DELIM)) {
-            throw new IllegalDungeonFormatException("No '" +
-                TOP_LEVEL_DELIM + "' after version indicator.");
-        }
+		init();
+		this.filename = filename;
 
-        // Throw away Items starter.
-        if (!s.nextLine().equals(ITEMS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                ITEMS_MARKER + "' line where expected.");
-        }
+		Scanner s = new Scanner(new FileReader(filename));
+		name = s.nextLine();
 
-        try {
-            // Instantiate items.
-            while (true) {
-                add(new Item(s));
-            }
-        } catch (Item.NoItemException e) {  /* end of items */ }
+		s.nextLine(); // Throw away version indicator.
 
-        // Throw away Rooms starter.
-        if (!s.nextLine().equals(ROOMS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                ROOMS_MARKER + "' line where expected.");
-        }
+		// Throw away delimiter.
+		if (!s.nextLine().equals(TOP_LEVEL_DELIM)) {
+			throw new IllegalDungeonFormatException("No '" + TOP_LEVEL_DELIM + "' after version indicator.");
+		}
 
-        try {
-            // Instantiate and add first room (the entry).
-            entry = new Room(s, this, initState);
-            add(entry);
+		// Throw away Items starter.
+		if (!s.nextLine().equals(ITEMS_MARKER)) {
+			throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER + "' line where expected.");
+		}
 
-            // Instantiate and add other rooms.
-            while (true) {
-                add(new Room(s, this, initState));
-            }
-        } catch (Room.NoRoomException e) {  /* end of rooms */ }
+		try {
+			// Instantiate items.
+			while (true) {
+				add(new Item(s));
+			}
+		} catch (Item.NoItemException e) {
+			/* end of items */ }
 
-        // Throw away Exits starter.
-        if (!s.nextLine().equals(EXITS_MARKER)) {
-            throw new IllegalDungeonFormatException("No '" +
-                EXITS_MARKER + "' line where expected.");
-        }
+		// Throw away Rooms starter.
+		if (!s.nextLine().equals(ROOMS_MARKER)) {
+			throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER + "' line where expected.");
+		}
 
-        try {
-            // Instantiate exits.
-            while (true) {
-                Exit exit = new Exit(s, this);
-            }
-        } catch (Exit.NoExitException e) {  /* end of exits */ }
+		try {
+			// Instantiate and add first room (the entry).
+			entry = new Room(s, this, initState);
+			add(entry);
 
-        s.close();
-    }
-    
-    // common object initialization tasks, regardless of which constructor
-    // is used.
-    private void init() {
-        rooms = new Hashtable<String,Room>();
-        items = new Hashtable<String,Item>();
-    }
+			// Instantiate and add other rooms.
+			while (true) {
+				add(new Room(s, this, initState));
+			}
+		} catch (Room.NoRoomException e) {
+			/* end of rooms */ }
 
-    /*
-     * Store the current (changeable) state of this dungeon to the writer
-     * passed.
-     */
-    void storeState(PrintWriter w) throws IOException {
-        w.println(FILENAME_LEADER + getFilename());
-        w.println(ROOM_STATES_MARKER);
-        for (Room room : rooms.values()) {
-            room.storeState(w);
-        }
-        w.println(TOP_LEVEL_DELIM);
-    }
+		// Throw away Exits starter.
+		if (!s.nextLine().equals(EXITS_MARKER)) {
+			throw new IllegalDungeonFormatException("No '" + EXITS_MARKER + "' line where expected.");
+		}
 
-    /*
-     * Restore the (changeable) state of this dungeon to that reflected in the
-     * reader passed.
-     */
-    void restoreState(Scanner s) throws GameState.IllegalSaveFormatException {
+		try {
+			// Instantiate exits.
+			while (true) {
+				Exit exit = new Exit(s, this);
+			}
+		} catch (Exit.NoExitException e) {
+			/* end of exits */ }
 
-        // Note: the filename has already been read at this point.
-        
-        if (!s.nextLine().equals(ROOM_STATES_MARKER)) {
-            throw new GameState.IllegalSaveFormatException("No '" +
-                ROOM_STATES_MARKER + "' after dungeon filename in save file.");
-        }
+		s.close();
+	}
 
-        String roomName = s.nextLine();
-        while (!roomName.equals(TOP_LEVEL_DELIM)) {
-            getRoom(roomName.substring(0,roomName.length()-1)).
-                restoreState(s, this);
-            roomName = s.nextLine();
-        }
-    }
-    
-    /**
-     * Returns the spawn room of the dungeon.
-     * 
-     * @return spawn room for dungeon
-     */
-    public Room getEntry() { return entry; }
-    /**
-     * Returns the dungeon name.
-     *
-     * @return name The name of the dungeon.
-     */
-    public String getName() { return name; }
-    /**
-     * Returns the filename with the extension.
-     *
-     * @return filename Full dungeon file name with extension.
-     */
-    public String getFilename() { return filename; }
-    /**
-     * Adds a room to the dungeons rooms list.
-     * @param room Room object to be added to the rooms hashtable, keyed by room name.
-     */
-    public void add(Room room) { rooms.put(room.getTitle(),room); }
-    /**
-     * Adds an item to the dungeon items list.
-     *
-     * @param item Item object to be added to the items hashtable, keyed by primary name.
-     */
-    public void add(Item item) { items.put(item.getPrimaryName(),item); }
-    
-    /**
-     * Get the Room object whose name is passed. This has nothing to do with
-     * where the Adventurer might be.
-     * 
-     * @param roomTitle Room name
-     * @return room Room object from rooms hashtable keyed by room name
-     */
-    public Room getRoom(String roomTitle) {
-        return rooms.get(roomTitle);
-    }
+	// common object initialization tasks, regardless of which constructor
+	// is used.
+	private void init() {
+		rooms = new Hashtable<String, Room>();
+		teleDests = new Hashtable<String, Room>();
+		items = new Hashtable<String, Item>();
+		itemsOutOfPlay = new Hashtable<String, Item>();
+	}
 
-    /**
-     * Get the Item object whose primary name is passed. This has nothing to
-     * do with where the Adventurer might be, or what's in his/her inventory,
-     * etc.
-     *
-     * @param primaryItemName String - Used as key for items hashtable
-     * @return Item object from items hashtable
-     * @throws Item.NoItemException 
-     */
-    public Item getItem(String primaryItemName) throws Item.NoItemException {
-        
-        if (items.get(primaryItemName) == null) {
-            throw new Item.NoItemException();
-        }
-        return items.get(primaryItemName);
-    }
+	/*
+	 * Store the current (changeable) state of this dungeon to the writer
+	 * passed.
+	 */
+	void storeState(PrintWriter w) throws IOException {
+		w.println(FILENAME_LEADER + getFilename());
+		w.println(ROOM_STATES_MARKER);
+		for (Room room : rooms.values()) {
+			room.storeState(w);
+		}
+		w.println(TOP_LEVEL_DELIM);
+	}
+
+	/*
+	 * Restore the (changeable) state of this dungeon to that reflected in the
+	 * reader passed.
+	 */
+	void restoreState(Scanner s) throws GameState.IllegalSaveFormatException {
+
+		// Note: the filename has already been read at this point.
+
+		if (!s.nextLine().equals(ROOM_STATES_MARKER)) {
+			throw new GameState.IllegalSaveFormatException(
+					"No '" + ROOM_STATES_MARKER + "' after dungeon filename in save file.");
+		}
+
+		String roomName = s.nextLine();
+		while (!roomName.equals(TOP_LEVEL_DELIM)) {
+			getRoom(roomName.substring(0, roomName.length() - 1)).restoreState(s, this);
+			roomName = s.nextLine();
+		}
+	}
+
+	/**
+	 * Returns the spawn room of the dungeon.
+	 * 
+	 * @return spawn room for dungeon
+	 */
+	public Room getEntry() {
+		return entry;
+	}
+
+	/**
+	 * Returns the dungeon name.
+	 *
+	 * @return name The name of the dungeon.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Returns the filename with the extension.
+	 *
+	 * @return filename Full dungeon file name with extension.
+	 */
+	public String getFilename() {
+		return filename;
+	}
+
+	/**
+	 * Adds a room to the dungeons rooms list.
+	 * 
+	 * @param room
+	 *            Room object to be added to the rooms and teleDests
+	 *            hashtable, keyed by room title(name).
+	 */
+	public void add(Room room) {
+		rooms.put(room.getTitle(), room);
+		teleDests.put(room.getTitle(), room);
+	}
+	
+	/**
+	 * Adds a room to the designated data structure.
+	 * 
+	 * @param dest
+	 *            Destination data structure for room storage.
+	 * @param room
+	 *            Room object to be added to the designated hashtable, keyed 
+	 *            by room title(name).
+	 */
+	public void add(Hashtable<String, Room> dest, Room room) {
+		dest.put(room.getTitle(), room);
+	}
+
+	/**
+	 * Adds an item to the dungeon items list.
+	 *
+	 * @param item
+	 *            Item object to be added to the items hashtable, keyed by
+	 *            primary name.
+	 */
+	public void add(Item item) {
+		items.put(item.getPrimaryName(), item);
+	}
+
+	/**
+	 * Get the Room object whose name is passed. This has nothing to do with
+	 * where the Adventurer might be.
+	 * 
+	 * @param roomTitle
+	 *            Room name
+	 * @return room Room object from rooms hashtable keyed by room name
+	 */
+	public Room getRoom(String roomTitle) {
+		return rooms.get(roomTitle);
+	}
+
+	/**
+	 * Get the Item object whose primary name is passed. This has nothing to do
+	 * with where the Adventurer might be, or what's in his/her inventory, etc.
+	 *
+	 * @param primaryItemName
+	 *            String - Used as key for items hashtable
+	 * @return Item object from items hashtable
+	 * @throws Item.NoItemException
+	 */
+	public Item getItem(String primaryItemName) throws Item.NoItemException {
+
+		if (items.get(primaryItemName) == null) {
+			throw new Item.NoItemException();
+		}
+		return items.get(primaryItemName);
+	}
+
+	/**
+	 * This is a helper method which effectively removes and Item object from
+	 * the game - by removing it from the db holding Items linked to the
+	 * Dungeon. Due to frequent additions of features, the items will not
+	 * technically be deleted, but moved into an inaccessible(for now) db so
+	 * that if a new feature is added to the game which requires bringing an
+	 * Item taking out of play, but into the dungeon/game, it can be done
+	 * without having to read it from a file. The idea being, when the file is
+	 * originally read, and creates items, it only creates an item once.
+	 * 
+	 * @param item
+	 *            target Item object which is removed from the game ie. Dungeon
+	 *            object db structure holding all Item objects *
+	 * @throws Item.NoItemException
+	 */
+	public void removeItemFromGame(Item item) throws Item.NoItemException {
+		String targetItem = item.getPrimaryName();
+		if (items.get(targetItem) == null) {
+			throw new Item.NoItemException();
+		} else {
+			itemsOutOfPlay.put(targetItem, item);
+			items.remove(targetItem);
+		}
+
+	}
+	
+	public Hashtable<String, Room> getTeleTable() {
+		return teleDests;
+	}
+
+	/**
+	 * Development test method used to check game item master list by printing a
+	 * list of all in-play and out-of-play items to the console.
+	 */
+	public void devPrintAllItems() {
+		int num = 0;
+		if (!items.isEmpty() || !itemsOutOfPlay.isEmpty()) {
+			if (!items.isEmpty()) {
+				System.out.println("Items-In-Play:");
+				for (String key : items.keySet()) {
+					System.out.println(num + ": " + items.get(key).getPrimaryName());
+					num++;
+				}
+				System.out.println();
+			} else {
+				System.out.println("There are not items in play");
+			}
+			num = 0;
+			if (!itemsOutOfPlay.isEmpty()) {
+				num = 0;
+				System.out.println("Items-Out-of-Play:");
+				for (String key : itemsOutOfPlay.keySet()) {
+					System.out.println(num + ": " + itemsOutOfPlay.get(key).getPrimaryName());
+					num++;
+				}
+				System.out.println();
+			} else {
+				System.out.println("ALL items are in play");
+			}
+		} else {
+			System.out.println("There are no items at all");
+		}
+	}
+	
+	
 }

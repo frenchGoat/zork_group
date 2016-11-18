@@ -116,8 +116,18 @@ public class Room {
         beenHere = false;
     }
 
+    /**
+     * Returns Room object title name.
+     * 
+     * @return String title name
+     */
     String getTitle() { return title; }
 
+    /**
+     * Sets the Room objects desc variable
+     * 
+     * @param desc full description of the room
+     */
     void setDesc(String desc) { this.desc = desc; }
 
     /*
@@ -301,7 +311,32 @@ public class Room {
         throw new NPC.NoNPCException();
     }
 
+    /**
+     * Returns the Item objects within the contents db
+     * 
+     * @return list of Items present in the Room
+     */
     ArrayList<Item> getContents() {
         return contents;
     }
+    
+    /**
+	 * Development test method used to check room contents by printing a list
+	 * to the console.
+	 */
+    public void devPrintRoomContents() {
+    	int num = 0;
+		if (!contents.isEmpty()) {
+			System.out.println("Room Contains:");
+			for (Item i : contents) {
+				System.out.println(num + ": " + i.getPrimaryName());
+				num++;
+			}
+			System.out.println();
+		} else {
+			System.out.println("Room is empty");
+			System.out.println();
+		}
+	}
 }
+
