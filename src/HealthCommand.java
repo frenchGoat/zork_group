@@ -34,7 +34,17 @@ public class HealthCommand extends Command {
    * @return String The message that corrosponds to the health
    */
    String execute(){
-      return "health message";
+   String healthMessage = null;
+   if(health == 100){
+      healthMessage = "Healthy";
+      }
+   else if(health <= 50){
+      healthMessage = "Not doing so great";
+      }
+    else if(health <= 25){
+      healthMessage = "Warning: Critial conditions!";
+      }
+      return healthMessage;
    } 
 
 }

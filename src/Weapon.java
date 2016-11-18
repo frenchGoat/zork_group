@@ -1,10 +1,6 @@
 import java.util.Scanner;
 
 /**
- * 
- */
-
-/**
  * @author Jacques Troussard
  * @author Kaylee Payne
  *
