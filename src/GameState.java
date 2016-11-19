@@ -100,9 +100,13 @@ public class GameState {
 	/**
 	 * Current status of player hunger
 	 */
+   private int playerScore;
+   /**
+   * Current score of the player
+   */
 	private int playerHunger;
 	/**
-	 * CUrrent amount in player bank
+	 * Current amount in player bank
 	 */
 	private int playerBank;
 	/**
@@ -298,7 +302,9 @@ public class GameState {
 		// access then return player health
 		return playerHealth;
 	}
-	
+	public int getPlayerScore() {
+		return playerScore;
+	}
 	public int getPlayerHunger() {
 		return playerHunger;
 	}
