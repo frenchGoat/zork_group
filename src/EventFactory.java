@@ -35,17 +35,19 @@ public class EventFactory {
 	 * 
 	 * @param eventDescription
 	 *            string of eventDescription passed by initiating action
+	 * @param target
+	 *            target object if any exists
 	 * @return specific Event object as per the parsing
 	 */
-	public Event parse(String eventDescription) {
+	public Event parse(String target, String eventDescription) {
 		String[] parts = eventDescription.split(Pattern.quote("("));
 		String event = parts[0];
-		String param = parts.length >= 2 ? parts[1] : "";
+		String param = parts.length >= 2 ? parts[1].substring(0, parts[1].length()-1) : "";
 		switch (event) {
 		case "Die":
 			return new DieEvent();
 		case "Disappear":
-			return new DisappearEvent(param);
+			return new DisappearEvent(target);
 		case "Lock":
 			return new LockedEvent(Boolean.parseBoolean(param));
 		case "Score":
@@ -53,12 +55,16 @@ public class EventFactory {
 		case "Teleport":
 			return new TeleportEvent();
 		case "Transform":
-			return new TransformEvent(param);
+			return new TransformEvent(target, param);
 		case "Wound":
 			return new WoundEvent(Integer.parseInt(param));
 		default:
 			return new UnknownEvent(eventDescription);
 		}
+	}
+	
+	public Event parse(String eventDescription) {
+		return parse(null, eventDescription);
 	}
 
 }
