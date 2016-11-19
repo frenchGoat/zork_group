@@ -81,6 +81,7 @@ public class GameState {
 	 * Current dungeon
 	 */
 	private Dungeon dungeon;
+
 	/**
 	 * Current player inventory
 	 */
@@ -92,7 +93,7 @@ public class GameState {
 	/**
 	 * Current status of player health
 	 */
-	private int playerHealth;
+	private static int playerHealth;
 	/**
 	 * Current status of player hunger
 	 */
@@ -200,6 +201,7 @@ public class GameState {
 	void initialize(Dungeon dungeon) {
 		this.dungeon = dungeon;
 		adventurersCurrentRoom = dungeon.getEntry();
+		playerHealth = 20;
 
 	}
 
@@ -289,9 +291,29 @@ public class GameState {
 		return dungeon;
 	}
 
-	public static int getPlayerHealth() {
+	static int getPlayerHealth() {
 		// access then return player health
-		return 0;
+		return playerHealth;
+	}
+	
+	public int getPlayerHunger() {
+		return playerHunger;
+	}
+
+	public void setPlayerHunger(int playerHunger) {
+		this.playerHunger = playerHunger;
+	}
+
+	public int getPlayerBank() {
+		return playerBank;
+	}
+
+	public void setPlayerBank(int playerBank) {
+		this.playerBank = playerBank;
+	}
+
+	public void setPlayerHealth(int playerHealth) {
+		this.playerHealth = playerHealth;
 	}
 
 	public boolean isItemInRoom(String itemName) throws Item.NoItemException {
