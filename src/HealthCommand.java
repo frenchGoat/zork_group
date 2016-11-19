@@ -27,17 +27,26 @@ class HealthCommand extends Command {
     * @return health status message
     */
    String execute(){
-	   int currentHealth = GameState.getPlayerHealth();
-	   String healthMessage = "";
-	   
-	   /*
-	    * From the GameState, access the array of health messages and use an
-	    * if/else or switch mechanism to match the health int value with the
-	    * corresponding health message. return the appropriate health message.
-	    */
-	   
-	   //temp return value used for testing - JT
+   
+      int currentHealth = GameState.getPlayerHealth();
+      String healthMessage = "";
+      if(currentHealth == 100){
+         healthMessage = "Healthy";
+      }
+      else if(currentHealth <= 50){
+         healthMessage = "Not doing so great";
+      }
+      else if(currentHealth <= 25){
+         healthMessage = "Warning: Critial conditions!";
+      }
+   
+      /*
+       * From the GameState, access the array of health messages and use an
+       * if/else or switch mechanism to match the health int value with the
+       * corresponding health message. return the appropriate health message.
+       */
+   
       return Integer.toString(currentHealth) + "\n";
-   } 
 
+   } 
 }
