@@ -1,7 +1,4 @@
 import java.util.Scanner;
-
-import troussard_borkv3.Item;
-
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -96,7 +93,7 @@ public class GameState {
 	/**
 	 * Current status of player health
 	 */
-	private static int playerHealth;
+	private int playerHealth;
 	/**
 	 * Current status of player hunger
 	 */
@@ -157,8 +154,8 @@ public class GameState {
 	 * @throws Dungeon.IllegalDungeonFormatException
 	 */
 	@SuppressWarnings("resource")
-	void restore(String filename)
-			throws FileNotFoundException, IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
+	void restore(String filename) throws FileNotFoundException,
+			IllegalSaveFormatException, Dungeon.IllegalDungeonFormatException {
 
 		Scanner s = new Scanner(new FileReader(filename));
 
@@ -169,15 +166,18 @@ public class GameState {
 		String dungeonFileLine = s.nextLine();
 
 		if (!dungeonFileLine.startsWith(Dungeon.FILENAME_LEADER)) {
-			throw new IllegalSaveFormatException("No '" + Dungeon.FILENAME_LEADER + "' after version indicator.");
+			throw new IllegalSaveFormatException("No '" + Dungeon.FILENAME_LEADER
+					+ "' after version indicator.");
 		}
 
-		dungeon = new Dungeon(dungeonFileLine.substring(Dungeon.FILENAME_LEADER.length()), false);
+		dungeon = new Dungeon(dungeonFileLine.substring(Dungeon.FILENAME_LEADER.length()),
+				false);
 		dungeon.restoreState(s);
 
 		s.nextLine(); // Throw away "Adventurer:".
 		String currentRoomLine = s.nextLine();
-		adventurersCurrentRoom = dungeon.getRoom(currentRoomLine.substring(CURRENT_ROOM_LEADER.length()));
+		adventurersCurrentRoom = dungeon.getRoom(currentRoomLine.substring(
+				CURRENT_ROOM_LEADER.length()));
 		if (s.hasNext()) {
 			String inventoryList = s.nextLine().substring(INVENTORY_LEADER.length());
 			String[] inventoryItems = inventoryList.split(",");
@@ -185,7 +185,8 @@ public class GameState {
 				try {
 					addToInventory(dungeon.getItem(itemName));
 				} catch (Item.NoItemException e) {
-					throw new IllegalSaveFormatException("No such item '" + itemName + "'");
+					throw new IllegalSaveFormatException("No such item '" + itemName
+							+ "'");
 				}
 			}
 		}
@@ -294,11 +295,11 @@ public class GameState {
 		return dungeon;
 	}
 
-	static int getPlayerHealth() {
+	public int getPlayerHealth() {
 		// access then return player health
 		return playerHealth;
 	}
-	
+
 	public int getPlayerHunger() {
 		return playerHunger;
 	}
@@ -335,6 +336,31 @@ public class GameState {
 		return false;
 	}
 
+	void store() throws IOException {
+		store(DEFAULT_SAVE_FILE);
+	}
+
+	void store(String saveName) throws IOException {
+		String filename = saveName + SAVE_FILE_EXTENSION;
+		PrintWriter w = new PrintWriter(new FileWriter(filename));
+		w.println(SAVE_FILE_VERSION);
+		dungeon.storeState(w);
+		w.println("Adventurer:");
+		w.println(CURRENT_ROOM_LEADER + getAdventurersCurrentRoom().getTitle());
+		w.println(INVENTORY_LEADER + printInv());
+		w.println(HEALTH_LEADER + getPlayerHealth());
+		w.close();
+	}
+
+	public String printInv() {
+		String buff = "";
+		for (Item x : inventory) {
+			buff += x.getPrimaryName() + ",";
+		}
+		buff = buff.substring(0, buff.length());
+		return buff;
+	}
+
 	// ++++++++++++++GAME LOGGER METHODS+++++++++++++++++
 	// Possibly move this to its own class
 
@@ -349,7 +375,7 @@ public class GameState {
 	}
 
 	public void clickTurn() {
-		curTurn ++;
+		curTurn++;
 
 	}
 
@@ -381,30 +407,4 @@ public class GameState {
 
 		}
 	}
-
-	void store() throws IOException {
-		store(DEFAULT_SAVE_FILE);
-	}
-
-	void store(String saveName) throws IOException {
-		String filename = saveName + SAVE_FILE_EXTENSION;
-		PrintWriter w = new PrintWriter(new FileWriter(filename));
-		w.println(SAVE_FILE_VERSION);
-		dungeon.storeState(w);
-		w.println("Adventurer:");
-		w.println(CURRENT_ROOM_LEADER + getAdventurersCurrentRoom().getTitle());
-		w.println(INVENTORY_LEADER + printInv());
-		w.println(HEALTH_LEADER + getPlayerHealth());
-		w.close();
-	}
-	
-	public String printInv(){
-		String buff = "";
-		for (Item x: inventory){
-			buff += x.getPrimaryName() + ",";
-		}
-		buff = buff.substring(0, buff.length());
-		return buff;
-	}
-
 }
