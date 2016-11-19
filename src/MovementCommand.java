@@ -34,6 +34,12 @@ class MovementCommand extends Command {
         Room nextRoom = currentRoom.leaveBy(dir);
         if (nextRoom != null) {  // could try/catch here.
             GameState.instance().setAdventurersCurrentRoom(nextRoom);
+            if (nextRoom.getTitle().equals("Teleport Room")) {
+            	new TeleportEvent().trigger();
+            	return "\nYou've been Teleported to -> " + 
+            			GameState.instance().getAdventurersCurrentRoom().describe() 
+            			+ "\n";
+            }
             return "\n" + nextRoom.describe() + "\n";
         } else {
             return "You can't go " + dir + ".\n";

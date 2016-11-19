@@ -244,11 +244,6 @@ public class Room {
 	public Room leaveBy(String dir) {
 		for (Exit exit : exits) {
 			if (exit.getDir().equals(dir)) {
-				if (exit.getTele() == true) {
-					new TeleportEvent().trigger();
-					System.out.println("You've been teleported!");
-					return GameState.instance().getAdventurersCurrentRoom();
-				}
 				return exit.getDest();
 			}
 		}
