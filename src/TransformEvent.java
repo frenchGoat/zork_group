@@ -68,16 +68,16 @@ public class TransformEvent extends Event {
 			GameState.instance().addToInventory(incomingItem);
 			GameState.instance().removeFromInventory(outgoingItem);
 			targetItemOrigin = "player-inventory";
-			System.out.println("(If condition) - Inventory disappear success!");
-			GameState.instance().devPrintInventory();
+			//System.out.println("(If condition) - Inventory disappear success!");
+			//GameState.instance().devPrintInventory();
 			
 		// Otherwise perform the pair of operations on the Room object.
 		} else {
 			GameState.instance().getAdventurersCurrentRoom().add(incomingItem);
 			GameState.instance().getAdventurersCurrentRoom().remove(outgoingItem);
 			targetItemOrigin = GameState.instance().getAdventurersCurrentRoom().getTitle();
-			System.out.println("(Else condition) - Room contents disappear success!");
-			GameState.instance().getAdventurersCurrentRoom().devPrintRoomContents();
+			//System.out.println("(Else condition) - Room contents disappear success!");
+			//GameState.instance().getAdventurersCurrentRoom().devPrintRoomContents();
 		}
 		/*
 		 * Remove the item from play by moving it into an inaccessible db within the 
