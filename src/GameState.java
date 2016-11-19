@@ -97,10 +97,11 @@ public class GameState {
 	/**
 	 * Current status of player hunger
 	 */
-        private int playerScore;
-        /**
-         * Current score of the player
-         */
+
+    private int playerScore;
+    /**
+     * Current score of the player
+     */
 	private int playerHunger;
 	/**
 	 * Current amount in player bank
