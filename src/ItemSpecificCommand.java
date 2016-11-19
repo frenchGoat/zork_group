@@ -1,4 +1,5 @@
 import java.util.regex.Pattern;
+
 /**
  * @author Jacques Troussard
  *
@@ -41,16 +42,20 @@ class ItemSpecificCommand extends Command {
 		// Check for event triggers
 		if (itemReferredTo.hasEvents(verb)) {
 			try {
-				EventActivator ea = new EventActivator(itemReferredTo.getEventDetailsForVerb(verb));
+				EventActivator ea = new EventActivator("*" + itemReferredTo
+						.getPrimaryName() + "*" + itemReferredTo.getEventDetailsForVerb(
+								verb));
 				/*
-				 *  Triggering of events is now done from within the EventActivator to facilitate 
-				 *  triggering multiple events in one turn.
+				 * Triggering of events is now done from within the
+				 * EventActivator to facilitate triggering multiple events in
+				 * one turn.
 				 */
 				ea.activate();
 			} catch (Item.NoItemException e) {
 				e.printStackTrace();
 			}
 		}
-		return (msg == null ? "Sorry, you can't " + verb + " the " + noun + "." : msg) + "\n";
+		return (msg == null ? "Sorry, you can't " + verb + " the " + noun + "." : msg)
+				+ "\n";
 	}
 }

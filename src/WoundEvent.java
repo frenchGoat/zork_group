@@ -31,9 +31,12 @@ public class WoundEvent extends Event {
 	 * @return message alerting player how much damage was taken
 	 */
 	@Override
-	String trigger() {
+	public void trigger() {
 		// TODO Auto-generated method stub
-		return null;
+		int playerHealth = GameState.instance().getPlayerHealth();
+		GameState.instance().setPlayerHealth(playerHealth - damage);
+		
+		
 	}
 
 }

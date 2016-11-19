@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @author Jacques Troussard
@@ -21,6 +22,10 @@ public class Exit {
      * Room object identifying the linked Room object from the source Room. 
      */
     private Room dest;
+    /**
+     * Bool identifying this room as a teleporter or not.
+     */
+    private boolean tele = false;
 
     /**
      * Takes a String, and two Room objects to construct an Exit object. After 
@@ -34,6 +39,10 @@ public class Exit {
     Exit(String dir, Room src, Room dest) {
         init();
         this.dir = dir;
+        if (dir.startsWith(Pattern.quote("*"))) {
+        	dir = dir.substring(1);
+        	this.tele = true;
+        }
         this.src = src;
         this.dest = dest;
         src.addExit(this);
@@ -59,6 +68,10 @@ public class Exit {
         }
         src = d.getRoom(srcTitle);
         dir = s.nextLine();
+        if (dir.contains("*")) {
+        	dir = dir.substring(1);
+        	this.tele = true;
+        }
         dest = d.getRoom(s.nextLine());
         
         // I'm an Exit object. Great. Add me as an exit to my source Room too,
@@ -104,4 +117,6 @@ public class Exit {
      * @return destination of exit
      */
     Room getDest() { return dest; }
+    
+    Boolean getTele() { return tele; }
 }

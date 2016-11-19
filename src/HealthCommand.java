@@ -14,13 +14,13 @@ import java.util.Scanner;
  * @author Michelle Booth
  * @author Jacques Troussard
  */
-public class HealthCommand extends Command {
+class HealthCommand extends Command {
     /**
     * Single character command which when executed alerts the player of their 
     * current health status.
 	* 
 	*/
-   HealthCommand(){}
+   HealthCommand() {}
    
    /**
     * Gets the health status (GameState) and returns the health message
@@ -29,7 +29,7 @@ public class HealthCommand extends Command {
    String execute(){
    
       int currentHealth = GameState.getPlayerHealth();
-      String healthMessage = null;
+      String healthMessage = "";
       if(currentHealth == 100){
          healthMessage = "Healthy";
       }
@@ -46,7 +46,7 @@ public class HealthCommand extends Command {
        * corresponding health message. return the appropriate health message.
        */
    
-      return healthMessage;
-   } 
+      return Integer.toString(currentHealth) + "\n";
 
+   } 
 }

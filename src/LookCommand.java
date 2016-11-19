@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * 
  */
@@ -8,6 +10,10 @@
  *
  */
 public class LookCommand extends Command {
+	String currentRoom = GameState.instance().getAdventurersCurrentRoom().getTitle();
+	ArrayList<Item> contents = GameState.instance().getAdventurersCurrentRoom().getContents();
+	String lookLeader = "Looking around ";
+	
 
 	/**
 	 * 
@@ -21,8 +27,10 @@ public class LookCommand extends Command {
 	 */
 	@Override
 	String execute() {
-		// TODO Auto-generated method stub
-		return GameState.instance().getAdventurersCurrentRoom().getContents().toString();
+		if (contents.isEmpty()) {
+			return lookLeader + currentRoom + " you see nothing." + "\n";
+		}
+		return lookLeader + currentRoom + " you see; " + contents.toString() + "\n";
 	}
 
 }

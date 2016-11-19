@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import troussard_borkv3.Item;
+
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -81,6 +84,7 @@ public class GameState {
 	 * Current dungeon
 	 */
 	private Dungeon dungeon;
+
 	/**
 	 * Current player inventory
 	 */
@@ -92,7 +96,7 @@ public class GameState {
 	/**
 	 * Current status of player health
 	 */
-	private int playerHealth;
+	private static int playerHealth;
 	/**
 	 * Current status of player hunger
 	 */
@@ -200,6 +204,7 @@ public class GameState {
 	void initialize(Dungeon dungeon) {
 		this.dungeon = dungeon;
 		adventurersCurrentRoom = dungeon.getEntry();
+		playerHealth = 20;
 
 	}
 
@@ -289,9 +294,29 @@ public class GameState {
 		return dungeon;
 	}
 
-	public static int getPlayerHealth() {
+	static int getPlayerHealth() {
 		// access then return player health
-		return 0;
+		return playerHealth;
+	}
+	
+	public int getPlayerHunger() {
+		return playerHunger;
+	}
+
+	public void setPlayerHunger(int playerHunger) {
+		this.playerHunger = playerHunger;
+	}
+
+	public int getPlayerBank() {
+		return playerBank;
+	}
+
+	public void setPlayerBank(int playerBank) {
+		this.playerBank = playerBank;
+	}
+
+	public void setPlayerHealth(int playerHealth) {
+		this.playerHealth = playerHealth;
 	}
 
 	public boolean isItemInRoom(String itemName) throws Item.NoItemException {
@@ -355,6 +380,31 @@ public class GameState {
 			System.out.print("Turn " + num + "\n" + x);
 
 		}
+	}
+
+	void store() throws IOException {
+		store(DEFAULT_SAVE_FILE);
+	}
+
+	void store(String saveName) throws IOException {
+		String filename = saveName + SAVE_FILE_EXTENSION;
+		PrintWriter w = new PrintWriter(new FileWriter(filename));
+		w.println(SAVE_FILE_VERSION);
+		dungeon.storeState(w);
+		w.println("Adventurer:");
+		w.println(CURRENT_ROOM_LEADER + getAdventurersCurrentRoom().getTitle());
+		w.println(INVENTORY_LEADER + printInv());
+		w.println(HEALTH_LEADER + getPlayerHealth());
+		w.close();
+	}
+	
+	public String printInv(){
+		String buff = "";
+		for (Item x: inventory){
+			buff += x.getPrimaryName() + ",";
+		}
+		buff = buff.substring(0, buff.length());
+		return buff;
 	}
 
 }

@@ -66,8 +66,8 @@ public class DisappearEvent extends Event {
 		}
 		/*
 		 * Remove the item from play by moving it into an inaccessible db within the 
-		 * Dungeon object. At least at Stage 3a, the item will not have to be rehydrated 
-		 * from a file it in later stages access, or recreation of the item is necessary.
+		 * Dungeon object. At least at Stage 3a, so the item will not have to be rehydrated 
+		 * from a file. until later stages access, or recreation of the item is necessary.
 		 */
 		GameState.instance().getDungeon().removeItemFromGame(targetItem);
 		String lead0 = "Event: ";
