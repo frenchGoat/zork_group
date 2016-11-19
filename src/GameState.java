@@ -1,4 +1,7 @@
 import java.util.Scanner;
+
+import troussard_borkv3.Item;
+
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -377,6 +380,31 @@ public class GameState {
 			System.out.print("Turn " + num + "\n" + x);
 
 		}
+	}
+
+	void store() throws IOException {
+		store(DEFAULT_SAVE_FILE);
+	}
+
+	void store(String saveName) throws IOException {
+		String filename = saveName + SAVE_FILE_EXTENSION;
+		PrintWriter w = new PrintWriter(new FileWriter(filename));
+		w.println(SAVE_FILE_VERSION);
+		dungeon.storeState(w);
+		w.println("Adventurer:");
+		w.println(CURRENT_ROOM_LEADER + getAdventurersCurrentRoom().getTitle());
+		w.println(INVENTORY_LEADER + printInv());
+		w.println(HEALTH_LEADER + getPlayerHealth());
+		w.close();
+	}
+	
+	public String printInv(){
+		String buff = "";
+		for (Item x: inventory){
+			buff += x.getPrimaryName() + ",";
+		}
+		buff = buff.substring(0, buff.length());
+		return buff;
 	}
 
 }
