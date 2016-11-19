@@ -58,7 +58,7 @@ public class TeleportEvent extends Event {
 		 * If event constructor has been passed a destination parameter the 
 		 * GameState's currentAdventurer's location is updated to the parameter.
 		 * The condition of a useless teleport (ie. destination location is the same
-		 * as currentlocation) will not be check. Without a destination parameter 
+		 * as currentlocation) will not be checked. Without a destination parameter 
 		 * possible locations are downloaded from the current Dungeons teleDests db
 		 * and a destination is selected by generating a random index number.
 		 */
