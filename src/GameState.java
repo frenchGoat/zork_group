@@ -210,7 +210,7 @@ public class GameState {
 	void initialize(Dungeon dungeon) {
 		this.dungeon = dungeon;
 		adventurersCurrentRoom = dungeon.getEntry();
-		playerHealth = 20;
+		playerHealth = 100;
 
 	}
 
