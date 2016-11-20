@@ -30,7 +30,7 @@ class HealthCommand extends Command {
    
       int currentHealth = GameState.instance().getPlayerHealth();
       String healthMessage = "";
-      if(currentHealth == 100){
+      if(currentHealth > 50){
          healthMessage = "Healthy";
       }
       else if(currentHealth <= 50){
