@@ -33,7 +33,11 @@ public class ScoreEvent extends Event {
 	 */
 	@Override
 	void trigger() {
-		// implement score incrementation.
+		int currentScore = GameState.instance().getPlayerScore();
+		int newScore = currentScore + points;
+		GameState.instance().setPlayerScore(newScore);
+		System.out.println("scored " + points);
+		System.out.println("value of gamestate player score var: " + GameState.instance().getPlayerScore());
 	}
 
 }

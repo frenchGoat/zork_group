@@ -326,6 +326,10 @@ public class GameState {
 	public void setPlayerHealth(int playerHealth) {
 		this.playerHealth = playerHealth;
 	}
+	
+	public void setPlayerScore(int newScore) {
+		this.playerScore = newScore;
+	}
 
 	public boolean isItemInRoom(String itemName) throws Item.NoItemException {
 		Item item = getDungeon().getItem(itemName);
