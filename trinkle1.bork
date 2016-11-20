@@ -4,7 +4,7 @@ Group Bork v1.0
 Items:
 ScoreItem
 1
-drink[Score(30)]:test
+drink[Score(30),Disappear()]:Gulp that was worth 30 points
 ---
 Bomb
 95
@@ -20,11 +20,11 @@ drink[Transform(emptyCan),Wound(-1)]:Gulp, gulp -- that was GOOD!
 ---
 ScoreItem1
 1
-drink[Score(50)]:Gulp, gulp -- that was GOOD!
+drink[Score(50)]:Gulp that was worth 50 points
 ---
 ScoreItem2
 1
-drink[Score(25)]:Gulp, gulp -- that was GOOD!
+drink[Score(25)]:Gulp that was worth 25 points
 ---
 emptyCan
 2

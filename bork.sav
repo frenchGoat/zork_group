@@ -2,14 +2,15 @@ Bork v3.0 save data
 Dungeon file: trinkle1.bork
 Room states:
 Stephen's office:
-beenHere=false
-Contents: StarWarsToy,WawaTravelMug,donut
+beenHere=true
+Contents: WawaTravelMug,ScoreItem2
 ---
 Room B6:
 beenHere=false
 ---
 Basement hallway:
 beenHere=true
+Contents: DrPepper
 ---
 Teleport Room:
 beenHere=false
@@ -24,9 +25,11 @@ Contents: chainsaw,magicWand
 ---
 Rotunda:
 beenHere=true
+Contents: ScoreItem1
 ---
 ===
 Adventurer:
-Current room: Basement hallway
-Inventory: emptyCan,
-Health: 21
+Current room: Stephen's office
+Inventory: StarWarsToy,
+Health: 102
+Score: 80

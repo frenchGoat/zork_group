@@ -360,6 +360,7 @@ public class GameState {
 		w.println(CURRENT_ROOM_LEADER + getAdventurersCurrentRoom().getTitle());
 		w.println(INVENTORY_LEADER + printInv());
 		w.println(HEALTH_LEADER + getPlayerHealth());
+		w.println(SCORE_LEADER + getPlayerScore());
 		w.close();
 	}
 
