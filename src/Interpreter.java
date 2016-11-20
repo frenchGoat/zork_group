@@ -27,6 +27,18 @@ public class Interpreter {
 
         try {
             state = GameState.instance();
+            System.out.println("                \\||/");
+            System.out.println("                |  @___oo");
+            System.out.println("      /\\  /\\   / (__,,,,|");
+            System.out.println("     ) /^\\) ^\\/ _)");
+            System.out.println("     )   /^\\/   _)");
+            System.out.println("     )   _ /  / _)");
+            System.out.println(" /\\  )/\\/ ||  | )_)");
+            System.out.println("<  >      |(,,) )__)");
+            System.out.println(" ||      /    \\)___)\\");
+            System.out.println(" | \\____(      )___) )___");
+            System.out.println(" \\_______(_______;;; __;;;");
+            
             if (args[0].endsWith(".bork")) {
                 state.initialize(new Dungeon(args[0]));
                 System.out.println("\nWelcome to " + 
