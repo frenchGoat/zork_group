@@ -27,7 +27,7 @@ stomp:Further stomping seems to have no effect. recycle[Score(5),Disappear]:Boo-
 ---
 magicWand
 5
-break[Wound(10),Disappear]:The wand snaps in half. Strange magic fills the air, making you feel suddenly ill.
+break[Wound(60),Disappear]:The wand snaps in half. Strange magic fills the air, making you feel suddenly ill.
 wave[Score(5),Teleport]:An angelic form briefly appears, smiles, and just as quickly fades away.
 ---
 StarWarsToy
