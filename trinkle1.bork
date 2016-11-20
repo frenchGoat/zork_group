@@ -2,6 +2,10 @@ Trinkle
 Group Bork v1.0
 ===
 Items:
+ScoreItem
+1
+drink[Score(30)]:test
+---
 Bomb
 95
 examine:The bomb is a heavy, glistening black sphere. On the top appears to be some form of detonator.
@@ -14,6 +18,14 @@ kick:The can skitters down the hallway.
 shake:A liquid fizzes menacingly inside the can.
 drink[Transform(emptyCan),Wound(-1)]:Gulp, gulp -- that was GOOD!
 ---
+ScoreItem1
+1
+drink[Score(50)]:Gulp, gulp -- that was GOOD!
+---
+ScoreItem2
+1
+drink[Score(25)]:Gulp, gulp -- that was GOOD!
+---
 emptyCan
 2
 kick:The empty can skitters down the hallway.
@@ -23,7 +35,8 @@ stomp[Transform(squishedCan)]:The can crunches down into a thin disk, useful for
 squishedCan
 2
 throw:Zing!
-stomp:Further stomping seems to have no effect. recycle[Score(5),Disappear]:Boo-ya, helped save the environment.
+stomp:Further stomping seems to have no effect.
+recycle[Score(5),Disappear]:Boo-ya, helped save the environment.
 ---
 magicWand
 5
@@ -50,6 +63,7 @@ stomp:The donut is now smooshed.
 ===
 Rooms:
 Rotunda
+Contents: ScoreItem,ScoreItem1,ScoreItem2
 You are in a beautiful round entry chamber, with tall white pillars that
 seemingly reach to the skies. There is an elevator here.
 ---
