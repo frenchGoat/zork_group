@@ -6,6 +6,8 @@ import java.util.Scanner;
  *
  */
 public class Interpreter {
+	
+	public static String cmdBrd = "\n******************************************************************\n";
 
     private static GameState state; // not strictly necessary; GameState is 
                                     // singleton
@@ -44,8 +46,8 @@ public class Interpreter {
             command = promptUser(commandLine);
 
             while (!command.equals("q")) {
-
-                System.out.print(
+            	System.out.print(cmdBrd);
+            	System.out.print(
                     CommandFactory.instance().parse(command).execute());
 
                 command = promptUser(commandLine);
