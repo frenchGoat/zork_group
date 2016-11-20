@@ -28,7 +28,7 @@ class HealthCommand extends Command {
     */
    String execute(){
    
-      int currentHealth = GameState.getPlayerHealth();
+      int currentHealth = GameState.instance().getPlayerHealth();
       String healthMessage = "";
       if(currentHealth == 100){
          healthMessage = "Healthy";
@@ -46,7 +46,7 @@ class HealthCommand extends Command {
        * corresponding health message. return the appropriate health message.
        */
    
-      return Integer.toString(currentHealth) + "\n";
+      return healthMessage + "\n";
 
    } 
 }
