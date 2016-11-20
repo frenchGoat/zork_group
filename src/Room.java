@@ -215,20 +215,23 @@ public class Room {
 		} else {
 			description = title + "\n" + desc;
 		}
-		for (Item item : contents) {
-			description += "\nThere is a " + item.getPrimaryName() + " here.";
+		if (!contents.isEmpty()) {
+			for (Item item : contents) {
+				description += "\nThere is a " + item.getPrimaryName() + " here.";
+			}
+			if (contents.size() > 0) {
+				description += "\n";
+			} 
+		} else {
+			description += "\nThere are no items in this room.";
 		}
-		if (contents.size() > 0) {
-			description += "\n";
-		}
-
 		if (!beenHere) {
 			for (Exit exit : exits) {
 				description += "\n" + exit.describe();
 			}
 		}
 		beenHere = true;
-		return description;
+		return description + "\n";
 	}
 
 	/**

@@ -58,6 +58,9 @@ public class Interpreter {
             command = promptUser(commandLine);
 
             while (!command.equals("q")) {
+            	// Check win loss conditions before prompting for command
+            	
+            	
             	System.out.print(cmdBrd);
             	System.out.print(
                     CommandFactory.instance().parse(command).execute());

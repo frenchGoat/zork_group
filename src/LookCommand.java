@@ -27,10 +27,12 @@ public class LookCommand extends Command {
 	 */
 	@Override
 	String execute() {
-		if (contents.isEmpty()) {
-			return lookLeader + currentRoom + " you see nothing." + "\n";
-		}
-		return lookLeader + currentRoom + " you see; " + contents.toString() + "\n";
+		//GameState.instance().getAdventurersCurrentRoom().describe();
+		//if (contents.isEmpty()) {
+		//	return lookLeader + currentRoom + " you see nothing." + "\n";
+		//}
+		return GameState.instance().getAdventurersCurrentRoom().describe();
+		//lookLeader + currentRoom + " you see; " + contents.toString() + "\n";
 	}
 
 }

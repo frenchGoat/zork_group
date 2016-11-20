@@ -3,14 +3,13 @@ Dungeon file: trinkle1.bork
 Room states:
 Stephen's office:
 beenHere=true
-Contents: WawaTravelMug,ScoreItem2
+Contents: StarWarsToy,WawaTravelMug
 ---
 Room B6:
-beenHere=false
+beenHere=true
 ---
 Basement hallway:
 beenHere=true
-Contents: DrPepper
 ---
 Teleport Room:
 beenHere=false
@@ -20,16 +19,16 @@ beenHere=false
 Contents: Bomb
 ---
 Rotunda balcony:
-beenHere=false
-Contents: chainsaw,magicWand
+beenHere=true
+Contents: chainsaw
 ---
 Rotunda:
 beenHere=true
-Contents: ScoreItem1
+Contents: ScoreItem,ScoreItem2
 ---
 ===
 Adventurer:
-Current room: Stephen's office
-Inventory: StarWarsToy,
-Health: 102
-Score: 80
+Current room: Room B6
+Inventory: emptyCan,magicWand,ScoreItem1,
+Health: 103
+Score: 140
