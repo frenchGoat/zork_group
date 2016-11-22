@@ -51,9 +51,11 @@ public class Interpreter {
                 System.err.println(USAGE_MSG);
                 System.exit(2);
             }
-
+            
             System.out.print("\n" + 
                 state.getAdventurersCurrentRoom().describe() + "\n");
+            
+            System.out.println("Enter 'help' for list of commands");
 
             command = promptUser(commandLine);
 
