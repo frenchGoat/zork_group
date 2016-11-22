@@ -61,7 +61,13 @@ public class Interpreter {
 
             while (!command.equals("q")) {
             	// Check win loss conditions before prompting for command
-            	
+            	if (state.getPlayerHealth() <= 0) {
+                    DieEvent die = new DieEvent();
+                    die.trigger();
+                } else if (state.getPlayerScore() >= 100) {
+                    WinEvent win = new WinEvent();
+                    win.trigger();
+                }
             	
             	System.out.print(cmdBrd);
             	System.out.print(
