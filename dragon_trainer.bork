@@ -1,0 +1,223 @@
+Dragon Trainer
+Group Zork v3b
+===
+Items:
+===
+Rooms:
+Your Room
+This is your room. As main start of character.
+---
+Living Room
+Living room of your house, meet someone who tells you about your quest.
+---
+Garden
+Outside your house. Pick up some healing items.
+---
+Road to Village
+One direction road to village square
+---
+Village Square
+Cross roads for player to equip themselves before starting the adventure
+---
+Shop Keeper
+Place to meet with a vendor
+---
+Dragon Forest
+Enterance to forest to get dragon
+---
+Dragon cave
+Choose your dragon
+---
+Medow
+Nothing here
+---
+Cliff
+teleport area only when dragon present --> fly to 'dungeon'
+---
+Dungeon Enterance
+Enter main dungeon
+---
+Top of mountain
+access to volcano
+---
+Main room of dungeon
+you can decide to go left or right to the blue or red rooms
+---
+Red room
+contains a few rooms which lead to an artifcate that you can toss into the volcano to win the game
+---
+Red room 1
+monsters here
+---
+Red room 2
+monsters here?
+---
+Upper red room
+locked exit to top of mountain
+---
+Blue room
+contains a bunch of rooms with monsters that lead to the boss
+---
+Blue room 1
+monsters here
+---
+Blue room 2
+monsters here
+---
+Blue room 3
+monsters here
+---
+Boss room
+here is the boss
+---
+===
+Exits:
+Your Room
+e
+Living Room
+---
+Living Room
+w
+Your Room
+---
+Living Room
+e
+Garden
+---
+Garden
+w
+Living Room
+---
+Living Room
+n
+Road to Village
+---
+Road to Village
+s
+Living Room
+---
+Road to Village
+n
+Village Square
+---
+Village Square
+s
+Road to Village
+---
+Village Square
+w
+Shop Keeper
+---
+Shop Keeper
+e
+Village Square
+---
+Village Square
+e
+Dragon Forest
+---
+Dragon Forest
+w
+Village Square
+---
+Village Square
+n
+Cliff
+---
+Cliff
+s
+Village Square
+---
+Dragon Forest
+e
+Dragon Cave
+---
+Dragon Forest
+n
+Medow
+---
+Dragon Cave
+w
+Dargon Forest
+---
+Medow
+s
+Dargon Forest
+---
+Dungeon Enterance
+n
+Main room of dungeon
+---
+Dungeon Enterance
+u
+Top of mountain
+---
+Top of mountain
+d
+Dungeon Enterance
+---
+Main room of dungeon
+w
+Red room
+---
+Red room
+s
+Red room 1
+---
+Red room 1
+n
+Red room
+---
+Red room
+n
+Red room 2
+---
+Red room 2
+d
+Red room
+---
+Red room 2
+u
+Upper red room
+---
+Upper red room
+u
+Top of mountain
+---
+Main room of dungeon
+e
+Blue room
+---
+Blue room
+n
+Blue room 1
+---
+Blue room 1
+s
+Blue room
+---
+Blue room 1
+e
+Blue room 2
+---
+Blue room 2
+w
+Blue room 1
+---
+Blue room 1
+w
+Blue room 3
+---
+Blue room 3
+e
+Blue room 1
+---
+Blue room 3
+n
+Boss room
+---
+Boss room
+s
+Blue room 3
+---
+===
