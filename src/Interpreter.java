@@ -51,15 +51,23 @@ public class Interpreter {
                 System.err.println(USAGE_MSG);
                 System.exit(2);
             }
-
+            
             System.out.print("\n" + 
                 state.getAdventurersCurrentRoom().describe() + "\n");
+            
+            System.out.println("Enter 'help' for list of commands");
 
             command = promptUser(commandLine);
 
             while (!command.equals("q")) {
             	// Check win loss conditions before prompting for command
-            	
+            	if (state.getPlayerHealth() <= 0) {
+                    DieEvent die = new DieEvent();
+                    die.trigger();
+                } else if (state.getPlayerScore() >= 100) {
+                    WinEvent win = new WinEvent();
+                    win.trigger();
+                }
             	
             	System.out.print(cmdBrd);
             	System.out.print(

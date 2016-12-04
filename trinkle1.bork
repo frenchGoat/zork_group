@@ -4,7 +4,13 @@ Group Bork v1.0
 Items:
 ScoreItem
 1
-drink[Score(30),Disappear()]:Gulp that was worth 30 points
+examine:Drink this item to activate. Does not disappear.
+drink[Score(25)]:Gulp that was worth 25 points
+---
+WoundItem
+1
+examine:Drink this item to activate, does not disappear
+drink[Wound(25)]:Ouch wound 25 points
 ---
 Bomb
 95
@@ -17,14 +23,6 @@ DrPepper
 kick:The can skitters down the hallway.
 shake:A liquid fizzes menacingly inside the can.
 drink[Transform(emptyCan),Wound(-1)]:Gulp, gulp -- that was GOOD!
----
-ScoreItem1
-1
-drink[Score(50)]:Gulp that was worth 50 points
----
-ScoreItem2
-1
-drink[Score(25)]:Gulp that was worth 25 points
 ---
 emptyCan
 2
@@ -63,7 +61,7 @@ stomp:The donut is now smooshed.
 ===
 Rooms:
 Rotunda
-Contents: ScoreItem,ScoreItem1,ScoreItem2
+Contents: ScoreItem,WoundItem
 You are in a beautiful round entry chamber, with tall white pillars that
 seemingly reach to the skies. There is an elevator here.
 ---

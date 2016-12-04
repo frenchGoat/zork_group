@@ -48,6 +48,9 @@ public class CommandFactory {
         if (verb.equals("save")) {
             return new SaveCommand(noun);
         }
+        if (verb.equals("help")) {
+            return new HelpCommand();
+        }
         if (verb.equals("take")) {
             return new TakeCommand(noun);
         }

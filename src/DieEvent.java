@@ -1,5 +1,4 @@
-package src;
-
+import java.io.*;
 /**
  * University of Mary Washington
  * CPSC 240 Section 2
@@ -11,6 +10,7 @@ import java.io.*;
  *
  */
 public class DieEvent extends Event {
+    private String message = "You have died";
     /**
      * This is an end game trigger, in which the player has lost. Die events can be
      * caused by reaching 0 in either player health or hunger status. This trigger 
@@ -33,6 +33,7 @@ public class DieEvent extends Event {
         } catch (IOException | GameState.IllegalSaveFormatException | Dungeon.IllegalDungeonFormatException e) {}
         System.out.println("You have died :(  You have respawned at your last save point.");
         System.out.println(instance.getAdventurersCurrentRoom().getTitle());
+        return message;
     }
 
 }
