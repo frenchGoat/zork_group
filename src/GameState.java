@@ -29,7 +29,6 @@ public class GameState {
 	 * Header String for default file name when writing to a .sav file.
 	 */
 	static String DEFAULT_SAVE_FILE = "bork_save";
-
 	/**
 	 * Header String for default save file extension when writing to a .sav
 	 * file.
@@ -76,12 +75,10 @@ public class GameState {
 	 * Instance variable for GameState
 	 */
 	private static GameState theInstance;
-
 	/**
 	 * Current dungeon
 	 */
 	private Dungeon dungeon;
-
 	/**
 	 * Current player inventory
 	 */
@@ -97,7 +94,6 @@ public class GameState {
 	/**
 	 * Current status of player hunger
 	 */
-
     private int playerScore;
     /**
      * Current score of the player
@@ -108,18 +104,20 @@ public class GameState {
 	 */
 	private int playerBank;
 	/**
+	 * Value of monetary items in the game.
+	 */
+	private String[] coinValues;
+	/**
 	 * Michelle: sorry didn't know how you wanted to do this so i'll leave it to
 	 * you
 	 */
 	private ArrayList<Exit> unlockedExits;
-
 	// Variables related to game logging
 	/**
 	 * Database structure for the game log. Player commands, events triggered
 	 * and results will be stored here.
 	 */
 	private ArrayList<String> log;
-
 	/**
 	 * Actual log entry to be put into log database.
 	 */
@@ -128,11 +126,11 @@ public class GameState {
 	 * Current GameState turn (counter variable).
 	 */
 	private int curTurn;
-
+	
+	
+	
 	/**
-	 * 
-	 * 
-	 * /** Returns the only instance of GameState
+	 * Returns the only instance of GameState
 	 *
 	 * @return theInstance current instance of GameState
 	 */
@@ -142,13 +140,28 @@ public class GameState {
 		}
 		return theInstance;
 	}
-
+	
+	/**
+	 * Main Constructor
+	 */
 	private GameState() {
 		inventory = new ArrayList<Item>();
 		log = new ArrayList<String>();
 		curTurn = 0;
+		
+		/*
+		 * At this point the game will have only four currency types with the following 
+		 * coefficient values;
+		 *  Steel: 1
+		 * Copper: 2
+		 * Silver: 4
+		 *   Gold: 7
+		 * Values will be deteremined by their index number.
+		 */
+		coinValues = new String[] {"","Steel","Copper","","Silver","","","Gold"};
+		
 	}
-
+	
 	/**
 	 * Restores GameState with a .sav file
 	 * 
@@ -373,6 +386,19 @@ public class GameState {
 		return buff;
 	}
 
+	public String addMoney(String incomingCoin){
+		incomingCoin = incomingCoin.replaceAll("coin", "").trim();
+		int purse = getPlayerBank();
+		int coinValue = 0;
+		for (String coinName : coinValues){
+			if (coinName.contains(incomingCoin)){
+				purse += coinValue * 10;
+				setPlayerBank(purse);
+			}
+			coinValue++;
+		}
+		return (Integer.toString(coinValue));
+	}
 	// ++++++++++++++GAME LOGGER METHODS+++++++++++++++++
 	// Possibly move this to its own class
 
