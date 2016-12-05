@@ -1,9 +1,11 @@
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.Random;
 
 /**
  * @author Jacques Troussard
@@ -82,7 +84,8 @@ public class Dungeon {
 	 * @throws FileNotFoundException
 	 * @throws IllegalDungeonFormatException
 	 */
-	public Dungeon(String filename) throws FileNotFoundException, IllegalDungeonFormatException {
+	public Dungeon(String filename) throws FileNotFoundException,
+			IllegalDungeonFormatException {
 
 		this(filename, true);
 	}
@@ -99,7 +102,8 @@ public class Dungeon {
 	 * @throws IllegalDungeonFormatException
 	 */
 	@SuppressWarnings("resource")
-	public Dungeon(String filename, boolean initState) throws FileNotFoundException, IllegalDungeonFormatException {
+	public Dungeon(String filename, boolean initState) throws FileNotFoundException,
+			IllegalDungeonFormatException {
 
 		init();
 		this.filename = filename;
@@ -111,12 +115,14 @@ public class Dungeon {
 
 		// Throw away delimiter.
 		if (!s.nextLine().equals(TOP_LEVEL_DELIM)) {
-			throw new IllegalDungeonFormatException("No '" + TOP_LEVEL_DELIM + "' after version indicator.");
+			throw new IllegalDungeonFormatException("No '" + TOP_LEVEL_DELIM
+					+ "' after version indicator.");
 		}
 
 		// Throw away Items starter.
 		if (!s.nextLine().equals(ITEMS_MARKER)) {
-			throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER + "' line where expected.");
+			throw new IllegalDungeonFormatException("No '" + ITEMS_MARKER
+					+ "' line where expected.");
 		}
 
 		try {
@@ -129,7 +135,8 @@ public class Dungeon {
 
 		// Throw away Rooms starter.
 		if (!s.nextLine().equals(ROOMS_MARKER)) {
-			throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER + "' line where expected.");
+			throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER
+					+ "' line where expected.");
 		}
 
 		try {
@@ -146,7 +153,8 @@ public class Dungeon {
 
 		// Throw away Exits starter.
 		if (!s.nextLine().equals(EXITS_MARKER)) {
-			throw new IllegalDungeonFormatException("No '" + EXITS_MARKER + "' line where expected.");
+			throw new IllegalDungeonFormatException("No '" + EXITS_MARKER
+					+ "' line where expected.");
 		}
 
 		try {
@@ -158,6 +166,77 @@ public class Dungeon {
 			/* end of exits */ }
 
 		s.close();
+
+		randomObjGeneration();
+	}
+
+	/**
+	 * Loops through every Room object checking for its random object generation
+	 * permissions. When it finds a match the appropriate generator is call.
+	 */
+	private void randomObjGeneration() {
+		Random randInt = new Random();
+		Room targetRoom = null;
+		int coinGenRate = 50;
+		int mobGenRate = 20;
+		for (String key : rooms.keySet()) {
+			targetRoom = rooms.get(key);
+			int success = randInt.nextInt(101);
+			if (targetRoom.isRandCoin() && success < coinGenRate) {
+				// System.out.println("MAKING COIN");
+				String addCoin = coinGenerator(randInt);
+				targetRoom.add(items.get(addCoin));
+				// System.out.println(items.get(addCoin).getPrimaryName());
+			}
+			if (targetRoom.isRandMob()) {
+
+			}
+
+		}
+
+	}
+
+	/**
+	 * Takes a random number generator. Loops through all the coin values and
+	 * creates probabilities based on their value. Higher value coins have a
+	 * lower probability. A random number is generated and then the normalized
+	 * coin values are incremented until the running total surpasses the random
+	 * number which indicates which coin should be generated.
+	 * 
+	 * @param r
+	 *            Random number generator object
+	 * @return Coin value description for the dungeon to decode.
+	 */
+	private String coinGenerator(Random r) {
+		LinkedList<Coin> arr = GameState.instance().getCoinValues();
+		Hashtable<String, Double> coinDropRates = new Hashtable<String, Double>();
+		double norm = 0;
+		double seed = r.nextDouble();
+		double prob = 0;
+		int high = 0;
+
+		for (Coin c : arr) {
+			if (c.getValue() > high) {
+				high = c.getValue();
+			}
+			norm += c.getValue();
+		}
+		for (Coin c : arr) {
+			norm = c.getValue() / high;
+		}
+		for (Coin c : arr) {
+			coinDropRates.put(c.getName(), Double.valueOf(high / c.getValue()) / norm);
+		}
+		for (String key : coinDropRates.keySet()) {
+			prob += coinDropRates.get(key).doubleValue();
+			if (prob > seed) {
+				return key;
+			}
+
+		}
+		// System.out.println("FAILED COIN GENERATION");
+		return null;
+
 	}
 
 	// common object initialization tasks, regardless of which constructor
@@ -191,8 +270,8 @@ public class Dungeon {
 		// Note: the filename has already been read at this point.
 
 		if (!s.nextLine().equals(ROOM_STATES_MARKER)) {
-			throw new GameState.IllegalSaveFormatException(
-					"No '" + ROOM_STATES_MARKER + "' after dungeon filename in save file.");
+			throw new GameState.IllegalSaveFormatException("No '" + ROOM_STATES_MARKER
+					+ "' after dungeon filename in save file.");
 		}
 
 		String roomName = s.nextLine();
@@ -233,22 +312,22 @@ public class Dungeon {
 	 * Adds a room to the dungeons rooms list.
 	 * 
 	 * @param room
-	 *            Room object to be added to the rooms and teleDests
-	 *            hashtable, keyed by room title(name).
+	 *            Room object to be added to the rooms and teleDests hashtable,
+	 *            keyed by room title(name).
 	 */
 	public void add(Room room) {
 		rooms.put(room.getTitle(), room);
 		teleDests.put(room.getTitle(), room);
 	}
-	
+
 	/**
 	 * Adds a room to the designated data structure.
 	 * 
 	 * @param dest
 	 *            Destination data structure for room storage.
 	 * @param room
-	 *            Room object to be added to the designated hashtable, keyed 
-	 *            by room title(name).
+	 *            Room object to be added to the designated hashtable, keyed by
+	 *            room title(name).
 	 */
 	public void add(Hashtable<String, Room> dest, Room room) {
 		dest.put(room.getTitle(), room);
@@ -319,7 +398,7 @@ public class Dungeon {
 		}
 
 	}
-	
+
 	public Hashtable<String, Room> getTeleTable() {
 		return teleDests;
 	}
@@ -346,7 +425,8 @@ public class Dungeon {
 				num = 0;
 				System.out.println("Items-Out-of-Play:");
 				for (String key : itemsOutOfPlay.keySet()) {
-					System.out.println(num + ": " + itemsOutOfPlay.get(key).getPrimaryName());
+					System.out.println(num + ": " + itemsOutOfPlay.get(key)
+							.getPrimaryName());
 					num++;
 				}
 				System.out.println();
@@ -357,6 +437,5 @@ public class Dungeon {
 			System.out.println("There are no items at all");
 		}
 	}
-	
-	
+
 }
