@@ -36,6 +36,7 @@ class TakeCommand extends Command {
      * @return String message alerting the player of successfulness of take command
      */
     public String execute() {
+    	System.out.println("trying to take " + itemName);
         if (itemName == null || itemName.trim().length() == 0) {
             return "Take what?\n";
         }
@@ -43,7 +44,12 @@ class TakeCommand extends Command {
             Room currentRoom = 
                 GameState.instance().getAdventurersCurrentRoom();
             Item theItem = currentRoom.getItemNamed(itemName);
-            GameState.instance().addToInventory(theItem);
+            	if (itemName.contains("coin")){
+            		return ("You added $" + GameState.instance().addMoney(itemName)
+            				+ " to your purse.\n");
+            	}else {
+            		GameState.instance().addToInventory(theItem);
+            	}
             currentRoom.remove(theItem);
             return itemName + " taken.\n";
         } catch (Item.NoItemException e) {
