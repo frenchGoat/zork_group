@@ -22,7 +22,8 @@ class InventoryCommand extends Command {
         if (names.size() == 0) {
             return "You are empty-handed.\n";
         }
-        String retval = "You are carrying:\n";
+        String retval = "Bank: $" + GameState.instance().getPlayerBank() + 
+        		"\nYou are carrying:\n";
         for (String itemName : names) {
             retval += "   A " + itemName + "\n";
         }
