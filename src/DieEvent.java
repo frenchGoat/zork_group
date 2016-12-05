@@ -33,7 +33,6 @@ public class DieEvent extends Event {
         } catch (IOException | GameState.IllegalSaveFormatException | Dungeon.IllegalDungeonFormatException e) {}
         System.out.println("You have died :(  You have respawned at your last save point.");
         System.out.println(instance.getAdventurersCurrentRoom().getTitle());
-        return message;
     }
 
 }
