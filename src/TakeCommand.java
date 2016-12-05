@@ -36,7 +36,6 @@ class TakeCommand extends Command {
      * @return String message alerting the player of successfulness of take command
      */
     public String execute() {
-    	System.out.println("trying to take " + itemName);
         if (itemName == null || itemName.trim().length() == 0) {
             return "Take what?\n";
         }
