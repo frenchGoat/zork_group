@@ -18,12 +18,12 @@ class InventoryCommand extends Command {
      * console.
      */
     public String execute() {
-        ArrayList<String> names = GameState.instance().getInventoryNames();
+    	String retval = "Bank: $" + GameState.instance().getPlayerBank() + "\n";
+    	ArrayList<String> names = GameState.instance().getInventoryNames();
         if (names.size() == 0) {
-            return "You are empty-handed.\n";
+            return retval + "You are empty-handed.\n";
         }
-        String retval = "Bank: $" + GameState.instance().getPlayerBank() + 
-        		"\nYou are carrying:\n";
+        retval = "You are carrying:\n";
         for (String itemName : names) {
             retval += "   A " + itemName + "\n";
         }
