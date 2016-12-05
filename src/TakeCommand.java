@@ -44,6 +44,7 @@ class TakeCommand extends Command {
                 GameState.instance().getAdventurersCurrentRoom();
             Item theItem = currentRoom.getItemNamed(itemName);
             	if (itemName.contains("coin")){
+            		currentRoom.remove(theItem);
             		return ("You added $" + GameState.instance().addMoney(itemName)
             				+ " to your purse.\n");
             	}else {
