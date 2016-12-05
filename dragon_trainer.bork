@@ -13,10 +13,11 @@ Gold coin
 ===
 Rooms:
 Your Room
-Contents: Gold coin,Item
+Contents: <coin>Gold coin,Item
 This is your room. As main start of character.
 ---
 Living Room
+Contents: <coin, mob>Gold coin,Item
 Living room of your house, meet someone who tells you about your quest.
 ---
 Garden

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,6 +33,15 @@ public class Room {
 	 */
 	private boolean beenHere;
 	/**
+	 * Indicates whether random coins are allowed to be generated in this room.
+	 */
+	private boolean randCoin;
+	/**
+	 * Indicates whether random monsters are allowed to be generated in this
+	 * room.
+	 */
+	private boolean randMob;
+	/**
 	 * Data structure used to store Item objects which in game are present in
 	 * the Room.
 	 */
@@ -50,6 +60,7 @@ public class Room {
 	Room(String title) {
 		init();
 		this.title = title;
+		this.randCoin = this.randMob = false;
 	}
 
 	Room(Scanner s, Dungeon d) throws NoRoomException,
@@ -91,6 +102,13 @@ public class Room {
 				Dungeon.TOP_LEVEL_DELIM)) {
 
 			if (lineOfDesc.startsWith(CONTENTS_STARTER)) {
+				if (lineOfDesc.contains("<")) {
+					String[] lineParts = lineOfDesc.split(Pattern.quote(">"));
+					String[] randPermissions = lineParts[0].substring(CONTENTS_STARTER
+							.length() + 1, lineParts[0].length()).split(",");
+					setRandPermissions(randPermissions);
+					lineOfDesc = CONTENTS_STARTER + lineParts[1];
+				}
 				String itemsList = lineOfDesc.substring(CONTENTS_STARTER.length());
 				String[] itemNames = itemsList.split(",");
 				for (String itemName : itemNames) {
@@ -221,7 +239,7 @@ public class Room {
 			}
 			if (contents.size() > 0) {
 				description += "\n";
-			} 
+			}
 		} else {
 			description += "\nThere are no items in this room.";
 		}
@@ -351,6 +369,27 @@ public class Room {
 	ArrayList<Item> getContents() {
 		return contents;
 	}
+	
+	/**
+	 * Takes String array, generated from parsed room description line at time of 
+	 * room initialization and sets the random object generation permissions.
+	 *
+	 * @param randPermissionList String array containing permission checks for random <p>
+	 * object generation. 
+	 */
+	void setRandPermissions(String[] randPermissionList){
+		for (String permissionType : randPermissionList){
+			switch (permissionType.trim()){
+				case "coin": randCoin = true;
+				break;
+				case "mob": randMob = true;
+				break;
+				default: randCoin = randMob = false;
+				break;
+			}
+		}
+	}
+	
 
 	/**
 	 * Development test method used to check room contents by printing a list to
