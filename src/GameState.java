@@ -397,7 +397,7 @@ public class GameState {
 			}
 			coinValue++;
 		}
-		return (Integer.toString(coinValue));
+		return (Integer.toString(coinValue*10));
 	}
 	// ++++++++++++++GAME LOGGER METHODS+++++++++++++++++
 	// Possibly move this to its own class
