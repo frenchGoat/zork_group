@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
@@ -106,7 +107,7 @@ public class GameState {
 	/**
 	 * Value of monetary items in the game.
 	 */
-	private String[] coinValues;
+	private LinkedList<Coin> coinValues;
 	/**
 	 * Michelle: sorry didn't know how you wanted to do this so i'll leave it to
 	 * you
@@ -156,9 +157,13 @@ public class GameState {
 		 * Copper: 2
 		 * Silver: 4
 		 *   Gold: 7
-		 * Values will be deteremined by their index number.
+		 * 
 		 */
-		coinValues = new String[] {"","Steel","Copper","","Silver","","","Gold"};
+		coinValues = new LinkedList<Coin>();
+		coinValues.add(new Coin("Steel", 1));
+		coinValues.add(new Coin("Copper", 2));
+		coinValues.add(new Coin("Silver", 4));
+		coinValues.add(new Coin("Gold", 7));
 		
 	}
 	
@@ -331,6 +336,10 @@ public class GameState {
 	public int getPlayerBank() {
 		return playerBank;
 	}
+	
+	public LinkedList<Coin> getCoinValues() {
+		return coinValues;
+	}
 
 	public void setPlayerBank(int playerBank) {
 		this.playerBank = playerBank;
@@ -387,17 +396,17 @@ public class GameState {
 	}
 
 	public String addMoney(String incomingCoin){
-		incomingCoin = incomingCoin.replaceAll("coin", "").trim();
-		int purse = getPlayerBank();
-		int coinValue = 0;
-		for (String coinName : coinValues){
-			if (coinName.contains(incomingCoin)){
-				purse += coinValue * 10;
+		int retval = 0;
+		for (Coin c : coinValues){
+			if (incomingCoin.equals(c.getName())){
+				int purse = getPlayerBank();
+				int deposit = c.getValue()*10;
+				purse += deposit;
 				setPlayerBank(purse);
+				retval = deposit;
 			}
-			coinValue++;
 		}
-		return (Integer.toString(coinValue*10));
+		return Integer.toString(retval);
 	}
 	// ++++++++++++++GAME LOGGER METHODS+++++++++++++++++
 	// Possibly move this to its own class
