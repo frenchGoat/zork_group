@@ -10,6 +10,15 @@ kick[Wound(2)]:test print message activated by event
 Gold coin
 0
 ---
+Silver coin
+0
+---
+Copper coin
+0
+---
+Steel coin
+0
+---
 ===
 Rooms:
 Your Room
@@ -21,27 +30,35 @@ Contents: <coin, mob>Gold coin,Item
 Living room of your house, meet someone who tells you about your quest.
 ---
 Garden
+Contents: <coin>
 Outside your house. Pick up some healing items.
 ---
 Road to Village
+Contents: <coin>
 One direction road to village square
 ---
 Village Square
+Contents: <coin>
 Cross roads for player to equip themselves before starting the adventure
 ---
 Shop Keeper
+Contents: <coin>
 Place to meet with a vendor
 ---
 Dragon Forest
+Contents: <coin>
 Enterance to forest to get dragon
 ---
 Dragon Cave
+Contents: <coin>
 Choose your dragon
 ---
 Medow
+Contents: <coin>
 Nothing here
 ---
 Cliff
+Contents: <coin>
 teleport area only when dragon present --> fly to 'dungeon'
 ---
 Dungeon Enterance
