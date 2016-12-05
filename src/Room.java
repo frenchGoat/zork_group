@@ -107,18 +107,25 @@ public class Room {
 					String[] randPermissions = lineParts[0].substring(CONTENTS_STARTER
 							.length() + 1, lineParts[0].length()).split(",");
 					setRandPermissions(randPermissions);
-					lineOfDesc = CONTENTS_STARTER + lineParts[1];
-				}
-				String itemsList = lineOfDesc.substring(CONTENTS_STARTER.length());
-				String[] itemNames = itemsList.split(",");
-				for (String itemName : itemNames) {
 					try {
-						if (initState) {
-							add(d.getItem(itemName));
+						lineOfDesc = CONTENTS_STARTER + lineParts[1];
+					} catch (ArrayIndexOutOfBoundsException e) {
+						lineOfDesc = "no items after permissions";
+					}
+
+				}
+				if (!lineOfDesc.equals("no items after permissions")) {
+					String itemsList = lineOfDesc.substring(CONTENTS_STARTER.length());
+					String[] itemNames = itemsList.split(",");
+					for (String itemName : itemNames) {
+						try {
+							if (initState) {
+								add(d.getItem(itemName));
+							}
+						} catch (Item.NoItemException e) {
+							throw new Dungeon.IllegalDungeonFormatException(
+									"No such item '" + itemName + "'");
 						}
-					} catch (Item.NoItemException e) {
-						throw new Dungeon.IllegalDungeonFormatException("No such item '"
-								+ itemName + "'");
 					}
 				}
 			} else {
@@ -369,27 +376,39 @@ public class Room {
 	ArrayList<Item> getContents() {
 		return contents;
 	}
-	
+
 	/**
-	 * Takes String array, generated from parsed room description line at time of 
-	 * room initialization and sets the random object generation permissions.
+	 * Takes String array, generated from parsed room description line at time
+	 * of room initialization and sets the random object generation permissions.
 	 *
-	 * @param randPermissionList String array containing permission checks for random <p>
-	 * object generation. 
+	 * @param randPermissionList
+	 *            String array containing permission checks for random
+	 *            <p>
+	 *            object generation.
 	 */
-	void setRandPermissions(String[] randPermissionList){
-		for (String permissionType : randPermissionList){
-			switch (permissionType.trim()){
-				case "coin": randCoin = true;
+	void setRandPermissions(String[] randPermissionList) {
+		for (String permissionType : randPermissionList) {
+			switch (permissionType.trim()) {
+			case "coin":
+				randCoin = true;
 				break;
-				case "mob": randMob = true;
+			case "mob":
+				randMob = true;
 				break;
-				default: randCoin = randMob = false;
+			default:
+				randCoin = randMob = false;
 				break;
 			}
 		}
 	}
-	
+
+	public boolean isRandCoin() {
+		return randCoin;
+	}
+
+	public boolean isRandMob() {
+		return randMob;
+	}
 
 	/**
 	 * Development test method used to check room contents by printing a list to
