@@ -2,9 +2,18 @@ Dragon Trainer
 Group Zork v3b
 ===
 Items:
+Dummy Item
+1
+examine:command with no events - kick this item to test event
+kick[Wound(2)]:test print message activated by event
+---
+Gold coin
+0
+---
 ===
 Rooms:
 Your Room
+Contents: Gold coin,
 This is your room. As main start of character.
 ---
 Living Room
