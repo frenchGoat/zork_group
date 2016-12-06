@@ -45,6 +45,7 @@ class TakeCommand extends Command {
             Item theItem = currentRoom.getItemNamed(itemName);
             	if (itemName.contains("coin")){
             		currentRoom.remove(theItem);
+            		EventFactory.instance().parse("Score(5)").trigger();;
             		return ("You added $" + GameState.instance().addMoney(itemName)
             				+ " to your purse.\n");
             	}else {
