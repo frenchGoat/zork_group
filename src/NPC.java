@@ -1,6 +1,7 @@
 
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 /**
  * Every NPC type will extend this class that gives each NPC a name, health, 
  * conversation hashtable, and a current room that is read in from a file. Along with getters for each field.
@@ -11,8 +12,11 @@ import java.util.Scanner;
  */
 public class NPC {
 	
+	static String MESSAGE_LEAD = "messages:";
+	
     @SuppressWarnings("serial")
-	static class NoNPCException extends Exception {}
+	static class NoNPCException extends Exception {
+    }
     
     /**
      * Name of NPC
@@ -22,14 +26,18 @@ public class NPC {
      * Health of NPC
      */
     private int health;
+    
+
     /**
      * Hashtable of NPC conversations
      */
-    private Hashtable<String,String> conversation;
+    private Hashtable<String,Dialogue> conversations;
     /**
      * Current Room of NPC
      */
     private Room currentRoom;
+    
+    NPC(){}
     
     /**
     * Creates an NPC with a string name.
@@ -45,8 +53,24 @@ public class NPC {
     *
     * @param scanner The scanner of the Dungeon file.
     */
-    NPC(Scanner scanner) {
-	    
+    NPC(Scanner sc) {
+    }
+    
+    public Hashtable<String, Dialogue> getConversations() {
+		return conversations;
+	}
+
+	public void setConversations(Hashtable<String, Dialogue> conversations) {
+		this.conversations = conversations;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void init(){
+    	conversations = new Hashtable<String, Dialogue>();
+    	this.currentRoom = null;
     }
 
     /**
@@ -102,7 +126,9 @@ public class NPC {
     */
     public String interact(String prompt) {
 	    return null;
-    }  
+    }
+
+
     
 
 }
