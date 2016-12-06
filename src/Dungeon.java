@@ -28,6 +28,7 @@ public class Dungeon {
 	public static String ROOMS_MARKER = "Rooms:";
 	public static String EXITS_MARKER = "Exits:";
 	public static String ITEMS_MARKER = "Items:";
+	public static String NPCS__MARKER = "NPCs:";
 
 	// Variables relating to game state (.sav) storage.
 	static String FILENAME_LEADER = "Dungeon file: ";
@@ -133,6 +134,27 @@ public class Dungeon {
 		} catch (Item.NoItemException e) {
 			/* end of items */ }
 
+		// Throw away NPCS starter.
+		if (!s.nextLine().equals(NPCS__MARKER)) {
+			throw new IllegalDungeonFormatException("No '" + NPCS__MARKER
+					+ "' line where expected.");
+		}
+
+		try {
+			// Instantiate npc.
+			while (true) {
+				NpcMaker incomingNpc = new NpcMaker();
+				add(incomingNpc.makeNpc(s));
+			}
+			// Throw away end of npcs delimiter
+			
+			/*
+			 *  I have no idea why but when using NPC.NoNPCException makes this 'block
+			 *   of code un reachable' for now switch to regular exception
+			 */
+		} catch (Exception e) {
+			/* end of npcs */ }
+
 		// Throw away Rooms starter.
 		if (!s.nextLine().equals(ROOMS_MARKER)) {
 			throw new IllegalDungeonFormatException("No '" + ROOMS_MARKER
@@ -166,8 +188,12 @@ public class Dungeon {
 			/* end of exits */ }
 
 		s.close();
-
 		randomObjGeneration();
+	}
+
+	private void add(NPC npc) {
+		npcs.put(npc.getName(), npc);
+
 	}
 
 	/**
@@ -246,6 +272,7 @@ public class Dungeon {
 		teleDests = new Hashtable<String, Room>();
 		items = new Hashtable<String, Item>();
 		itemsOutOfPlay = new Hashtable<String, Item>();
+		npcs = new Hashtable<String, NPC>();
 	}
 
 	/*
@@ -401,6 +428,10 @@ public class Dungeon {
 
 	public Hashtable<String, Room> getTeleTable() {
 		return teleDests;
+	}
+
+	public Hashtable<String, NPC> getNpcs() {
+		return npcs;
 	}
 
 	/**
