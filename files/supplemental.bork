@@ -3,22 +3,36 @@ Group Zork v3b
 ===
 Items:
 Item
-1
+0v7d5
 examine:command with no events - kick this item to test event
 kick[Wound(2)]:test print message activated by event
 ---
+Bronze shield
+0v3d0
+examine:This bronze shield is rather small, allowing the user to deftly block his opponent's attacks.
+---
 Gold coin
-0
+0v7d5
 ---
 Silver coin
-0
+0v7d5
 ---
 Copper coin
-0
+0v7d5
 ---
 Steel coin
-0
+0v7d5
 ---
+===
+NPCs:
+Quest Giver
+30
+messages:a,"hello there":b,"here is your quest":c,"here is a hint for your quest"
+---
+Vendor
+30
+messages:a,"welcome to my store":b[OpenInventory()],"best prices in the village"
+inventory:
 ===
 Rooms:
 Your Room
@@ -27,6 +41,7 @@ This is your room. As main start of character.
 ---
 Living Room
 Contents: <coin, mob>Gold coin,Item
+NPC Present: Quest Giver
 Living room of your house, meet someone who tells you about your quest.
 ---
 Garden

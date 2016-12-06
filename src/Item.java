@@ -20,6 +20,17 @@ public class Item {
 	 * Weight of item.
 	 */
 	private int weight;
+	
+	/**
+	 * Value of item.
+	 */
+	private int value;
+	
+	/**
+	 * Droprate of item.
+	 */
+	private double dropRate;
+	
 	/**
 	 * Hashtable used to store messages and events related to item.
 	 */
@@ -67,8 +78,38 @@ public class Item {
 			throw new NoItemException();
 		}
 
-		// Read item weight.
-		weight = Integer.valueOf(s.nextLine());
+		/*
+		 *  Read item weight and value and drop rates. Hydration file setup now includes
+		 *  an easy to read off String in the following format. 
+		 *  
+		 *  <Name>
+		 *  <weight>v<value>d<droprate as int>
+		 *  <verb>:[<event>(<param>)]:<message>
+		 *  
+		 */
+		
+		String wvdr = s.nextLine();
+		try{
+			weight = Integer.valueOf(Character.toString(wvdr.charAt(0)));
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("Item weight hydrating problem related to indexing");
+			weight = 0;
+		}
+		try{
+			value = Integer.valueOf(Character.toString(wvdr.charAt(2)));
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("Item value hydrating problem related to indexing");
+			value = 0;
+		}
+		try{
+			dropRate = Double.valueOf(wvdr.substring(4, wvdr.length()));
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("Item dropRate hydrating problem related to indexing");
+			dropRate = 0;
+		}
+		
+		
+		
 
 		// Read and parse verbs lines, as long as there are more.
 		String verbLine = s.nextLine();
