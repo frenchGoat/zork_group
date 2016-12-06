@@ -132,6 +132,14 @@ public class Room {
 				desc += lineOfDesc + "\n";
 			}
 			lineOfDesc = s.nextLine();
+			if (lineOfDesc.startsWith(NPC_PRESENCE)) {
+				String[] npcList = lineOfDesc.substring(NPC_PRESENCE.length()).split(
+						",");
+				for (String name : npcList) {
+					NPC npc = d.getNpcs().get(name);
+					npcs.add(npc);
+				}
+			}
 		}
 
 		// throw away delimiter
@@ -148,6 +156,7 @@ public class Room {
 		contents = new ArrayList<Item>();
 		exits = new ArrayList<Exit>();
 		beenHere = false;
+		npcs = new ArrayList<NPC>();
 	}
 
 	/**
@@ -234,6 +243,16 @@ public class Room {
 		String description;
 		if (beenHere) {
 			description = title;
+			if (!npcs.isEmpty() && npcs.size() > 1) {
+				description += ":";
+				for (NPC x : npcs) {
+					description += " " + x.getName() + ",";
+				}
+				description = description.substring(0, description.length() - 1)
+						+ " are here.";
+			} else if (!npcs.isEmpty()) {
+				description += ": " + npcs.get(0).getName() + " is here";
+			}
 			for (Exit exit : exits) {
 				description += "\n" + exit.describe();
 			}
