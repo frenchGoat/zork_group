@@ -81,7 +81,7 @@ public class NPC {
     *
     * @param health The new health of the NPC
     */
-    public viod setHealth(int health) {
+    public void setHealth(int health) {
 	this.health = health;
     }
 	
@@ -95,7 +95,7 @@ public class NPC {
     }
 	
     /**
-    * Returns the correct responce from the NPC's conversation Hashtable based off of a String prompt.
+    * Returns the correct response from the NPC's conversation Hashtable based off of a String prompt.
     * 
     * @param prompt The user's conversation prompt that will be a key for a response in conversation.
     * @return converse The string response with the key of prompt.
