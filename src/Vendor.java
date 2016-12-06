@@ -1,4 +1,5 @@
 
+import java.util.Hashtable;
 import java.util.Scanner;
 /**
  * The Vendor extends NPC and has an additional field for the currency it carries.
@@ -8,9 +9,15 @@ import java.util.Scanner;
  */
 public class Vendor extends NPC {
     /**
-     * Money int that determines the amount of money thr vendor possesses.
+     * Money int that determines the amount of money the vendor possesses.
      */
     private int money;
+    
+    /**
+     * Data structure to hold vendors inventory
+     */
+    private Hashtable<String, Item> store;
+    
     /**
     * Creates a Vendor NPC with an int money.
     *
