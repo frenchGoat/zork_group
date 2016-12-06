@@ -25,23 +25,27 @@ Steel coin
 ---
 ===
 NPCs:
-Quest Giver
-30
-messages:a,"hello there":b,"here is your quest":c,"here is a hint for your quest"
----
 Vendor
+Torbjorn
 30
 messages:a,"welcome to my store":b[OpenInventory()],"best prices in the village"
-inventory:
+inventory:Copper coin
+---
+Vendor
+Giott
+30
+messages:a,"welcome to my store":b[OpenInventory()],"best prices in the village"
+inventory:Copper coin
+---
 ===
 Rooms:
 Your Room
-Contents: <coin>Gold coin,Item
+Contents: Silver coin,Item
+NPC Present: Giott
 This is your room. As main start of character.
 ---
 Living Room
 Contents: <coin, mob>Gold coin,Item
-NPC Present: Quest Giver
 Living room of your house, meet someone who tells you about your quest.
 ---
 Garden
@@ -56,8 +60,9 @@ Village Square
 Contents: <coin>
 Cross roads for player to equip themselves before starting the adventure
 ---
-Shop Keeper
+Village Shop
 Contents: <coin>
+NPC Present: Torbjorn
 Place to meet with a vendor
 ---
 Dragon Forest
@@ -148,9 +153,9 @@ Road to Village
 ---
 Village Square
 w
-Shop Keeper
+Village Shop
 ---
-Shop Keeper
+Village Shop
 e
 Village Square
 ---
