@@ -28,13 +28,13 @@ NPCs:
 Vendor
 Torbjorn
 30
-messages:a,"welcome to my store":b[OpenInventory()],"best prices in the village"
+messages:a,"hello":b"your quest is"
 inventory:Copper coin
 ---
 Vendor
 Giott
 30
-messages:a,"welcome to my store":b[OpenInventory()],"best prices in the village"
+messages:a,"Welcome to my store!":b[OpenInventory()],"best prices in the village!":c,"Good-Bye."
 inventory:Copper coin
 ---
 ===
