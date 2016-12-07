@@ -122,6 +122,16 @@ public class NPC {
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;
 	}
+	
+	/**
+	 * Sets the name of the NPC.
+	 *
+	 * @param name
+	 *            The new name of the NPC
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Returns the correct response from the NPC's conversation Hashtable based
