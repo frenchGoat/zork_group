@@ -1,11 +1,5 @@
 /**
- * University of Mary Washington
- * CPSC 240 Section 23
- * DONE 
- */
-/**
  * @author Jacques Troussard
- *
  */
 class TakeCommand extends Command {
 
