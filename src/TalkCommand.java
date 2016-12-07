@@ -38,7 +38,7 @@ public class TalkCommand extends Command {
 				theTarget.openDialogue();
 			} catch (NPC.NoNPCException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return target + " isn't here to listen to your ramblings.\n";
 			}
             
             return Interpreter.cmdBrd + "\nOk now what?\n";

@@ -82,7 +82,12 @@ public class CommandFactory {
 			return new ScoreCommand();
 		}
 		if (verb.equals("talk")) {
-			return new TalkCommand(noun);
+			if (noun.contains("to")){
+				return new TalkCommand(noun);
+			}else{
+				return new UnknownCommand(command);
+			}
+			
 		}
 		if (verb.equals("i") || verb.equals("inventory")) {
 			return new InventoryCommand();

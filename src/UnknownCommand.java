@@ -28,6 +28,6 @@ class UnknownCommand extends Command {
      * @return error message
      */
     String execute() {
-        return "I'm not sure what you mean by \"" + bogusCommand + "\".\n";
+        return "I'm not sure what you mean by \"" + bogusCommand + "\".\nType 'help' for information on basic commands.\n";
     }
 }
