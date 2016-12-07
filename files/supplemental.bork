@@ -2,6 +2,11 @@ Dragon Trainer
 Group Zork v3b
 ===
 Items:
+Dragon Training Manual
+wvdd0000
+examine:This manual when read should explain the differences in dragon companions.
+read:Dragon1 has this ability, Dragon2 has another ability
+---
 Item
 wvdd0000
 examine:dummy item
@@ -59,9 +64,9 @@ inventory:Copper coin
 ===
 Rooms:
 Your Room
-Contents: Silver coin,Item
+Contents: Silver coin,Dragon Training Manual
 NPC Present: Giott
-This is your room. As main start of character.
+Your modest room, along with all the usual 
 ---
 Living Room
 Contents: <coin, mob>Gold coin,Item
