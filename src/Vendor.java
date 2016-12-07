@@ -65,6 +65,10 @@ public class Vendor extends NPC {
 		
 	}
 
+	public Vendor(String s) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Returns the amount of money this Vendor has.
 	 * 

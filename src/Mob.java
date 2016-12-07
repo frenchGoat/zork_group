@@ -29,7 +29,11 @@ public class Mob extends NPC {
         super(scanner);
     }
     
-    /**
+    public Mob(String s) {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Returns the attack of this Mob.
      * 
      * @return attack The int value of damage this mob can deal.
