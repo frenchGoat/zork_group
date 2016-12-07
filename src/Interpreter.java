@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Interpreter {
 	
 	public static String cmdBrd = "\n******************************************************************\n";
+	public static String brd = "------------------------------------------------------------------\n";
 
     private static GameState state; // not strictly necessary; GameState is 
                                     // singleton
@@ -57,7 +58,9 @@ public class Interpreter {
             
             System.out.println("Enter 'help' for list of commands");
 
+            System.out.print(brd);
             command = promptUser(commandLine);
+            
 
             while (!command.equals("q")) {
             	// Check win loss conditions before prompting for command
@@ -69,10 +72,12 @@ public class Interpreter {
                     win.trigger();
                 }
             	
-            	System.out.print(cmdBrd);
+            	
+            	
             	System.out.print(
                     CommandFactory.instance().parse(command).execute());
 
+            	System.out.print(brd);
                 command = promptUser(commandLine);
                 GameState.instance().clickTurn();
             }
