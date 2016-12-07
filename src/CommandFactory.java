@@ -19,8 +19,7 @@ public class CommandFactory {
 	/**
 	 * List of possible movement commands which the player may use.
 	 */
-	public static List<String> MOVEMENT_COMMANDS = Arrays.asList("n", "w", "e", "s", "u",
-			"d");
+	public static List<String> MOVEMENT_COMMANDS = Arrays.asList("n", "w", "e", "s", "u", "d");
 
 	public static synchronized CommandFactory instance() {
 		if (theInstance == null) {
@@ -37,6 +36,8 @@ public class CommandFactory {
 	 * strings. These Strings are being stored in a simple array. User input is
 	 * assumed to come in two basic forms. 1) single character ex. 'q' 2) a
 	 * multiple part command composed of a verb key word and at least one noun.
+	 * multi worded nouns will be concated into a single noun and parsed by the
+	 * respective command code.
 	 * 
 	 * @param command
 	 *            string of input received from player
@@ -45,11 +46,6 @@ public class CommandFactory {
 	public Command parse(String command) {
 		String parts[] = command.split(" ");
 		String verb = parts[0];
-		/*
-		 * Zork version three from professor assigned 'noun' variable this way;
-		 * String noun = parts.length >= 2 ? parts[1] : ""; taking anything
-		 * after the second word after the verb and throwing it away
-		 */
 		// In case the noun is multi worded, concats all the words into one
 		// String.
 		String noun = "";
@@ -58,11 +54,9 @@ public class CommandFactory {
 				noun = noun.concat(parts[i] + " ");
 			}
 			noun = noun.substring(0, noun.length() - 1);
-		}else{
+		} else {
 			noun = "";
 		}
-		
-
 		if (verb.equals("save")) {
 			return new SaveCommand(noun);
 		}
@@ -82,12 +76,11 @@ public class CommandFactory {
 			return new ScoreCommand();
 		}
 		if (verb.equals("talk")) {
-			if (noun.contains("to")){
+			if (noun.contains("to")) {
 				return new TalkCommand(noun);
-			}else{
+			} else {
 				return new UnknownCommand(command);
 			}
-			
 		}
 		if (verb.equals("i") || verb.equals("inventory")) {
 			return new InventoryCommand();
