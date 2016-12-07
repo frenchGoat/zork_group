@@ -122,7 +122,7 @@ public class GameState {
 	/**
 	 * Actual log entry to be put into log database.
 	 */
-	private static String logEntry;
+	static String logEntry;
 	/**
 	 * Current GameState turn (counter variable).
 	 */
