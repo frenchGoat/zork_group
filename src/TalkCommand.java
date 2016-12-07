@@ -1,5 +1,3 @@
-import NPC.NoNPCException;
-
 /**
  * When executed it will initiate interaction with NPC's.
  * 
