@@ -28,7 +28,7 @@ NPCs:
 Vendor
 Torbjorn
 30
-messages:a,"hello":b"your quest is"
+messages:a,"hello":b,"your quest is":c,"Go Away!"
 inventory:Copper coin
 ---
 Vendor
