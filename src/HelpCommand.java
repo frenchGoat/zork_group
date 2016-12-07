@@ -25,13 +25,13 @@ public class HelpCommand extends Command {
 	String execute() {
 		String hr = "******************************************************************";
 		String title0  = center("HELP SCREEN", 66, " ");
-		String title1  = String.format("%1$-30s %2$30s","MOVEMENT COMMANDS", "OTHER SINGLE CHARACTER COMMANDS");
-		String t1Line0 = String.format("%1$-30s %2$30s","n=North", "h=Check player health condition");
-		String t1Line1 = String.format("%1$-30s %2$30s","e=East", "i=Inventory");
-		String t1Line2 = String.format("%1$-30s %2$30s","s=South", "q=Quit game");
-		String t1Line3 = String.format("%1$-30s %2$30s","w=West", "s=Save game");
-		String t1Line4 = String.format("%1$-30s", "u=Up"); 
-		String t1Line5 = String.format("%1$-30s","d=Down");
+		String title1  = String.format("%1$-30s %2$s","MOVEMENT COMMANDS", "OTHER SINGLE CHARACTER COMMANDS");
+		String t1Line0 = String.format("%1$-32s %2$s","n=North", "h=Check player health condition");
+		String t1Line1 = String.format("%1$-32s %2$s","e=East", "i=Inventory");
+		String t1Line2 = String.format("%1$-32s %2$s","s=South", "q=Quit game");
+		String t1Line3 = String.format("%1$-32s %2$s","w=West", "s=Save game");
+		String t1Line4 = String.format("%1$-32s", "u=Up"); 
+		String t1Line5 = String.format("%1$-32s","d=Down");
 		String title2  = center("BASIC COMMANDS", 66, " ");
 		String cmd0 = String.format("%1$-10s %2$-15s %3$s", "+talk to","<NPC NAME>","- Brings up dialogue options.");
 		String cmd1 = String.format("%1$-10s %2$-15s %3$s", "+take","<ITEM NAME>","- Adds item to inventory");
