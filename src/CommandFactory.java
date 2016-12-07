@@ -81,6 +81,9 @@ public class CommandFactory {
 		if (verb.equals("score")) {
 			return new ScoreCommand();
 		}
+		if (verb.equals("talk")) {
+			return new TalkCommand(noun);
+		}
 		if (verb.equals("i") || verb.equals("inventory")) {
 			return new InventoryCommand();
 		}
