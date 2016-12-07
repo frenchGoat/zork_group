@@ -128,6 +128,9 @@ public class Room {
 						}
 					}
 					lineOfDesc = s.nextLine();
+				}else{
+					// Get rid of "no items after permission" 
+					lineOfDesc = s.nextLine();
 				}
 
 			}
