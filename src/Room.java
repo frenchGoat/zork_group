@@ -127,19 +127,23 @@ public class Room {
 									"No such item '" + itemName + "'");
 						}
 					}
+					lineOfDesc = s.nextLine();
 				}
-			} else {
-				desc += lineOfDesc + "\n";
+
 			}
-			lineOfDesc = s.nextLine();
 			if (lineOfDesc.startsWith(NPC_PRESENCE)) {
-				String[] npcList = lineOfDesc.substring(NPC_PRESENCE.length()).split(
-						",");
+				String[] npcList = lineOfDesc.substring(NPC_PRESENCE.length()).split(",");
 				for (String name : npcList) {
 					NPC npc = d.getNpcs().get(name);
 					npcs.add(npc);
 				}
+				lineOfDesc = s.nextLine();
+
+			} else {
+				desc += lineOfDesc + "\n";
+				lineOfDesc = s.nextLine();
 			}
+
 		}
 
 		// throw away delimiter
@@ -243,21 +247,19 @@ public class Room {
 		String description;
 		if (beenHere) {
 			description = title;
-			if (!npcs.isEmpty() && npcs.size() > 1) {
-				description += ":";
-				for (NPC x : npcs) {
-					description += " " + x.getName() + ",";
-				}
-				description = description.substring(0, description.length() - 1)
-						+ " are here.";
-			} else if (!npcs.isEmpty()) {
-				description += ": " + npcs.get(0).getName() + " is here";
+			if (!npcs.isEmpty()) {
+				description += "\nYou notice " + makeNpcList();
 			}
+
 			for (Exit exit : exits) {
 				description += "\n" + exit.describe();
 			}
 		} else {
-			description = title + "\n" + desc;
+			description = title + "\n" + desc + "\n";
+			if (!npcs.isEmpty()) {
+				description = description.trim() + " You also notice " + makeNpcList()
+						+ "\n";
+			}
 		}
 		if (!contents.isEmpty()) {
 			for (Item item : contents) {
@@ -427,6 +429,26 @@ public class Room {
 
 	public boolean isRandMob() {
 		return randMob;
+	}
+
+	/**
+	 * Returns a String listing all or the only npc(s) present in the room
+	 * object. Grammatical differences between plural and singular npcs are
+	 * handled.
+	 * 
+	 * @return String of npcs present in room.
+	 */
+	public String makeNpcList() {
+		String list = "";
+		if (!npcs.isEmpty() && npcs.size() > 1) {
+			for (NPC x : npcs) {
+				list += " " + x.getName() + ",";
+			}
+			list = list.substring(0, list.length() - 1) + " are here.";
+		} else if (!npcs.isEmpty()) {
+			list += npcs.get(0).getName() + " is here.";
+		}
+		return list;
 	}
 
 	/**
