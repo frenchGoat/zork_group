@@ -20,17 +20,17 @@ public class Item {
 	 * Weight of item.
 	 */
 	private int weight;
-	
+
 	/**
 	 * Value of item.
 	 */
 	private int value;
-	
+
 	/**
 	 * Droprate of item.
 	 */
 	private double dropRate;
-	
+
 	/**
 	 * Hashtable used to store messages and events related to item.
 	 */
@@ -45,6 +45,7 @@ public class Item {
 	 * be invoked.
 	 */
 	private Hashtable<String, String> triggers;
+
 	/**
 	 * Takes w as a int parameter and assigns it to the instance variable,
 	 * weight.
@@ -60,6 +61,7 @@ public class Item {
 		init();
 		this.primaryName = n;
 	}
+
 	/**
 	 * For testing purposes only!
 	 */
@@ -79,37 +81,39 @@ public class Item {
 		}
 
 		/*
-		 *  Read item weight and value and drop rates. Hydration file setup now includes
-		 *  an easy to read off String in the following format. 
-		 *  
-		 *  <Name>
-		 *  <weight>v<value>d<droprate as int>
-		 *  <verb>:[<event>(<param>)]:<message>
-		 *  
+		 * Read item weight and value and drop rates. Hydration file setup now
+		 * includes an easy to read off String in the following format.
+		 * 
+		 * <Name> <weight>v<value>d<droprate as int>
+		 * <verb>:[<event>(<param>)]:<message>
+		 * 
 		 */
-		
-		String wvdr = s.nextLine();
-		try{
-			weight = Integer.valueOf(Character.toString(wvdr.charAt(0)));
-		} catch (StringIndexOutOfBoundsException e) {
-			System.out.println("Item weight hydrating problem related to indexing");
-			weight = 0;
+
+		String wvdd = s.nextLine();
+		if (wvdd.equals(Dungeon.TOP_LEVEL_DELIM)) {
+			throw new NoItemException();
 		}
-		try{
-			value = Integer.valueOf(Character.toString(wvdr.charAt(2)));
-		} catch (StringIndexOutOfBoundsException e) {
-			System.out.println("Item value hydrating problem related to indexing");
-			value = 0;
+		if (wvdd.contains("wvdd")) {
+			wvdd = wvdd.substring(4);
+			try {
+				weight = Integer.valueOf(Character.toString(wvdd.charAt(0)));
+			} catch (StringIndexOutOfBoundsException e) {
+				System.out.println("Item weight hydrating problem related to indexing");
+				weight = 0;
+			}
+			try {
+				value = Integer.valueOf(Character.toString(wvdd.charAt(1)));
+			} catch (StringIndexOutOfBoundsException e) {
+				System.out.println("Item value hydrating problem related to indexing");
+				value = 0;
+			}
+			try {
+				dropRate = Double.valueOf(wvdd.substring(2, wvdd.length()));
+			} catch (StringIndexOutOfBoundsException e) {
+				System.out.println("Item dropRate hydrating problem related to indexing");
+				dropRate = 0;
+			}
 		}
-		try{
-			dropRate = Double.valueOf(wvdr.substring(4, wvdr.length()));
-		} catch (StringIndexOutOfBoundsException e) {
-			System.out.println("Item dropRate hydrating problem related to indexing");
-			dropRate = 0;
-		}
-		
-		
-		
 
 		// Read and parse verbs lines, as long as there are more.
 		String verbLine = s.nextLine();
@@ -120,18 +124,27 @@ public class Item {
 			String[] verbParts = verbLine.split(":");
 			// Does verb have events connected to it?
 			if (verbParts[0].contains("[")) {
-				String eventLine = verbParts[0]; // verb with event details attached
-				String[] eventParts = eventLine.split(Pattern.quote("[")); // separate verb from event details
-				// load data structures -  event details are not parsed yet -> specific event or eventFactory's job
-				triggers.put(eventParts[0], eventParts[1].substring(0, eventParts[1].length() - 1)); 
+				String eventLine = verbParts[0]; // verb with event details
+													// attached
+				String[] eventParts = eventLine.split(Pattern.quote("[")); // separate
+																			// verb
+																			// from
+																			// event
+																			// details
+				// load data structures - event details are not parsed yet ->
+				// specific event or eventFactory's job
+				triggers.put(eventParts[0], eventParts[1].substring(0, eventParts[1].length() - 1));
 				messages.put(eventParts[0], verbParts[1]);
-			// Verb without event parts can be added to messages hashtable without edits.
+				// Verb without event parts can be added to messages hashtable
+				// without edits.
 			} else {
 				messages.put(verbParts[0], verbParts[1]);
 			}
 			verbLine = s.nextLine();
+
 		}
 	}
+
 	/**
 	 * Used by parser to confirm whether user command input of an item name is
 	 * valid for an existing Item object.
@@ -153,14 +166,15 @@ public class Item {
 	public String getMessageForVerb(String verb) {
 		return messages.get(verb);
 	}
-	
+
 	/**
 	 * Returns the event detail string related the keyed verb. Can be more than
 	 * one event in a single line.
 	 * 
-	 * @param verb key for hashtable, triggers.
-	 * @return the event details string which can contain details for more than one
-	 * event
+	 * @param verb
+	 *            key for hashtable, triggers.
+	 * @return the event details string which can contain details for more than
+	 *         one event
 	 */
 	public String getEventDetailsForVerb(String verb) {
 		return triggers.get(verb);
@@ -172,31 +186,16 @@ public class Item {
 	public String toString() {
 		return primaryName;
 	}
-	
+
 	public boolean hasEvents(String verb) {
 		return triggers.containsKey(verb);
 	}
-	
+
 	/**
 	 * For testing purposes only!
 	 */
 	public void init() {
 		messages = new Hashtable<String, String>();
 		triggers = new Hashtable<String, String>();
-	}
-	
-	
-	
-	
-	
-	//Item Methods Test
-	
-	public static void main (String args[]) {
-		Item i = new Item("i");
-		i.triggers.put("someVerb","triggerDetails");
-		System.out.println(i.hasEvents("someVerb"));
-		Item j = new Item("j");
-		j.triggers.put("anotherVerb", "triggerDetails");
-		System.out.println(j.hasEvents("someVerb"));
 	}
 }

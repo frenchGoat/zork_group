@@ -46,23 +46,23 @@ public class Vendor extends NPC {
 		store = new LinkedList<String>();
 		setName(sc.nextLine());
 		setHealth(Integer.parseInt(sc.nextLine()));
-		
+
 		String[] messageLine = sc.nextLine().split(Pattern.quote(":"));
-		for (String part : messageLine){
-			if (!part.equals(MESSAGE_LEAD.substring(0, MESSAGE_LEAD.length()-1))){
+		for (String part : messageLine) {
+			if (!part.equals(MESSAGE_LEAD.substring(0, MESSAGE_LEAD.length() - 1))) {
 				Dialogue incomingDiag = new Dialogue(part);
 				getConversations().put(incomingDiag.getMessageKey(), incomingDiag);
 			}
-			
+
 		}
-		
+
 		String[] inventoryLine = sc.nextLine().substring(INV_LEADER.length()).split(Pattern.quote(","));
-		for (String part : inventoryLine){
+		for (String part : inventoryLine) {
 			store.add(part);
-		}		
-		//throw away delimiter
+		}
+		// throw away delimiter
 		sc.nextLine();
-		
+
 	}
 
 	public Vendor(String s) {

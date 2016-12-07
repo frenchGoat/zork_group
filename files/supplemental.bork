@@ -3,32 +3,51 @@ Group Zork v3b
 ===
 Items:
 Item
-0v7d5
-examine:command with no events - kick this item to test event
-kick[Wound(2)]:test print message activated by event
+wvdd0000
+examine:dummy item
+---
+Apple
+wvdd0750
+examine:Looking at the piece of fruit, reminds you how you havn't had your 5 servings today.
+eat:[Wound(-10)]:Yum!
+kick[Wound(1), Disappear()]:There's apple sauce everywhere now.
+stomp[Wound(1), Disappear()]:There's apple sauce everywhere now.
+smash[Wound(1), Disappear()]:There's apple sauce everywhere now.
 ---
 Bronze shield
-0v3d0
+wvdd0300
 examine:This bronze shield is rather small, allowing the user to deftly block his opponent's attacks.
 ---
+Forge hammer
+wvdd3710
+examine:This multipurpose hammer could be used for fixing... or breaking things >=)
+---
+Mythril hammer
+wvdd5510
+examine:The head of the hammer is made of a silvered steel. A finely crafted hammer indeed.
+---
+Jade amulet
+wvdd0300
+examine:This amulet has been fashioned on a chain to be worn. You can't help feeling it is more than just a fashion item.
+---
 Gold coin
-0v7d5
+wvdd0710
 ---
 Silver coin
-0v7d5
+wvdd0520
 ---
 Copper coin
-0v7d5
+wvdd0230
 ---
 Steel coin
-0v7d5
+wvdd0150
 ---
 ===
 NPCs:
 Vendor
 Torbjorn
 30
-messages:a,"hello":b,"your quest is":c,"Go Away!"
+messages:a,"For the last time, I'm Swedish!":b,"Best in Swedish engineering!":c,"All this standing around when there's work to be done..."
 inventory:Copper coin
 ---
 Vendor
@@ -49,8 +68,8 @@ Contents: <coin, mob>Gold coin,Item
 Living room of your house, meet someone who tells you about your quest.
 ---
 Garden
-Contents: <coin>
-Outside your house. Pick up some healing items.
+Contents: <coin>Apple
+A small but functional fence surrounds a small stubborn garden. It would be a complete lose if it wasn't for a single apple hanging from a wild apple tree.
 ---
 Road to Village
 Contents: <coin>
