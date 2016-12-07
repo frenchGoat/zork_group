@@ -9,9 +9,7 @@ public class Testgrounds {
 	
 	public static void main (String args[]) {
 		NpcMaker maker = new NpcMaker();
-		NPC v = maker.makeNpc("Vendor");
-		
-		System.out.println(v.getClass());
+	
 		
 		
 	}
