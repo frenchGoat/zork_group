@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Room {
+	/**
+	 * Character name color
+	 */
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_RESET = "\u001B[0m";
 
 	@SuppressWarnings("serial")
 	class NoRoomException extends Exception {
@@ -447,9 +452,9 @@ public class Room {
 			for (NPC x : npcs) {
 				list += " " + x.getName() + ",";
 			}
-			list = list.substring(0, list.length() - 1) + " are here.";
+			list = ANSI_CYAN + list.substring(0, list.length() - 1) + ANSI_RESET  + " are here.";
 		} else if (!npcs.isEmpty()) {
-			list += npcs.get(0).getName() + " is here.";
+			list += ANSI_CYAN + npcs.get(0).getName() + ANSI_RESET  + " is here.";
 		}
 		return list;
 	}
