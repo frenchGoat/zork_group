@@ -19,6 +19,11 @@ kick[Wound(1), Disappear()]:There's apple sauce everywhere now.
 stomp[Wound(1), Disappear()]:There's apple sauce everywhere now.
 smash[Wound(1), Disappear()]:There's apple sauce everywhere now.
 ---
+Stone
+wvdd0000
+examine:An ordinary rock.
+kick[Wound(1), Disappear()]:Ouch!
+---
 Bronze shield
 wvdd0200
 examine:This bronze shield is rather small, allowing the user to deftly block his opponent's attacks.
@@ -78,16 +83,16 @@ A small but functional fence surrounds a small stubborn garden. It would be a co
 ---
 Road to Village
 Contents: <coin>
-One direction road to village square
+A small somewhat kept path leads to the Village Square. Faintly, you can here the humm of a busy village up ahead.
 ---
 Village Square
 Contents: <coin>
-Cross roads for player to equip themselves before starting the adventure
+The center of town is very busy. Everyone from bakers to iron smiths criss cross the town square going about their buisness.
 ---
 Village Shop
 Contents: <coin>
 NPC Present: Torbjorn
-Place to meet with a vendor
+A small but interesting shop. A sea of useful adventure items cover the walls. Some even hang from the rafters. At the end of the room there is a small man behind a counter.
 ---
 Dragon Forest
 Contents: <coin>

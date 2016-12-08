@@ -6,6 +6,13 @@ Money - This is more of a passive feature which adds a some depth and the abilit
 
 Talking with NPC - This was suppose to be a way to add depth to the story and allow the player to interact with the NPCs.
 
+	<EXAMPLE>
+		From entry room:
+		talk to Giott --- this NPC was suppose to be the first person you meet and would get you started on your quest. Due to time issues he is now a test vendor.
+		a --- opens a greeting/information speech bubble
+		b --- opens a functional message that is suppose to activate or trigger an event, since there are only vendors in this game it opens the trade screen.
+		c --- opens a good bye speech bubble.
+
 Vendors / Trading - A sub class of NPC which purpose in the game is to trade your money for items. You can also chat with them if you find them interesting enough.
 
 	<EXAMPLE>
@@ -26,9 +33,6 @@ Vendors / Trading - A sub class of NPC which purpose in the game is to trade you
 		b --- this command opens the trade screen, which will print the available inventory and the item prices.
 		<#> --- if you have enough money pressing the corresponding number will give add the item to your inventory and remove the apporperiate amount of money.
 		x --- this exits the trading screen.
-
-
-examine npcs
 
 
 

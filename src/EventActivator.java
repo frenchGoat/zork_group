@@ -52,7 +52,6 @@ public class EventActivator {
 			int eventIndex = 0;
 			for (int i = numOfEvents; i > 0; i--) {
 				EventFactory.instance().parse(nameOfItemActedOn, eventBuffer[eventIndex]).trigger();
-				System.out.println(eventBuffer[eventIndex]);
 				eventIndex++;
 			}
 		}
