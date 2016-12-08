@@ -61,7 +61,9 @@ public class NPC {
 	}
 
 	/**
-	 * Access Dialogue objects from conversations ds, keyed by a single character String.
+	 * Access Dialogue objects from conversations ds, keyed by a single
+	 * character String.
+	 * 
 	 * @return Hashtable of Dialogue objects, keyed by single character Strings.
 	 */
 	public Hashtable<String, Dialogue> getConversations() {
@@ -122,7 +124,7 @@ public class NPC {
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;
 	}
-	
+
 	/**
 	 * Sets the name of the NPC.
 	 *
@@ -147,10 +149,12 @@ public class NPC {
 	}
 
 	/**
-	 * Helper method used within the openDialogue method. Prompts user for single character String input which 
-	 * represents a key used to access Dialogue objects in conversationsdata structure.
+	 * Helper method used within the openDialogue method. Prompts user for
+	 * single character String input which represents a key used to access
+	 * Dialogue objects in conversationsdata structure.
 	 * 
-	 * @param commandLine Scanner to read userinput.
+	 * @param commandLine
+	 *            Scanner to read userinput.
 	 * @return User input. Should only be a single character String.
 	 */
 	@SuppressWarnings("unused")
@@ -160,23 +164,19 @@ public class NPC {
 	}
 
 	/**
-	 * This method will take program control away from the Interpreter while the player can engage in a 'conversation'
-	 * with an NPC. If the target Npc's conversation data structure is empty, a speech bubble with elipses is created,
-	 * and control is passed back to Interpreter. However if the Npc has Dialogue objects in its conversations DS a
-	 * list of conversation options is opened, and when selected will return the related message string as well as 
-	 * triggering any necessary events.
+	 * This method will take program control away from the Interpreter while the
+	 * player can engage in a 'conversation' with an NPC. If the target Npc's
+	 * conversation data structure is empty, a speech bubble with elipses is
+	 * created, and control is passed back to Interpreter. However if the Npc
+	 * has Dialogue objects in its conversations DS a list of conversation
+	 * options is opened, and when selected will return the related message
+	 * string as well as triggering any necessary events.
 	 */
 	public void openDialogue() {
 		if (conversations.isEmpty()) {
 			// silent npc
 			String silent = " \".  .  .  .\" ";
-			System.out.println("\n==============================================");
-			System.out.println("/                                            /");
-			System.out.println(centerText(silent));
-			System.out.println("/                                            /");
-			System.out.println("==\\   /======================================/");
-			System.out.println("   \\ /");
-			System.out.println("    V");
+			System.out.print(createSpeechBubble(silent));
 			System.out.println("  " + name.toUpperCase() + "\n");
 			System.out.println("\nThey don't seem interested in talking with you.\n");
 		} else {
@@ -184,25 +184,19 @@ public class NPC {
 			String command = "new";
 			String options = "abc";
 			while (!command.equals("c")) {
-				System.out.println("What do you want to talk about with " + this.name + " ?");
+				System.out.println("What do you want to talk about with " + this.name
+						+ " ?");
 				System.out.println("[a] Say hello.");
-				if (this instanceof Vendor){
+				if (this instanceof Vendor) {
 					System.out.println("[b] Trade with " + this.name + ".");
-				}else{
+				} else {
 					System.out.println("[b] Ask a question.");
 				}
 				System.out.println("[c] Leave conversation.");
 				command = promptUser(option);
 				if (options.contains(command)) {
-					System.out.println(
-							"\n==============================================");
-					System.out.println("/                                            /");
-					System.out.println(centerText(conversations.get(command)
+					System.out.println(createSpeechBubble(conversations.get(command)
 							.getMessage()));
-					System.out.println("/                                            /");
-					System.out.println("==\\   /======================================/");
-					System.out.println("   \\ /");
-					System.out.println("    V");
 					System.out.println("  " + this.name.toUpperCase() + "\n");
 				} else {
 					System.out.println("Try speaking clearly.");
@@ -216,23 +210,66 @@ public class NPC {
 	/**
 	 * Helper method used to center text on a ascii speech bubble.
 	 * 
-	 * @param text Incoming text to be centered.
-	 * @return text padded on either side with blank spaces so that it is centered.
+	 * @param text
+	 *            Incoming text to be centered.
+	 * @return text padded on either side with blank spaces so that it is
+	 *         centered.
 	 */
-	String centerText(String text) {
+	public static String createSpeechBubble(String text) {
+		String top = "==============================================";
+		String bottom = "==\\   /======================================\n   \\ /\n    V";
+		String edge = "/";
+
+		String[] consoleLength = new String[42];
+		String[] parts = text.split(" ");
+		String result = "";
+		String bubble = top + "\n" + edge + top.substring(2).replace("=", " ") + edge
+				+ "\n";
+
+		int counter = 0;
+		for (String x : parts) {
+			char[] word = x.toCharArray();
+			if ((counter + word.length) > consoleLength.length) {
+				result = center(result.substring(0, result.length() - 1), 46, "/");
+				bubble += result + "\n";
+				counter = 0;
+				result = "";
+			}
+			for (char c : word) {
+				result += Character.toString(c);
+				counter++;
+			}
+			result += " ";
+			counter += 1;
+		}
+
+		if (!result.isEmpty()) {
+			result = center(result.substring(0, result.length() - 1), 46, "/") + "\n";
+			result += edge + top.substring(2).replace("=", " ") + edge;
+			bubble += result + "\n";
+			return bubble + bottom;
+		} else {
+			return bubble + bottom;
+		}
+	}
+
+	public static String center(String text, int length, String edge) {
 		String result; // String to build as retrun value.
 		String[] rez; // Pre-result in array data type.
 		char[] rawTextAsChar; // raw param as array of chars (text param)
-		int lineLength = 46; // Total length of print line
+		int lineLength; // Total length of print line
 		int size; // Count of how many characters are in para text
-		int startingIndex = (int) lineLength / 2; // Where the characters from
-													// text will start being
-													// indexed
+		int startingIndex; // Where the characters from text will be indexed
+							// first
+		String border; // Single character String to act as border
 
 		// Set some initial variables
 		rawTextAsChar = text.toCharArray();
 		size = text.length();
+		lineLength = length;
+		startingIndex = (int) lineLength / 2;
 		rez = new String[lineLength];
+		border = edge;
 
 		// Even out size of parameter length
 		if (size % 2 != 0) {
@@ -247,8 +284,8 @@ public class NPC {
 		}
 
 		// Set borders
-		rez[0] = "/";
-		rez[lineLength - 1] = "/";
+		rez[0] = border;
+		rez[lineLength - 1] = border;
 
 		// Create counter helper to step through rez array and check for missing
 		// spaces
