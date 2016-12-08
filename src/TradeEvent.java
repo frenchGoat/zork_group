@@ -13,7 +13,7 @@ public class TradeEvent extends Event {
 	public TradeEvent(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Helper method used within the openDialogue method. Prompts user for
 	 * single character String input which represents a key used to access
@@ -94,6 +94,8 @@ public class TradeEvent extends Event {
 				}
 
 				menu += itemLine + "\n";
+				itemLine = "";
+				counter = 0;
 
 			}
 
@@ -103,43 +105,53 @@ public class TradeEvent extends Event {
 			options.add("x");
 			String selection = "";
 			listNum = listNum - 1;
-			while (listNum>0){
+			while (listNum > 0) {
 				options.add(String.valueOf(listNum));
-				listNum --;
+				listNum--;
 			}
-			
-			String buyLine = "What do you want to buy? Enter the line number or 'x' to leave trading";
-			while (!command.equals("x")) {	
+
+			String buyLine =
+					"What do you want to buy? Enter the line number or 'x' to leave trading";
+			while (!command.equals("x")) {
 				System.out.println(menu);
 				System.out.println(buyLine);
 				command = promptUser(option);
-
-				if (!command.equals("x")){
-					selection = String.valueOf(Integer.valueOf(command) - 1);
-				}
-				
 				boolean flag = false;
 				for (String s : options) {
-					if (s.equals(selection)){
+					if (s.equals(command)) {
 						flag = true;
 					}
 				}
-				
-				if (true){
+				if (!command.equals("x")) {
+					selection = String.valueOf(Integer.valueOf(command) - 1);
+				}
+
+				if (flag) {
 					Item itemToBuy = inv.get(Integer.valueOf(selection));
 					int cost;
-					if (GameState.instance().getPlayerBank()>=itemToBuy.getValue()*2.5){
-						cost = (int)(itemToBuy.getValue()*2.5);
-						System.out.println("SOLD!");
-						buyLine = "Great purchase! Can I get you anything else?";
+					int newTotal;
+					if (GameState.instance().getPlayerBank() >= itemToBuy.getValue()
+							* 2.5) {
+						cost = (int) (itemToBuy.getValue() * 2.5);
+						System.out.println(NPC.createSpeechBubble("SOLD!"));
+						System.out.println("  " + this.name.toUpperCase() + "\n");
 						GameState.instance().addToInventory(itemToBuy);
-						GameState.instance().setPlayerBank(yourBank-cost);
-					}else{
-						System.out.println("Sorry Bub. Come back when you have some more scratch.");
-						buyLine = "Can I get you anything else?";
+						newTotal = yourBank - cost;
+						GameState.instance().setPlayerBank(newTotal);
+						command = "x";
+					} else {
+						System.out.println(NPC.createSpeechBubble(
+								"Sorry Bub. Come back when you have some more scratch."));
+						System.out.println("  " + this.name.toUpperCase() + "\n");
+						command = "x";
 					}
+				} else {
+					System.out.println(NPC.createSpeechBubble(
+							"Just stick to the menu, alright buddy?"));
+					System.out.println("  " + this.name.toUpperCase() + "\n");
 				}
 			}
+
 		}
 	}
 }

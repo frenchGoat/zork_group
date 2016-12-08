@@ -20,7 +20,7 @@ stomp[Wound(1), Disappear()]:There's apple sauce everywhere now.
 smash[Wound(1), Disappear()]:There's apple sauce everywhere now.
 ---
 Bronze shield
-wvdd0300
+wvdd0200
 examine:This bronze shield is rather small, allowing the user to deftly block his opponent's attacks.
 ---
 Forge hammer
@@ -59,7 +59,7 @@ Vendor
 Giott
 30
 messages:a,"Welcome to my store!":b[Trade()],"best prices in the village!":c,"Good-Bye."
-inventory:Copper coin
+inventory:Jade amulet,Mythril hammer,Forge hammer,Bronze shield
 ---
 ===
 Rooms:
