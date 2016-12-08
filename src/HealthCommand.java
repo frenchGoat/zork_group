@@ -31,13 +31,13 @@ class HealthCommand extends Command {
       int currentHealth = GameState.instance().getPlayerHealth();
       String healthMessage = "";
       if(currentHealth > 50){
-         healthMessage = "Healthy";
+         healthMessage = "You are healthly.\nHealth:" +currentHealth;
       }
       else if(currentHealth <= 50){
-         healthMessage = "Not doing so great";
+         healthMessage = "You're not doing so great.\nHealth:" +currentHealth;
       }
       else if(currentHealth <= 25){
-         healthMessage = "Warning: Critial conditions!";
+         healthMessage = "Warning: Critial conditions!\nHealth:" +currentHealth;
       }
    
       /*

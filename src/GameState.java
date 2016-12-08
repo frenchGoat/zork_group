@@ -398,7 +398,7 @@ public class GameState {
 	public String addMoney(String incomingCoin){
 		int retval = 0;
 		for (Coin c : coinValues){
-			if (incomingCoin.equals(c.getName())){
+			if (incomingCoin.equalsIgnoreCase(c.getName())){
 				int purse = getPlayerBank();
 				int deposit = c.getValue()*10;
 				purse += deposit;

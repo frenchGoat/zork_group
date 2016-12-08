@@ -39,6 +39,6 @@ public class Mob extends NPC {
      * @return attack The int value of damage this mob can deal.
      */
     public int getAttack() {
-        
+        return -1; // @todo: fix this
     }
 }

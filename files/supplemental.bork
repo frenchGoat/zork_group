@@ -13,7 +13,7 @@ examine:dummy item
 ---
 Apple
 wvdd0750
-examine:Looking at the piece of fruit, reminds you how you havn't had your 5 servings today.
+examine:Looking at the piece of fruit, reminds you how you haven't had your 5 servings today.
 eat:[Wound(-10)]:Yum!
 kick[Wound(1), Disappear()]:There's apple sauce everywhere now.
 stomp[Wound(1), Disappear()]:There's apple sauce everywhere now.

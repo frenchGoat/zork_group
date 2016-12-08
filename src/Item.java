@@ -156,7 +156,7 @@ public class Item {
 	 */
 	boolean goesBy(String name) {
 		// could have other aliases
-		return this.primaryName.equals(name);
+		return this.primaryName.equalsIgnoreCase(name);
 	}
 
 	String getPrimaryName() {
