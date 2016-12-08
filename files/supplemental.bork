@@ -53,13 +53,13 @@ Vendor
 Torbjorn
 30
 messages:a,"For the last time, I'm Swedish!":b,"Best in Swedish engineering!":c,"All this standing around when there's work to be done..."
-inventory:Copper coin
+inventory:Mythril hammer,Forge hammer,
 ---
 Vendor
 Giott
 30
-messages:a,"Welcome to my store!":b[Trade()],"best prices in the village!":c,"Good-Bye."
-inventory:Jade amulet,Mythril hammer,Forge hammer,Bronze shield
+messages:a,"Hi there friend. Time to start your adventure. I have a few things you might find useful on your journey, but I'll have to charge.":b[Trade()],"You're going to love these things.!":c,"Good-Bye."
+inventory:Jade amulet,Bronze shield
 ---
 ===
 Rooms:
@@ -74,7 +74,7 @@ Living room of your house, meet someone who tells you about your quest.
 ---
 Garden
 Contents: <coin>Apple
-A small but functional fence surrounds a small stubborn garden. It would be a complete lose if it wasn't for a single apple hanging from a wild apple tree.
+A small but functional fence surrounds a small stubborn garden. It would be a complete loss if it wasn't for a single apple hanging from a wild apple tree.
 ---
 Road to Village
 Contents: <coin>

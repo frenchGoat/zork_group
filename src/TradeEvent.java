@@ -102,7 +102,6 @@ public class TradeEvent extends Event {
 			Scanner option = new Scanner(System.in);
 			String command = "new";
 			LinkedList<String> options = new LinkedList<String>();
-			options.add("x");
 			String selection = "";
 			listNum = listNum - 1;
 			while (listNum > 0) {
@@ -134,7 +133,7 @@ public class TradeEvent extends Event {
 							* 2.5) {
 						cost = (int) (itemToBuy.getValue() * 2.5);
 						System.out.println(NPC.createSpeechBubble("SOLD!"));
-						System.out.println("  " + this.name.toUpperCase() + "\n");
+						System.out.println("  " + Room.ANSI_CYAN + this.name.toUpperCase() + Room.ANSI_RESET + "\n");
 						GameState.instance().addToInventory(itemToBuy);
 						newTotal = yourBank - cost;
 						GameState.instance().setPlayerBank(newTotal);
@@ -142,13 +141,19 @@ public class TradeEvent extends Event {
 					} else {
 						System.out.println(NPC.createSpeechBubble(
 								"Sorry Bub. Come back when you have some more scratch."));
-						System.out.println("  " + this.name.toUpperCase() + "\n");
+						System.out.println("  " + Room.ANSI_CYAN + this.name.toUpperCase() + Room.ANSI_RESET + "\n");
 						command = "x";
 					}
 				} else {
-					System.out.println(NPC.createSpeechBubble(
-							"Just stick to the menu, alright buddy?"));
-					System.out.println("  " + this.name.toUpperCase() + "\n");
+					if (command.equals("x")) {
+						System.out.println(NPC.createSpeechBubble(
+								"Come find me if you need anything."));
+						System.out.println("  " + Room.ANSI_CYAN + this.name.toUpperCase() + Room.ANSI_RESET + "\n");
+					} else {
+						System.out.println(NPC.createSpeechBubble(
+								"Just stick to the menu, alright buddy?"));
+						System.out.println("  " + Room.ANSI_CYAN + this.name.toUpperCase() + Room.ANSI_RESET + "\n");
+					}
 				}
 			}
 

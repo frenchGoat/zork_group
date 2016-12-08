@@ -203,7 +203,7 @@ public class NPC {
 				if (options.contains(command)) {
 					Dialogue selection = conversations.get(command);
 					System.out.println(createSpeechBubble(selection.getMessage()));
-					System.out.println("  " + this.name.toUpperCase() + "\n");
+					System.out.println("  " + Room.ANSI_CYAN + this.name.toUpperCase() + Room.ANSI_RESET + "\n");
 					if (!selection.getActions().isEmpty()) {
 						for (String eventDetails : selection.getActions()) {
 							EventActivator ea = new EventActivator("*" + this.name + "*" + eventDetails);
