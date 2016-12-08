@@ -113,7 +113,7 @@ public class Interpreter {
 	private static String promptUser(Scanner commandLine) {
 
 		System.out.print("> ");
-		return commandLine.nextLine();
+		return commandLine.nextLine().toLowerCase();
 	}
 
 	public static String sizeForConsole(String text) {

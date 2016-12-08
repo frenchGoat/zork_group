@@ -3,7 +3,7 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import Item.NoItemException;
+//import Item.NoItemException;
 
 /**
  * Every NPC type will extend this class that gives each NPC a name, health,
