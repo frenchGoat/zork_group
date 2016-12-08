@@ -15,7 +15,7 @@ public class LockedEvent extends Event {
 	 * Locked status of exit
 	 */
 
-	private boolean locked;
+   private boolean locked;
 
 	/**
 	 * This is an exit manipulation where the locked status of the exit is
@@ -24,9 +24,9 @@ public class LockedEvent extends Event {
 	 * @param locked
 	 *            boolean = the current locked state of the exit
 	 */
-	public LockedEvent(boolean locked) {
-		this.locked = locked;
-	}
+   public LockedEvent(boolean locked) {
+      this.locked = locked;
+   }
 
 	/**
 	 * Activates the LockedEvent
@@ -36,13 +36,13 @@ public class LockedEvent extends Event {
 	 * @return new locked status
 	 */
 
-	/*
-	 * Hi michelle! Your trigger shouldn't take in any arguments. Check out the
-	 * Command Factory Pattern, or other events to get a template.
-	 */
-	String trigger(key Item) {
-
-		return "locked";
-	}
-
+   void trigger() {
+      GameState.instance();
+      for(String s : GameState.instance().getInventoryNames()){
+         if(s.equals("key")){
+            locked = false;
+         }
+      }
+   }
 }
+//testing testing 123
