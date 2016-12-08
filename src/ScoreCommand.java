@@ -29,11 +29,11 @@ public class ScoreCommand extends Command {
 	String execute() {
 		String scoreMessage = null;
 		if (score <= 25) {
-			scoreMessage = "Beginning Trainer";
+			scoreMessage = "Beginning Trainer\nScore:" +score;
 		} else if (score > 25 && score <= 50) {
-			scoreMessage = "Good Trainer";
+			scoreMessage = "Good Trainer\nScore:" +score;
 		} else if (score > 50 && score <= 75) {
-			scoreMessage = "Expert Trainer";
+			scoreMessage = "Expert Trainer\nScore:" +score;
 		} else if (score > 75) {
 			scoreMessage = "Master Trainer";
 		}
