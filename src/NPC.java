@@ -1,9 +1,9 @@
 
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import Item.NoItemException;
 
 /**
  * Every NPC type will extend this class that gives each NPC a name, health,
@@ -77,6 +77,7 @@ public class NPC {
 	 */
 	public void init() {
 		conversations = new Hashtable<String, Dialogue>();
+		store = new LinkedList<String>();
 		this.currentRoom = null;
 	}
 
@@ -165,6 +166,7 @@ public class NPC {
 		return commandLine.nextLine();
 	}
 
+	LinkedList<String> store;
 	/**
 	 * This method will take program control away from the Interpreter while the
 	 * player can engage in a 'conversation' with an NPC. If the target Npc's
@@ -173,8 +175,9 @@ public class NPC {
 	 * has Dialogue objects in its conversations DS a list of conversation
 	 * options is opened, and when selected will return the related message
 	 * string as well as triggering any necessary events.
+	 * @throws Item.NoItemException 
 	 */
-	public void openDialogue() {
+	public void openDialogue() throws Item.NoItemException {
 		if (conversations.isEmpty()) {
 			// silent npc
 			String silent = " \".  .  .  .\" ";
@@ -202,12 +205,8 @@ public class NPC {
 					System.out.println("  " + this.name.toUpperCase() + "\n");
 					if (!selection.getActions().isEmpty()) {
 						for (String eventDetails : selection.getActions()) {
-							EventActivator e = new EventActivator("Die");
-							try {
-								e.activate();
-							} catch (Item.NoItemException e1) {
-								e1.printStackTrace();
-							}
+							EventActivator ea = new EventActivator("*" + this.name + "*" + eventDetails);
+							ea.activate();
 						}
 					}
 				} else {
@@ -265,6 +264,10 @@ public class NPC {
 		}
 	}
 
+	public LinkedList<String> getStore() {
+		return store;
+	}
+	
 	public static String center(String text, int length, String edge) {
 		String result; // String to build as retrun value.
 		String[] rez; // Pre-result in array data type.

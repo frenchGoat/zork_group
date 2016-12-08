@@ -8,7 +8,8 @@ public class Testgrounds {
 	}
 	
 	public static void main (String args[]) {
-		NpcMaker maker = new NpcMaker();
+		NPC n = new Vendor()
+		TradeEvent t = new TradeEvent();
 	
 		
 		

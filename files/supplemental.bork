@@ -58,7 +58,7 @@ inventory:Copper coin
 Vendor
 Giott
 30
-messages:a,"Welcome to my store!":b[OpenInventory()],"best prices in the village!":c,"Good-Bye."
+messages:a,"Welcome to my store!":b[Trade()],"best prices in the village!":c,"Good-Bye."
 inventory:Copper coin
 ---
 ===

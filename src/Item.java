@@ -163,6 +163,14 @@ public class Item {
 		return primaryName;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
+	public double getDropRate() {
+		return dropRate;
+	}
+
 	public String getMessageForVerb(String verb) {
 		return messages.get(verb);
 	}

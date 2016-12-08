@@ -78,6 +78,10 @@ public class Vendor extends NPC {
 		return money;
 	}
 
+	public LinkedList<String> getStore() {
+		return store;
+	}
+
 	/**
 	 * Updates the vendor's money
 	 *

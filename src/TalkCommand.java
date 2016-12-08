@@ -1,3 +1,5 @@
+import Item.NoItemException;
+
 /**
  * When executed it will initiate interaction with NPC's.
  * 
@@ -34,7 +36,7 @@ public class TalkCommand extends Command {
             try {
 				NPC theTarget = currentRoom.getNpcNamed(target);
 				theTarget.openDialogue();
-			} catch (NPC.NoNPCException e) {
+			} catch (NPC.NoNPCException | Item.NoItemException e) {
 				// TODO Auto-generated catch block
 				return target + " isn't here to listen to your ramblings.\n";
 			}

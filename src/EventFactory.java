@@ -58,6 +58,8 @@ public class EventFactory {
 			return new TransformEvent(target, param);
 		case "Wound":
 			return new WoundEvent(Integer.parseInt(param));
+		case "Trade":
+			return new TradeEvent(target);
 		default:
 			return new UnknownEvent(eventDescription);
 		}

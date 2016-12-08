@@ -47,7 +47,6 @@ public class EventActivator {
 			EventFactory.instance().parse(manualEvent.getDescription()).trigger();
 		} else if (eventBuffer.length == 1) {
 			EventFactory.instance().parse(nameOfItemActedOn, eventDetails).trigger();
-			System.out.println(eventDetails);
 		} else {
 			int numOfEvents = eventBuffer.length;
 			int eventIndex = 0;
