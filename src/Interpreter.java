@@ -82,8 +82,14 @@ public class Interpreter {
 					win.trigger();
 				}
 
-				System.out.print(sizeForConsole(CommandFactory.instance().parse(command)
-						.execute()));
+				if (command.equals("help")){
+					System.out.print(CommandFactory.instance().parse(command)
+							.execute());
+				}else{
+					System.out.print(sizeForConsole(CommandFactory.instance().parse(command)
+							.execute()));
+				}
+				
 
 				System.out.print(brd);
 				command = promptUser(commandLine);
