@@ -203,7 +203,7 @@ public class Dungeon {
 	private void randomObjGeneration() {
 		Random randInt = new Random();
 		Room targetRoom = null;
-		int coinGenRate = 50;
+		int coinGenRate = 35;
 		int mobGenRate = 20;
 		for (String key : rooms.keySet()) {
 			targetRoom = rooms.get(key);
