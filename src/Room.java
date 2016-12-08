@@ -249,7 +249,7 @@ public class Room {
 	public String describe() {
 		String description;
 		if (beenHere) {
-			description = title;
+			description = ":" + title + ":";
 			if (!npcs.isEmpty()) {
 				description += "\nYou notice " + makeNpcList();
 			}
@@ -258,7 +258,7 @@ public class Room {
 				description += "\n" + exit.describe();
 			}
 		} else {
-			description = title + "\n" + desc + "\n";
+			description = ":" + title + ":" + "\n" + desc + "\n";
 			if (!npcs.isEmpty()) {
 				description = description.trim() + " You also notice " + makeNpcList()
 						+ "\n";
