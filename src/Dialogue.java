@@ -32,7 +32,7 @@ public class Dialogue {
 
 
 	/**
-	 * Constructor fortesting purposes.
+	 * Constructor for testing purposes.
 	 * 
 	 * @param message
 	 * 				String of actual message.
@@ -58,10 +58,10 @@ public class Dialogue {
 	public Dialogue(String messageLine) {
 		init();
 		this.messageKey = Character.toString(messageLine.charAt(0));
-		if (messageLine.contains(Pattern.quote("["))) {
-			String[] parts = message.substring(2).split(Pattern.quote(","));
-			this.message = parts[1].substring(2);
-			actions.add(parts[0].substring(0, parts[0].length()));
+		if (messageLine.contains("]")) {
+			String[] parts = messageLine.substring(2).split(Pattern.quote(","));
+			this.message = parts[1];
+			actions.add(parts[0].substring(0, parts[0].length()-1));
 		}else{
 			this.message = messageLine.substring(2);
 		}
