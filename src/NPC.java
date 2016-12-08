@@ -3,6 +3,8 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import Item.NoItemException;
+
 /**
  * Every NPC type will extend this class that gives each NPC a name, health,
  * conversation hashtable, and a current room that is read in from a file. Along
@@ -195,9 +197,19 @@ public class NPC {
 				System.out.println("[c] Leave conversation.");
 				command = promptUser(option);
 				if (options.contains(command)) {
-					System.out.println(createSpeechBubble(conversations.get(command)
-							.getMessage()));
+					Dialogue selection = conversations.get(command);
+					System.out.println(createSpeechBubble(selection.getMessage()));
 					System.out.println("  " + this.name.toUpperCase() + "\n");
+					if (!selection.getActions().isEmpty()) {
+						for (String eventDetails : selection.getActions()) {
+							EventActivator e = new EventActivator("Die");
+							try {
+								e.activate();
+							} catch (Item.NoItemException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}
 				} else {
 					System.out.println("Try speaking clearly.");
 				}
